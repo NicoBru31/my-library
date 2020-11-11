@@ -4,10 +4,14 @@ const Home = () => (
   <>
     <h1 className='H1'>Bienvenue !</h1>
     <div>
-      <Link href='/customers'>Vous êtes client ?</Link>
+      <Link href='/customers'>
+        <div className='Link'>Vous êtes client ?</div>
+      </Link>
     </div>
     <div>
-      <Link href='/sellers'>Vous êtes libraire ?</Link>
+      <Link href='/sellers'>
+        <div className='Link'>Vous êtes libraire ?</div>
+      </Link>
     </div>
     <div>
       <h2>Découvrez le projet :</h2>
