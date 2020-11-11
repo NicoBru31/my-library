@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.Button {
+  @apply border-solid border-2 border-blue-800 rounded;
+}
+
+.H1 {
+  @apply text-center font-bold text-4xl;
+}
+
+.Link {
+  @apply text-2xl text-blue-800 cursor-pointer;
+}
+
+.Link:hover {
+  @apply text-green-800;
+}
+
+.home-picture {
+  background-image: url(/home.jpg) no-repeat center;
+  background-size: cover;
+  height: 50vh;
+  width: 100vw;
+}
