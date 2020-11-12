@@ -1,25 +1,17 @@
-import { Session, signIn, useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import CreateCustomer from '../../components/customer/CreateCustomer';
-
-interface LocalSession extends Session {
-  id?: string;
-}
+import useSession from '../../hooks/useSession';
 
 const Customer = () => {
-  const [session] = useSession();
+  const session = useSession();
   const router = useRouter();
 
-  useEffect(() => {
-    const id = (session as LocalSession)?.id;
-    if (id) router.push({ pathname: `/customers/${id}` });
-  }, [session]);
+  const connect = () => router.push({ pathname: '/login' });
 
   return (
     <>
-      <button onClick={() => signIn()}>Se connecter</button>
-      {!session ? <CreateCustomer /> : <div>Loading...</div>}
+      <button onClick={connect}>Se connecter</button>
+      {!session?.id && <CreateCustomer />}
     </>
   );
 };

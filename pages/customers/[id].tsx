@@ -1,10 +1,12 @@
 import { GetServerSideProps } from 'next';
-import { signOut } from 'next-auth/client';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useContext } from 'react';
 import { useQuery } from 'react-query';
-import Layout from '../../components/facc/Layout';
 import CreateReading from '../../components/readings/CreateReading';
 import Reading from '../../components/readings/Reading';
+import SessionContext from '../../contexts/SessionContext';
 import { getCustomer } from '../../fetch';
 import { CustomerPageType, CustomerType } from '../../types';
 
@@ -16,6 +18,15 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
 const Customer = ({ customer, id }: CustomerPageType) => {
   const { data } = useQuery('customer', { initialData: customer });
+  const { session, setSession } = useContext(SessionContext);
+  const router = useRouter();
+
+  const logout = () => setSession({ id: '' });
+
+  useEffect(() => {
+    if (!session?.id) router.push({ pathname: '/customers' });
+  }, [session]);
+
   return (
     <>
       <h1 className='H1'>{`Bonjour ${data.firstName} !`}</h1>
@@ -32,9 +43,7 @@ const Customer = ({ customer, id }: CustomerPageType) => {
         ))}
       </ul>
       <CreateReading id={id} />
-      <button onClick={() => signOut({ callbackUrl: '/' })}>
-        Me déconnecter
-      </button>
+      <button onClick={logout}>Me déconnecter</button>
     </>
   );
 };

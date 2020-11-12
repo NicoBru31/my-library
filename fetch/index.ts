@@ -1,3 +1,4 @@
+import { LoginInterface } from '../pages/login';
 import { AddressType, CustomerType, ReadingType } from '../types';
 
 const { VERCEL_URL = 'http://localhost:3000' } = process.env;
@@ -30,7 +31,7 @@ export const createCustomer = (customer: CustomerType) =>
   }).then((res) => res.json());
 
 export const createReading = ({ reading, id }: CreateReadingType) =>
-  fetch('${VERCEL_URL}/api/readings', {
+  fetch(`${VERCEL_URL}/api/readings`, {
     body: JSON.stringify({ ...reading, customerId: id }),
     method: 'POST',
   }).then((res) => res.json());
@@ -40,6 +41,12 @@ export const getAddresses = (id: string) =>
 
 export const getCustomer = (id: string) =>
   fetch(`${VERCEL_URL}/api/customers?id=${id}`).then((res) => res.json());
+
+export const login = (data: LoginInterface) =>
+  fetch(`${VERCEL_URL}/api/login`, {
+    body: JSON.stringify(data),
+    method: 'POST',
+  }).then((res) => res.json());
 
 export const updateCustomer = ({ customer, id }: UpdateCustomerType) =>
   fetch(`${VERCEL_URL}/api/customers?id=${id}`, {

@@ -1,14 +1,14 @@
-import { Provider } from 'next-auth/client';
 import Layout from '../components/facc/Layout';
 import '../styles/tailwind.css';
 import '../styles/globals.css';
+import SessionProvider from '../providers/SessionProvider';
 
 const MyApp = ({ Component, pageProps }) => (
-  <Provider session={pageProps.session}>
+  <SessionProvider>
     <Layout>
       <Component {...pageProps} />
     </Layout>
-  </Provider>
+  </SessionProvider>
 );
 
 export default MyApp;
