@@ -36,8 +36,7 @@ const options = (req: Incoming) => ({
       };
     },
   },
-  database:
-    'mongodb+srv://dbAdmin:V4YXFA7bMongo@alexandria.zykes.mongodb.net/stagin?retryWrites=true&w=majority',
+  database: process.env.MONGO_URI,
 });
 
 const handler = nextConnect();

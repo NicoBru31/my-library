@@ -1,0 +1,7 @@
+{
+  "name": "My-library",
+  "version": 1,
+  "env": {
+    "MONGO_URI": "@my-mongodb-uri"
+  }
+}

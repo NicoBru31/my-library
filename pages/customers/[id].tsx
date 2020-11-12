@@ -32,7 +32,9 @@ const Customer = ({ customer, id }: CustomerPageType) => {
         ))}
       </ul>
       <CreateReading id={id} />
-      <button onClick={() => signOut()}>Me déconnecter</button>
+      <button onClick={() => signOut({ callbackUrl: '/' })}>
+        Me déconnecter
+      </button>
     </>
   );
 };

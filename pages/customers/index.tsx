@@ -2,7 +2,6 @@ import { Session, signIn, useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import CreateCustomer from '../../components/customer/CreateCustomer';
-import Layout from '../../components/facc/Layout';
 
 interface LocalSession extends Session {
   id?: string;
@@ -20,7 +19,7 @@ const Customer = () => {
   return (
     <>
       <button onClick={() => signIn()}>Se connecter</button>
-      <CreateCustomer />
+      {!session ? <CreateCustomer /> : <div>Loading...</div>}
     </>
   );
 };
