@@ -1,7 +1,7 @@
 import { LoginInterface } from '../pages/login';
 import { AddressType, CustomerType, ReadingType } from '../types';
 
-const { URL = 'http://localhost:3000' } = process.env;
+const { NEXT_PUBLIC_URL = 'http://localhost:3000' } = process.env;
 
 export interface CreateReadingType {
   reading: ReadingType;
@@ -19,37 +19,37 @@ export interface UpdateCustomerType {
 }
 
 export const createAddress = ({ address, id }: CreateAddressType) =>
-  fetch(`${URL}/api/addresses?id=${id}`, {
+  fetch(`${NEXT_PUBLIC_URL}/api/addresses?id=${id}`, {
     body: JSON.stringify(address),
     method: 'POST',
   }).then((res) => res.json());
 
 export const createCustomer = (customer: CustomerType) =>
-  fetch(`${URL}/api/customers`, {
+  fetch(`${NEXT_PUBLIC_URL}/api/customers`, {
     body: JSON.stringify(customer),
     method: 'POST',
   }).then((res) => res.json());
 
 export const createReading = ({ reading, id }: CreateReadingType) =>
-  fetch(`${URL}/api/readings`, {
+  fetch(`${NEXT_PUBLIC_URL}/api/readings`, {
     body: JSON.stringify({ ...reading, customerId: id }),
     method: 'POST',
   }).then((res) => res.json());
 
 export const getAddresses = (id: string) =>
-  fetch(`${URL}/api/addresses?id=${id}`).then((res) => res.json());
+  fetch(`${NEXT_PUBLIC_URL}/api/addresses?id=${id}`).then((res) => res.json());
 
 export const getCustomer = (id: string) =>
-  fetch(`${URL}/api/customers?id=${id}`).then((res) => res.json());
+  fetch(`${NEXT_PUBLIC_URL}/api/customers?id=${id}`).then((res) => res.json());
 
 export const login = (data: LoginInterface) =>
-  fetch(`${URL}/api/login`, {
+  fetch(`${NEXT_PUBLIC_URL}/api/login`, {
     body: JSON.stringify(data),
     method: 'POST',
   }).then((res) => res.json());
 
 export const updateCustomer = ({ customer, id }: UpdateCustomerType) =>
-  fetch(`${URL}/api/customers?id=${id}`, {
+  fetch(`${NEXT_PUBLIC_URL}/api/customers?id=${id}`, {
     body: JSON.stringify(customer),
     method: 'PUT',
   }).then((res) => res.json());
