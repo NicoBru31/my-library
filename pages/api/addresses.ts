@@ -13,7 +13,6 @@ const handler = nextConnect();
 handler.use(middleware);
 
 handler.get<Incoming, Response>(async (req, res) => {
-  console.log('Hello');
   const customer: CustomerType = await req.db
     .collection('customers')
     .findOne(

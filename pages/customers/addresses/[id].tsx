@@ -1,7 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { useQuery } from 'react-query';
 import CreateAddress from '../../../components/addresses/CreateAddress';
-import Layout from '../../../components/facc/Layout';
 import { getAddresses } from '../../../fetch';
 import { AddressPageType, AddressType } from '../../../types';
 

@@ -36,6 +36,9 @@ const Customer = ({ customer, id }: CustomerPageType) => {
       <Link href={`/customers/addresses/${id}`}>
         <div className='Link'>Voir mes adresses</div>
       </Link>
+      <div className='Link' onClick={() => alert('Pas encore fait !')}>
+        Je veux avoir une recommandation !
+      </div>
       <div>Mes lectures :</div>
       <ul>
         {data.readings.map((reading) => (
