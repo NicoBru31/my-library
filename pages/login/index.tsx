@@ -18,12 +18,17 @@ const Login = () => {
   const router = useRouter();
 
   const send: SubmitHandler<LoginInterface> = async (data) => {
-    const log = await login(data);
+    let log = await login(data, !!router.query?.isSeller);
     setSession(log);
   };
 
   useEffect(() => {
-    if (session?.id) router.push({ pathname: `/customers/${session.id}` });
+    if (session?.id)
+      router.push({
+        pathname: `/${router.query?.isSeller ? 'sellers' : 'customers'}/${
+          session.id
+        }`,
+      });
   }, [session]);
 
   return (

@@ -6,6 +6,7 @@ import { FieldError, UseFormMethods, ValidationRules } from 'react-hook-form';
 export interface AddressType {
   _id: string;
   address: string;
+  askForReco: boolean;
   city: string;
   name: string;
   zip: string;
@@ -15,14 +16,6 @@ export interface AddressPageType {
   addresses: AddressType[];
   customer: CustomerType;
   id: string;
-}
-
-export interface ReadingType {
-  author: string;
-  comments: string;
-  _id: string;
-  name: string;
-  rating: number;
 }
 
 export interface Credentials {
@@ -66,9 +59,32 @@ export type InputType<T> = Field<T> & {
 export interface Incoming extends IncomingMessage {
   body?: any;
   db: Db;
-  query: { id?: string };
+  query: { id?: string; fromSeller?: string };
+}
+
+export interface ReadingType {
+  _id: string;
+  author: string;
+  comments: string;
+  name: string;
+  rating: number;
 }
 
 export interface Response extends ServerResponse {
   json: (data: Record<string, any>) => void;
+}
+
+export interface SellerType {
+  _id: string;
+  addresses: AddressType[];
+  confirm: string;
+  hash: string;
+  email: string;
+  name: string;
+  password: string;
+}
+
+export interface SellerPageType {
+  seller: SellerType;
+  id: string;
 }

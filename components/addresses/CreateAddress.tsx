@@ -6,10 +6,11 @@ import Input from '../form/Input';
 import fields from './addressFields';
 
 interface Props {
+  fromSeller?: boolean;
   id: string;
 }
 
-const CreateAddress = ({ id }: Props) => {
+const CreateAddress = ({ fromSeller, id }: Props) => {
   const { errors, handleSubmit, register, reset } = useForm<AddressType>({
     mode: 'onBlur',
     shouldFocusError: true,
@@ -28,7 +29,7 @@ const CreateAddress = ({ id }: Props) => {
   );
 
   const save: SubmitHandler<AddressType> = (variables) =>
-    mutate({ address: variables, id });
+    mutate({ address: variables, fromSeller, id });
 
   return (
     <form onSubmit={handleSubmit(save)}>

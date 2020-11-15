@@ -1,6 +1,9 @@
 import { LoginInterface } from '../pages/login';
-import { AddressType, CustomerType, ReadingType } from '../types';
-const URL = window.location.hostname;
+import { AddressType, CustomerType, ReadingType, SellerType } from '../types';
+
+let URL = 'http://localhost:3000';
+if (process.browser && !window.location.hostname.includes('localhost'))
+  URL = window.location.hostname;
 
 export interface CreateReadingType {
   reading: ReadingType;
@@ -9,6 +12,7 @@ export interface CreateReadingType {
 
 export interface CreateAddressType {
   address: AddressType;
+  fromSeller?: boolean;
   id: string;
 }
 
@@ -17,8 +21,17 @@ export interface UpdateCustomerType {
   id: string;
 }
 
-export const createAddress = ({ address, id }: CreateAddressType) =>
-  fetch(`${URL}/api/addresses?id=${id}`, {
+export interface UpdateSellerType {
+  seller: SellerType;
+  id: string;
+}
+
+export const createAddress = ({
+  address,
+  fromSeller = false,
+  id,
+}: CreateAddressType) =>
+  fetch(`${URL}/api/addresses?id=${id}&fromSeller=${fromSeller}`, {
     body: JSON.stringify(address),
     method: 'POST',
   }).then((res) => res.json());
@@ -35,20 +48,43 @@ export const createReading = ({ reading, id }: CreateReadingType) =>
     method: 'POST',
   }).then((res) => res.json());
 
-export const getAddresses = (id: string) =>
-  fetch(`${URL}/api/addresses?id=${id}`).then((res) => res.json());
+export const createSeller = (seller: SellerType) =>
+  fetch(`${URL}/api/sellers`, {
+    body: JSON.stringify(seller),
+    method: 'POST',
+  }).then((res) => res.json());
+
+export const getAddresses = (id: string, fromSeller = false) =>
+  fetch(`${URL}/api/addresses?id=${id}&fromSeller=${fromSeller}`).then((res) =>
+    res.json(),
+  );
 
 export const getCustomer = (id: string) =>
   fetch(`${URL}/api/customers?id=${id}`).then((res) => res.json());
 
-export const login = (data: LoginInterface) =>
-  fetch(`${URL}/api/login`, {
+export const getSeller = (id: string) =>
+  fetch(`${URL}/api/sellers?id=${id}`).then((res) => res.json());
+
+export const login = (data: LoginInterface, isSeller = false) =>
+  fetch(`${URL}/api/login${isSeller ? '?fromSeller=true' : ''}`, {
     body: JSON.stringify(data),
     method: 'POST',
+  }).then((res) => res.json());
+
+export const updateAddress = (address: Partial<AddressType>) =>
+  fetch(`${URL}/api/addresses?id=${address._id}`, {
+    body: JSON.stringify(address),
+    method: 'PUT',
   }).then((res) => res.json());
 
 export const updateCustomer = ({ customer, id }: UpdateCustomerType) =>
   fetch(`${URL}/api/customers?id=${id}`, {
     body: JSON.stringify(customer),
+    method: 'PUT',
+  }).then((res) => res.json());
+
+export const updateSeller = ({ seller, id }: UpdateSellerType) =>
+  fetch(`${URL}/api/sellers?id=${id}`, {
+    body: JSON.stringify(seller),
     method: 'PUT',
   }).then((res) => res.json());

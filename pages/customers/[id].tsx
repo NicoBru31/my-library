@@ -24,7 +24,8 @@ const Customer = ({ customer, id }: CustomerPageType) => {
   const logout = () => setSession({ id: '' });
 
   useEffect(() => {
-    if (!session?.id) router.push({ pathname: '/customers' });
+    if (!session?.id || !session?.isCustomer)
+      router.push({ pathname: '/customers' });
   }, [session]);
 
   return (

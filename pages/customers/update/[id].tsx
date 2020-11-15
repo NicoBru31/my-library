@@ -1,11 +1,10 @@
 import { GetServerSideProps } from 'next';
+import Link from 'next/link';
 import { useQuery } from 'react-query';
-import { CustomerPageType } from '../../../types/index';
+import CustomerUpdate from '../../../components/customer/CustomerUpdate';
 import { getCustomer } from '../../../fetch';
 import { CustomerType } from '../../../types';
-import Layout from '../../../components/facc/Layout';
-import CustomerUpdate from '../../../components/customer/CustomerUpdate';
-import Link from 'next/link';
+import { CustomerPageType } from '../../../types/index';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = typeof params.id === 'string' ? params.id : params.id[0];

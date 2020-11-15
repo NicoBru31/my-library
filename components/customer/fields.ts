@@ -21,7 +21,7 @@ const fields: Field<CustomerType>[] = [
     rules: {
       required: 'Champ obligatoire',
       pattern: {
-        message: 'Adresse e-mail invalide',
+        message: 'Adresse e-email invalide',
         value: /^([\w-\.]+)@((?:[\w]+\.)+)([a-zA-Z]{2,4})/i,
       },
     },
