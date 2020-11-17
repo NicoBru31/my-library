@@ -8,7 +8,9 @@
 }
 
 .Button {
-  @apply text-white rounded p-2;
+  @apply text-white;
+  @apply rounded;
+  @apply p-2;
   background: linear-gradient(to left, #2c5282 50%, #3182ce 50%) right;
   background-size: 200%;
   transition: 0.5s ease-in-out;
@@ -27,7 +29,8 @@
 }
 
 .burger {
-  @apply cursor-pointer fixed;
+  @apply cursor-pointer;
+  @apply fixed;
   height: 40px;
   right: 5vw;
   top: 2vh;
@@ -77,16 +80,24 @@
 }
 
 .Input {
-  @apply border-solid border-2 border-blue-800 rounded font-typewriter;
+  @apply border-solid;
+  @apply border-2;
+  @apply border-blue-800;
+  @apply rounded;
+  @apply font-typewriter;
   min-width: 300px;
 }
 
 .H1 {
-  @apply text-center font-bold text-4xl;
+  @apply text-center;
+  @apply font-bold;
+  @apply text-4xl;
 }
 
 .Link {
-  @apply text-2xl text-white cursor-pointer;
+  @apply text-2xl;
+  @apply text-white;
+  @apply cursor-pointer;
 }
 
 .Link:hover {
