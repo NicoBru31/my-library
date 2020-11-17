@@ -25,7 +25,7 @@ const Menu = () => {
       </button>
       <div className={`menu-pane ${burgerOpen && 'menu-open'}`}>
         <div className='Link'>
-          <Link href='/customerss'>Je suis client</Link>
+          <Link href='/customers'>Je suis client</Link>
         </div>
         {session?.isCustomer && (
           <div className='pl-6'>
