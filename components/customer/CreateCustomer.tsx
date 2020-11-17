@@ -47,7 +47,9 @@ const CreateCustomer = () => {
         register={register}
         type='password'
       />
-      <button type='submit'>Enregistrer</button>
+      <button className='Button' type='submit'>
+        Enregistrer
+      </button>
     </form>
   );
 };

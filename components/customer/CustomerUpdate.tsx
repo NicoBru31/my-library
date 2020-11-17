@@ -36,7 +36,9 @@ const CustomerUpdate = () => {
           register={register}
         />
       ))}
-      <button type='submit'>Enregistrer</button>
+      <button className='Button' type='submit'>
+        Enregistrer
+      </button>
     </form>
   );
 };

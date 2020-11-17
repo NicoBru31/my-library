@@ -11,7 +11,9 @@ const Seller = () => {
 
   return (
     <>
-      <button onClick={connect}>Se connecter</button>
+      <button className='Button' onClick={connect}>
+        Se connecter
+      </button>
       {!session?.id && <CreateSeller />}
     </>
   );

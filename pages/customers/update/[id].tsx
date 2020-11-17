@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import Link from 'next/link';
 import { useQuery } from 'react-query';
 import CustomerUpdate from '../../../components/customer/CustomerUpdate';
 import { getCustomer } from '../../../fetch';
@@ -20,7 +19,6 @@ const UpdateCustomer = ({ customer, id }: CustomerPageType) => {
   return (
     <>
       <h1 className='H1'>{`Hello ${data.firstName} !`}</h1>
-      <Link href={`/customers/${id}`}>Consulter mes lectures</Link>
       <CustomerUpdate />
     </>
   );

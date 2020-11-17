@@ -1,7 +1,5 @@
 import { GetServerSideProps } from 'next';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import { useContext } from 'react';
 import { useQuery } from 'react-query';
 import CreateReading from '../../components/readings/CreateReading';
@@ -18,28 +16,17 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
 const Customer = ({ customer, id }: CustomerPageType) => {
   const { data } = useQuery('customer', { initialData: customer });
-  const { session, setSession } = useContext(SessionContext);
+  const { setSession } = useContext(SessionContext);
   const router = useRouter();
 
-  const logout = () => setSession({ id: '' });
-
-  useEffect(() => {
-    if (!session?.id || !session?.isCustomer)
-      router.push({ pathname: '/customers' });
-  }, [session]);
+  const logout = () => {
+    setSession({ id: '' });
+    router.push({ pathname: '/login' });
+  };
 
   return (
     <>
       <h1 className='H1'>{`Bonjour ${data.firstName} !`}</h1>
-      <Link href={`/customers/update/${id}`}>
-        <div className='Link'>Modifier mon compte</div>
-      </Link>
-      <Link href={`/customers/addresses/${id}`}>
-        <div className='Link'>Voir mes adresses</div>
-      </Link>
-      <div className='Link' onClick={() => alert('Pas encore fait !')}>
-        Je veux avoir une recommandation !
-      </div>
       <div>Mes lectures :</div>
       <ul>
         {data.readings.map((reading) => (
@@ -47,7 +34,9 @@ const Customer = ({ customer, id }: CustomerPageType) => {
         ))}
       </ul>
       <CreateReading id={id} />
-      <button onClick={logout}>Me déconnecter</button>
+      <button className='Button' onClick={logout}>
+        Me déconnecter
+      </button>
     </>
   );
 };

@@ -14,14 +14,14 @@ const Input = <T extends {}>({
       {textarea ? (
         <textarea
           {...(props as TextareaHTMLAttributes<HTMLTextAreaElement>)}
-          className='Button'
+          className='Input'
           name={name}
           ref={register(rules)}
         />
       ) : (
         <input
           {...(props as InputHTMLAttributes<HTMLInputElement>)}
-          className='Button'
+          className='Input'
           name={name}
           ref={register(rules)}
         />

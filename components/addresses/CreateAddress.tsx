@@ -41,7 +41,9 @@ const CreateAddress = ({ fromSeller, id }: Props) => {
           register={register}
         />
       ))}
-      <button type='submit'>Ajouter</button>
+      <button className='Button' type='submit'>
+        Ajouter
+      </button>
     </form>
   );
 };

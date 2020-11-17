@@ -2,8 +2,83 @@
 @tailwind components;
 @tailwind utilities;
 
+.background {
+  background-color: theme('colors.whitebg');
+  overflow-x: unset;
+}
+
 .Button {
-  @apply border-solid border-2 border-blue-800 rounded;
+  @apply text-white rounded p-2;
+  background: linear-gradient(to left, #2c5282 50%, #3182ce 50%) right;
+  background-size: 200%;
+  transition: 0.5s ease-in-out;
+}
+
+.Button:hover {
+  background-position: left;
+}
+
+.Button:disabled {
+  opacity: 0.3;
+}
+
+.Button:disabled:hover {
+  background-position: right;
+}
+
+.burger {
+  @apply cursor-pointer fixed;
+  height: 40px;
+  right: 5vw;
+  top: 2vh;
+  width: 40px;
+  z-index: 2;
+}
+
+.burger div {
+  backface-visibility: hidden;
+  position: absolute;
+  left: 0;
+  border-top: 7px solid black;
+  width: 40px;
+  transition: 0.55s;
+}
+
+.burger div:nth-of-type(1) {
+  top: 0;
+}
+
+.burger div:nth-of-type(2) {
+  top: 18px;
+}
+
+.burger div:nth-of-type(3) {
+  top: 36px;
+}
+
+.burger-open div:nth-of-type(1) {
+  backface-visibility: hidden;
+  border-top-color: white;
+  top: 15px;
+  transform: rotate(50deg);
+  transition: 0.55s 0.5s;
+}
+
+.burger-open div:nth-of-type(2) {
+  opacity: 0;
+}
+
+.burger-open div:nth-of-type(3) {
+  backface-visibility: hidden;
+  border-top-color: white;
+  top: 15px;
+  transform: rotate(-410deg);
+  transition: 0.55s 0.5s;
+}
+
+.Input {
+  @apply border-solid border-2 border-blue-800 rounded font-typewriter;
+  min-width: 300px;
 }
 
 .H1 {
@@ -11,16 +86,37 @@
 }
 
 .Link {
-  @apply text-2xl text-blue-800 cursor-pointer;
+  @apply text-2xl text-white cursor-pointer;
 }
 
 .Link:hover {
-  @apply text-green-800;
+  @apply text-pink-300;
 }
 
 .home-picture {
-  background-image: url(/home.jpg) no-repeat center;
+  background-image: linear-gradient(
+      to left,
+      rgba(242, 243, 244, 1),
+      rgba(242, 243, 244, 0)
+    ),
+    linear-gradient(to top, rgba(242, 243, 244, 1), rgba(242, 243, 244, 0)),
+    url(/home.jpg);
+  background-repeat: no-repeat, no-repeat, no-repeat;
   background-size: cover;
   height: 50vh;
   width: 100vw;
+}
+
+.menu-pane {
+  background-color: #000;
+  height: 100%;
+  padding: 20px;
+  position: absolute;
+  right: -40vw;
+  transition: 0.6s ease-in-out;
+  width: 40vw;
+}
+
+.menu-open {
+  right: 0vw;
 }

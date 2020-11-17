@@ -27,7 +27,9 @@ const Seller = ({ seller, id }: SellerPageType) => {
       <Link href={`/sellers/addresses/${id}`}>
         <div className='Link'>Voir mon adresse</div>
       </Link>
-      <button onClick={logout}>Me déconnecter</button>
+      <button className='Button' onClick={logout}>
+        Me déconnecter
+      </button>
     </>
   );
 };
