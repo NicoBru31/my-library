@@ -12,7 +12,8 @@ const SessionProvider = ({ children }: PropsWithChildren<unknown>) => {
   }, [setSession]);
 
   useEffect(() => {
-    window.localStorage.setItem('liber:session', JSON.stringify(session));
+    if (session)
+      window.localStorage.setItem('liber:session', JSON.stringify(session));
   }, [session]);
 
   return (
