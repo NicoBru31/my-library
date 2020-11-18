@@ -3,7 +3,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'whitebg': '#F2F3F4',
+        cardbg: '#00000070',
+        cardbghover: '#2f855a90',
+        whitebg: '#F2F3F4',
       },
       fontFamily: {
         typewriter: 'FreeMono'

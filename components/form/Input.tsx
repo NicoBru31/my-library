@@ -1,4 +1,9 @@
-import { InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
+import {
+  Input as ChakraInput,
+  InputProps,
+  Textarea,
+  TextareaProps,
+} from '@chakra-ui/react';
 import { InputType } from '../../types';
 
 const Input = <T extends {}>({
@@ -12,16 +17,18 @@ const Input = <T extends {}>({
   <>
     <div>
       {textarea ? (
-        <textarea
-          {...(props as TextareaHTMLAttributes<HTMLTextAreaElement>)}
+        <Textarea
+          {...(props as TextareaProps)}
           className='Input'
+          style={{ width: '300px' }}
           name={name}
           ref={register(rules)}
         />
       ) : (
-        <input
-          {...(props as InputHTMLAttributes<HTMLInputElement>)}
+        <ChakraInput
+          {...(props as InputProps)}
           className='Input'
+          style={{ width: '300px' }}
           name={name}
           ref={register(rules)}
         />

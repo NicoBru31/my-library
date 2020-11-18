@@ -7,42 +7,19 @@
   overflow-x: unset;
 }
 
-.Button {
-  @apply text-white;
-  @apply rounded;
-  @apply p-2;
-  background: linear-gradient(to left, #2c5282 50%, #3182ce 50%) right;
-  background-size: 200%;
-  transition: 0.5s ease-in-out;
-}
-
-.Button:hover {
-  background-position: left;
-}
-
-.Button:disabled {
-  opacity: 0.3;
-}
-
-.Button:disabled:hover {
-  background-position: right;
-}
-
 .burger {
   @apply cursor-pointer;
-  @apply fixed;
   height: 40px;
-  right: 5vw;
-  top: 2vh;
   width: 40px;
   z-index: 2;
 }
 
 .burger div {
   backface-visibility: hidden;
-  position: absolute;
+  border-radius: 3px;
+  position: relative;
   left: 0;
-  border-top: 7px solid black;
+  border-top: 8px solid white;
   width: 40px;
   transition: 0.55s;
 }
@@ -52,19 +29,19 @@
 }
 
 .burger div:nth-of-type(2) {
-  top: 18px;
+  top: 8px;
 }
 
 .burger div:nth-of-type(3) {
-  top: 36px;
+  top: 16px;
 }
 
 .burger-open div:nth-of-type(1) {
   backface-visibility: hidden;
   border-top-color: white;
-  top: 15px;
+  top: 16px;
   transform: rotate(50deg);
-  transition: 0.55s 0.5s;
+  transition: 0.55s;
 }
 
 .burger-open div:nth-of-type(2) {
@@ -74,18 +51,13 @@
 .burger-open div:nth-of-type(3) {
   backface-visibility: hidden;
   border-top-color: white;
-  top: 15px;
+  top: 0px;
   transform: rotate(-410deg);
-  transition: 0.55s 0.5s;
+  transition: 0.55s;
 }
 
-.Input {
-  @apply border-solid;
-  @apply border-2;
-  @apply border-blue-800;
-  @apply rounded;
-  @apply font-typewriter;
-  min-width: 300px;
+.burger .alert {
+  top: 55px;
 }
 
 .H1 {
@@ -106,15 +78,14 @@
 
 .home-picture {
   background-image: linear-gradient(
-      to left,
+      to top,
       rgba(242, 243, 244, 1),
       rgba(242, 243, 244, 0)
     ),
-    linear-gradient(to top, rgba(242, 243, 244, 1), rgba(242, 243, 244, 0)),
     url(/home.jpg);
-  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-repeat: no-repeat, no-repeat;
   background-size: cover;
-  height: 50vh;
+  height: calc(100vh - 5rem);
   width: 100vw;
 }
 

@@ -1,5 +1,6 @@
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { queryCache, useMutation, useQuery } from 'react-query';
+import { Button } from '@chakra-ui/react';
 import { updateSeller, UpdateSellerType } from '../../fetch';
 import { SellerType } from '../../types';
 import Input from '../form/Input';
@@ -36,9 +37,9 @@ const SellerUpdate = () => {
           register={register}
         />
       ))}
-      <button className='Button' type='submit'>
+      <Button colorScheme='teal' type='submit'>
         Enregistrer
-      </button>
+      </Button>
     </form>
   );
 };

@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { Button } from '@chakra-ui/react';
 import CreateSeller from '../../components/sellers/CreateSeller';
 import useSession from '../../hooks/useSession';
 
@@ -11,9 +12,9 @@ const Seller = () => {
 
   return (
     <>
-      <button className='Button' onClick={connect}>
+      <Button colorScheme='teal' onClick={connect}>
         Se connecter
-      </button>
+      </Button>
       {!session?.id && <CreateSeller />}
     </>
   );

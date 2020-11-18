@@ -1,5 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { queryCache, useMutation } from 'react-query';
+import { Button } from '@chakra-ui/react';
 import { createAddress, CreateAddressType } from '../../fetch';
 import { AddressType } from '../../types';
 import Input from '../form/Input';
@@ -41,9 +42,9 @@ const CreateAddress = ({ fromSeller, id }: Props) => {
           register={register}
         />
       ))}
-      <button className='Button' type='submit'>
+      <Button colorScheme='teal' type='submit'>
         Ajouter
-      </button>
+      </Button>
     </form>
   );
 };

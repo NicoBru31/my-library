@@ -1,6 +1,6 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { Db } from 'mongodb';
-import { InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
+import { InputProps, TextareaProps } from '@chakra-ui/react';
 import { FieldError, UseFormMethods, ValidationRules } from 'react-hook-form';
 
 export interface AddressType {
@@ -42,10 +42,7 @@ export interface CustomerPageType {
   id: string;
 }
 
-export type Field<T> = (
-  | InputHTMLAttributes<HTMLInputElement>
-  | TextareaHTMLAttributes<HTMLTextAreaElement>
-) & {
+export type Field<T> = (InputProps | TextareaProps) & {
   name: keyof T;
   rules?: ValidationRules;
   textarea?: boolean;

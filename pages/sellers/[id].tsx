@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
+import { Button } from '@chakra-ui/react';
 import { useContext } from 'react';
 import { useQuery } from 'react-query';
 import SessionContext from '../../contexts/SessionContext';
@@ -27,9 +28,9 @@ const Seller = ({ seller, id }: SellerPageType) => {
       <Link href={`/sellers/addresses/${id}`}>
         <div className='Link'>Voir mon adresse</div>
       </Link>
-      <button className='Button' onClick={logout}>
+      <Button colorScheme='teal' onClick={logout}>
         Me déconnecter
-      </button>
+      </Button>
     </>
   );
 };

@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { queryCache, useMutation } from 'react-query';
+import { Button } from '@chakra-ui/react';
 import { createCustomer } from '../../fetch';
 import { CustomerType } from '../../types';
 import Input from '../form/Input';
@@ -47,9 +48,9 @@ const CreateCustomer = () => {
         register={register}
         type='password'
       />
-      <button className='Button' type='submit'>
+      <Button colorScheme='teal' type='submit'>
         Enregistrer
-      </button>
+      </Button>
     </form>
   );
 };

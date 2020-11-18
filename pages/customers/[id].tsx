@@ -2,6 +2,7 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { useQuery } from 'react-query';
+import { Button } from '@chakra-ui/react';
 import CreateReading from '../../components/readings/CreateReading';
 import Reading from '../../components/readings/Reading';
 import SessionContext from '../../contexts/SessionContext';
@@ -34,9 +35,9 @@ const Customer = ({ customer, id }: CustomerPageType) => {
         ))}
       </ul>
       <CreateReading id={id} />
-      <button className='Button' onClick={logout}>
+      <Button colorScheme='teal' onClick={logout}>
         Me déconnecter
-      </button>
+      </Button>
     </>
   );
 };
