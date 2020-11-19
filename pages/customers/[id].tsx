@@ -1,8 +1,8 @@
+import { Button } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { useQuery } from 'react-query';
-import { Button } from '@chakra-ui/react';
 import CreateReading from '../../components/readings/CreateReading';
 import Reading from '../../components/readings/Reading';
 import SessionContext from '../../contexts/SessionContext';
@@ -18,22 +18,22 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 const Customer = ({ customer, id }: CustomerPageType) => {
   const { data } = useQuery('customer', { initialData: customer });
   const { setSession } = useContext(SessionContext);
-  const router = useRouter();
+  const { push } = useRouter();
 
   const logout = () => {
     setSession({ id: '' });
-    router.push({ pathname: '/login' });
+    push({ pathname: '/login' });
   };
 
   return (
     <>
       <h1 className='H1'>{`Bonjour ${data.firstName} !`}</h1>
       <div>Mes lectures :</div>
-      <ul>
+      <div className='flex justify-between items-center flex-wrap'>
         {data.readings.map((reading) => (
           <Reading {...reading} key={reading._id} />
         ))}
-      </ul>
+      </div>
       <CreateReading id={id} />
       <Button colorScheme='teal' onClick={logout}>
         Me déconnecter

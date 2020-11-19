@@ -1,30 +1,43 @@
-import { ObjectId } from 'mongodb';
 import { hashSync } from 'bcryptjs';
+import { ObjectId } from 'mongodb';
 import nextConnect from 'next-connect';
 import middleware from '../../middleware/database';
-import {
-  Incoming,
-  CustomerType,
-  ReadingType,
-  Response,
-} from './../../types/index';
+import { CustomerType, Incoming, Response } from './../../types/index';
 
 const handler = nextConnect();
 
 handler.use(middleware);
 
 handler.get<Incoming, Response>(async (req, res) => {
-  const customer: CustomerType = await req.db.collection('customers').findOne({
-    _id: new ObjectId(req.query.id),
-  });
-  const readings: ReadingType[] = await req.db
-    .collection('readings')
-    .find({ _id: { $in: customer.readings } })
-    .toArray();
-  res.json({
-    ...customer,
-    readings,
-  });
+  const agg = await req.db.collection('customers').aggregate<CustomerType>([
+    { $match: { _id: new ObjectId(req.query.id) } },
+    {
+      $lookup: {
+        from: 'addresses',
+        localField: 'addresses',
+        foreignField: '_id',
+        as: 'addresses',
+      },
+    },
+    {
+      $lookup: {
+        from: 'readings',
+        localField: 'readings',
+        foreignField: '_id',
+        as: 'readings',
+      },
+    },
+    {
+      $lookup: {
+        from: 'recos',
+        localField: 'recos',
+        foreignField: '_id',
+        as: 'recos',
+      },
+    },
+  ]);
+  const customer = await agg.next();
+  res.json(customer);
 });
 
 handler.post<Incoming, Response>(async (req, res) => {

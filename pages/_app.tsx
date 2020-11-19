@@ -5,14 +5,17 @@ import '../styles/tailwind.css';
 import '../styles/globals.css';
 import SessionProvider from '../providers/SessionProvider';
 import AlertProvider from '../providers/AlertProvider';
+import LoaderProvider from '../providers/LoaderProvider';
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <ChakraProvider>
     <SessionProvider>
       <AlertProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <LoaderProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </LoaderProvider>
       </AlertProvider>
     </SessionProvider>
   </ChakraProvider>

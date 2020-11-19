@@ -41,7 +41,7 @@ const Menu = () => {
         <CgProfile color='white' size='40px' />
         <div className='text-white pl-4'>{`${session?.fullName || ''}`}</div>
       </div>
-      <div style={{ height: 'calc(100% - 20px)' }}>
+      <div className='z-10' style={{ height: 'calc(100% - 20px)' }}>
         <button
           className={`burger${burgerOpen ? ' burger-open' : ''}${
             alert ? ' alert' : ''
@@ -69,6 +69,11 @@ const Menu = () => {
             </div>
             <div className='Link'>
               <Link href={`/customers/${session.id}`}>Mes lectures</Link>
+            </div>
+            <div className='Link'>
+              <Link href={`/customers/recos/${session.id}`}>
+                Je veux une reco
+              </Link>
             </div>
           </div>
         )}

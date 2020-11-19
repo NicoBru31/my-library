@@ -90,15 +90,70 @@
 }
 
 .menu-pane {
-  background-color: #000;
-  height: 100%;
+  @apply bg-green-800;
+  @apply h-screen;
+  @apply absolute;
+  @apply z-20;
   padding: 20px;
-  position: absolute;
   right: -40vw;
+  top: 0;
   transition: 0.6s ease-in-out;
   width: 40vw;
 }
 
 .menu-open {
   right: 0vw;
+}
+
+.dot-flashing {
+  @apply bg-green-700;
+  @apply fixed;
+  border-radius: 5px;
+  @apply text-green-700;
+  animation-delay: 0.5s;
+  animation: dotFlashing 1s infinite linear alternate;
+  height: 10px;
+  left: calc(50vw - 5px);
+  top: calc(50vh - 5px);
+  width: 10px;
+}
+
+.dot-flashing::before,
+.dot-flashing::after {
+  @apply absolute;
+  content: '';
+  display: inline-block;
+  top: 0;
+}
+
+.dot-flashing::before {
+  @apply bg-green-700;
+  @apply text-green-700;
+  animation-delay: 0s;
+  animation: dotFlashing 1s infinite alternate;
+  border-radius: 5px;
+  height: 10px;
+  left: -15px;
+  width: 10px;
+}
+
+.dot-flashing::after {
+  @apply bg-green-700;
+  @apply text-green-700;
+  animation-delay: 1s;
+  animation: dotFlashing 1s infinite alternate;
+  border-radius: 5px;
+  height: 10px;
+  left: 15px;
+  width: 10px;
+}
+
+@keyframes dotFlashing {
+  0% {
+    background-color: #2f855a;
+  }
+  50%,
+  100% {
+    background-color: #ebe6ff;
+  }
 }

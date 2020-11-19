@@ -1,8 +1,8 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { queryCache, useMutation } from 'react-query';
 import { Button } from '@chakra-ui/react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { createAddress, CreateAddressType } from '../../fetch';
-import { AddressType } from '../../types';
+import useUpdate from '../../hooks/useUpdate';
+import { AddressType, CustomerType } from '../../types';
 import Input from '../form/Input';
 import fields from './addressFields';
 
@@ -16,18 +16,16 @@ const CreateAddress = ({ fromSeller, id }: Props) => {
     mode: 'onBlur',
     shouldFocusError: true,
   });
-  const [mutate] = useMutation<AddressType, AddressType, CreateAddressType>(
-    createAddress,
-    {
-      onSuccess: (data) => {
-        queryCache.setQueryData('addresses', (oldData: AddressType[]) => [
-          ...oldData,
-          data,
-        ]);
-        reset();
-      },
-    },
-  );
+  const { mutate, isLoading } = useUpdate<
+    AddressType,
+    CustomerType,
+    CreateAddressType
+  >({
+    action: createAddress,
+    key: fromSeller ? 'seller' : 'customer',
+    reset,
+    subKey: 'addresses',
+  });
 
   const save: SubmitHandler<AddressType> = (variables) =>
     mutate({ address: variables, fromSeller, id });
@@ -42,7 +40,7 @@ const CreateAddress = ({ fromSeller, id }: Props) => {
           register={register}
         />
       ))}
-      <Button colorScheme='teal' type='submit'>
+      <Button disabled={isLoading} colorScheme='teal' type='submit'>
         Ajouter
       </Button>
     </form>

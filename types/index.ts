@@ -12,19 +12,6 @@ export interface AddressType {
   zip: string;
 }
 
-export interface AddressPageType {
-  addresses: AddressType[];
-  customer: CustomerType;
-  id: string;
-}
-
-export interface Credentials {
-  email: string;
-  id: string;
-  password: string;
-  type: 'customer' | 'seller';
-}
-
 export interface CustomerType {
   _id: string;
   addresses?: AddressType[];
@@ -35,6 +22,7 @@ export interface CustomerType {
   lastName: string;
   password: string;
   readings: ReadingType[];
+  recos: RecoType[];
 }
 
 export interface CustomerPageType {
@@ -65,6 +53,17 @@ export interface ReadingType {
   comments: string;
   name: string;
   rating: number;
+}
+
+export interface RecoType {
+  _id: string;
+  createdAt: Date;
+  customerId: string;
+  from: {
+    addresses: string[];
+    readings: string[];
+  };
+  isClosed: boolean;
 }
 
 export interface Response extends ServerResponse {

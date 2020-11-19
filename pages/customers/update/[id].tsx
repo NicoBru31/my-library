@@ -11,7 +11,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   return { props: { customer, id } };
 };
 
-const UpdateCustomer = ({ customer, id }: CustomerPageType) => {
+const UpdateCustomer = ({ customer }: CustomerPageType) => {
   const { data } = useQuery<CustomerType>('customer', getCustomer, {
     initialData: customer,
   });

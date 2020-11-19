@@ -1,6 +1,7 @@
+import { Button } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { queryCache, useMutation } from 'react-query';
 import { createReading, CreateReadingType } from '../../fetch';
+import useUpdate from '../../hooks/useUpdate';
 import { CustomerType, ReadingType } from '../../types';
 import Input from '../form/Input';
 import fields from './readingFields';
@@ -14,18 +15,15 @@ const CreateReading = ({ id }: Props) => {
     mode: 'onBlur',
     shouldFocusError: true,
   });
-  const [mutate, { isLoading }] = useMutation<
+  const { mutate, isLoading } = useUpdate<
     ReadingType,
     CustomerType,
     CreateReadingType
-  >(createReading, {
-    onSuccess: (data) => {
-      queryCache.setQueryData('customer', (customer: CustomerType) => ({
-        ...customer,
-        readings: [...customer.readings, data],
-      }));
-      reset();
-    },
+  >({
+    action: createReading,
+    key: 'customer',
+    reset,
+    subKey: 'readings',
   });
 
   const create: SubmitHandler<ReadingType> = async (reading) =>
@@ -41,9 +39,9 @@ const CreateReading = ({ id }: Props) => {
           key={field.name}
         />
       ))}
-      <button disabled={isLoading} className='Button' type='submit'>
+      <Button colorScheme='teal' disabled={isLoading} type='submit'>
         Ajouter ce commentaire
-      </button>
+      </Button>
     </form>
   );
 };

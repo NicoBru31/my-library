@@ -1,34 +1,36 @@
+import { Button } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
-import { queryCache, useMutation } from 'react-query';
-import { Button } from '@chakra-ui/react';
 import { createCustomer } from '../../fetch';
+import useUpdate from '../../hooks/useUpdate';
 import { CustomerType } from '../../types';
 import Input from '../form/Input';
 import fields from './fields';
 
 const CreateCustomer = () => {
-  const router = useRouter();
-  const { errors, handleSubmit, register, setError } = useForm<CustomerType>({
+  const { push } = useRouter();
+  const { errors, handleSubmit, register, reset, setError } = useForm<
+    CustomerType
+  >({
     mode: 'onBlur',
     shouldFocusError: true,
   });
-  const [mutate] = useMutation<CustomerType, CustomerType, CustomerType>(
-    createCustomer,
-    {
-      onSuccess: (data) => {
-        queryCache.setQueryData('customer', data);
-        router.push({ pathname: '/login' });
-      },
-    },
-  );
+  const { mutate, isLoading } = useUpdate<
+    CustomerType,
+    CustomerType,
+    CustomerType
+  >({
+    action: createCustomer,
+    key: 'customer',
+    reset,
+  });
 
   const save: SubmitHandler<CustomerType> = (variables) => {
     if (variables.confirm !== variables.password)
       return setError('confirm', {
         message: 'Les mots de passe doivent être identiques',
       });
-    mutate(variables);
+    mutate(variables).then(() => push({ pathname: '/login' }));
   };
 
   return (
@@ -48,7 +50,7 @@ const CreateCustomer = () => {
         register={register}
         type='password'
       />
-      <Button colorScheme='teal' type='submit'>
+      <Button disabled={isLoading} colorScheme='teal' type='submit'>
         Enregistrer
       </Button>
     </form>

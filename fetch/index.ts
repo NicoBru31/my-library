@@ -1,5 +1,11 @@
 import { LoginInterface } from '../pages/login';
-import { AddressType, CustomerType, ReadingType, SellerType } from '../types';
+import {
+  AddressType,
+  CustomerType,
+  ReadingType,
+  RecoType,
+  SellerType,
+} from '../types';
 
 let URL = 'http://localhost:3000';
 if (process.browser && !window.location.hostname.includes('localhost'))
@@ -48,16 +54,17 @@ export const createReading = ({ reading, id }: CreateReadingType) =>
     method: 'POST',
   }).then((res) => res.json());
 
+export const createReco = (data: RecoType) =>
+  fetch(`${URL}/api/recos`, {
+    body: JSON.stringify(data),
+    method: 'POST',
+  }).then((res) => res.json());
+
 export const createSeller = (seller: SellerType) =>
   fetch(`${URL}/api/sellers`, {
     body: JSON.stringify(seller),
     method: 'POST',
   }).then((res) => res.json());
-
-export const getAddresses = (id: string, fromSeller = false) =>
-  fetch(`${URL}/api/addresses?id=${id}&fromSeller=${fromSeller}`).then((res) =>
-    res.json(),
-  );
 
 export const getCustomer = (id: string) =>
   fetch(`${URL}/api/customers?id=${id}`).then((res) => res.json());
