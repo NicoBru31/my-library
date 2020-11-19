@@ -1,7 +1,6 @@
+import { Button } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Input from '../../components/form/Input';
 import loginFields from '../../components/login/loginFields';
@@ -16,18 +15,12 @@ export interface LoginInterface {
 const Login = () => {
   const { errors, handleSubmit, register } = useForm<LoginInterface>();
   const { session, setSession } = useContext(SessionContext);
-  const [processing, setProcessing] = useState(false);
   const router = useRouter();
 
   const send: SubmitHandler<LoginInterface> = async (data) => {
-    setProcessing(true);
     let log = await login(data, !!router.query?.isSeller);
     setSession(log);
   };
-
-  useEffect(() => {
-    return () => setProcessing(false);
-  }, [setProcessing]);
 
   useEffect(() => {
     if (session?.id)
@@ -48,9 +41,9 @@ const Login = () => {
           register={register}
         />
       ))}
-      <button disabled={processing} className='Button' type='submit'>
+      <Button colorScheme='teal' type='submit'>
         Je me connecte
-      </button>
+      </Button>
     </form>
   );
 };

@@ -2,7 +2,7 @@ import { compareSync } from 'bcryptjs';
 import nextConnect from 'next-connect';
 import middleware from '../../middleware/database';
 import { LoginInterface } from '../login';
-import { CustomerType, Incoming, Response } from './../../types/index';
+import { Incoming, Response } from './../../types/index';
 
 const handler = nextConnect();
 
@@ -20,7 +20,7 @@ handler.post<Incoming, Response>(async (req, res) => {
   if (!data || !compareSync(password, data.hash)) return res.json({ _id: '' });
   return res.json({
     id: data._id,
-    isCustomer: true,
+    isCustomer: !fromSeller,
     fullName: data.name || `${data.firstName} ${data.lastName}`,
   });
 });

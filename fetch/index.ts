@@ -8,8 +8,8 @@ import {
 } from '../types';
 
 let URL = 'http://localhost:3000';
-if (process.browser && !window.location.hostname.includes('localhost'))
-  URL = window.location.hostname;
+if (process.browser && !window.location.origin.includes('localhost'))
+  URL = window.location.origin;
 
 export interface CreateReadingType {
   reading: ReadingType;
