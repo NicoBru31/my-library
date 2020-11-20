@@ -7,8 +7,10 @@ import {
   SellerType,
 } from '../types';
 
-let URL = '';
+let URL = process.env.VERCEL_URL || 'http://localhost:3000';
+console.log(URL);
 if (process.browser) URL = window.location.origin;
+if (!URL.includes('http')) URL = `https://${URL}`;
 
 export interface CreateReadingType {
   reading: ReadingType;
