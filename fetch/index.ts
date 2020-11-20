@@ -7,10 +7,7 @@ import {
   SellerType,
 } from '../types';
 
-let URL = process.env.VERCEL_URL || 'http://localhost:3000';
-console.log(URL);
-if (process.browser) URL = window.location.origin;
-if (!URL.includes('http')) URL = `https://${URL}`;
+const URL = 'https://my-library-fe53bsjce.vercel.app';
 
 export interface CreateReadingType {
   reading: ReadingType;
