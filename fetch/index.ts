@@ -7,9 +7,8 @@ import {
   SellerType,
 } from '../types';
 
-let URL = 'http://localhost:3000';
-if (process.browser && !window.location.origin.includes('localhost'))
-  URL = window.location.origin;
+let URL = '';
+if (process.browser) URL = window.location.origin;
 
 export interface CreateReadingType {
   reading: ReadingType;
