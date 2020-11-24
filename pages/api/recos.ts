@@ -7,6 +7,14 @@ const handler = nextConnect();
 
 handler.use(middleware);
 
+handler.get<Incoming, Response>(async (req, res) => {
+  const recos = await req.db
+    .collection('recos')
+    .find({ isClosed: false })
+    .toArray();
+  res.json(recos);
+});
+
 handler.post<Incoming, Response>(async (req, res) => {
   const reco = JSON.parse(req.body) as RecoType;
   reco.createdAt = new Date();
@@ -22,6 +30,15 @@ handler.post<Incoming, Response>(async (req, res) => {
       { $addToSet: { recos: new ObjectId(insertedId) } },
     );
   res.json(inserted);
+});
+
+handler.put<Incoming, Response>(async (req, res) => {
+  const { id } = req.query;
+  const reco = JSON.parse(req.body);
+  const { upsertedCount } = await req.db
+    .collection('recos')
+    .updateOne({ _id: new ObjectId(id) }, { $addToSet: { answers: reco } });
+  res.json({ success: upsertedCount > 0 });
 });
 
 export default handler;

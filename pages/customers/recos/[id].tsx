@@ -1,13 +1,19 @@
 import { Button } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
+import { useEffect } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { useQuery } from 'react-query';
+import { queryCache, useQuery } from 'react-query';
 import RecoAddresses from '../../../components/recos/RecoAddresses';
 import RecoIntro from '../../../components/recos/RecoIntro';
 import RecoReadings from '../../../components/recos/RecoReadings';
-import { createReco, getCustomer } from '../../../fetch';
+import { createReco, getGoogleBook, getCustomer } from '../../../fetch';
 import useUpdate from '../../../hooks/useUpdate';
-import { CustomerPageType, CustomerType, RecoType } from '../../../types';
+import {
+  CustomerPageType,
+  CustomerType,
+  GoogleBookType,
+  RecoType,
+} from '../../../types';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = typeof params.id === 'string' ? params.id : params.id[0];
@@ -16,6 +22,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 };
 
 const Reco = ({ customer, id }: CustomerPageType) => {
+  const { data: books } = useQuery<GoogleBookType[]>('books', {
+    initialData: [],
+  });
   const { data } = useQuery<CustomerType>('customer', {
     initialData: customer,
   });
@@ -45,6 +54,19 @@ const Reco = ({ customer, id }: CustomerPageType) => {
     mutate({ ...data, customerId: id });
   };
 
+  useEffect(() => {
+    if (data?.recos?.length) {
+      const promises = data.recos
+        .map(({ answers }) =>
+          answers.map(({ books }) => books.map(getGoogleBook)),
+        )
+        .flat(3);
+      Promise.all(promises).then((res) =>
+        queryCache.setQueryData('books', res),
+      );
+    }
+  }, [data]);
+
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(save)}>
@@ -60,8 +82,8 @@ const Reco = ({ customer, id }: CustomerPageType) => {
         </div>
       </form>
       <div>Mes recos :</div>
-      {data?.recos.map((reco) => (
-        <div key={reco._id}>{reco._id}</div>
+      {books.map((book) => (
+        <div key={book.id}>{book?.volumeInfo?.title}</div>
       ))}
     </FormProvider>
   );

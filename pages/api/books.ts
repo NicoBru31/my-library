@@ -1,15 +1,17 @@
+import { ObjectId } from 'mongodb';
 import nextConnect from 'next-connect';
-import fetch from 'isomorphic-fetch';
+import middleware from '../../middleware/database';
 import { Incoming, Response } from '../../types';
-const { BOOKS_API } = process.env;
 
 const handler = nextConnect();
 
+handler.use(middleware);
+
 handler.get<Incoming, Response>(async (req, res) => {
-  console.log(req.query);
-  const books = await fetch(`${BOOKS_API}${req.query}`).then((r) => r.json());
-  console.log('books', books);
-  res.json(books);
+  const book = await req.db
+    .collection('books')
+    .findOne({ _id: new ObjectId(req.query.id) });
+  res.json(book);
 });
 
 export default handler;

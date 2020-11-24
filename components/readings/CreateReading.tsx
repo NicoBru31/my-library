@@ -1,20 +1,29 @@
 import { Button } from '@chakra-ui/react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useState } from 'react';
+import {
+  FieldError,
+  FormProvider,
+  SubmitHandler,
+  useForm,
+} from 'react-hook-form';
 import { createReading, CreateReadingType } from '../../fetch';
 import useUpdate from '../../hooks/useUpdate';
-import { CustomerType, ReadingType } from '../../types';
+import { CustomerType, GoogleBookType, ReadingType } from '../../types';
 import Input from '../form/Input';
 import fields from './readingFields';
+import SearchReading from './SearchReading';
 
 interface Props {
   id: string;
 }
 
 const CreateReading = ({ id }: Props) => {
-  const { errors, handleSubmit, register, reset } = useForm<ReadingType>({
+  const [googleBook, setGoogleBook] = useState<GoogleBookType>();
+  const methods = useForm<ReadingType>({
     mode: 'onBlur',
     shouldFocusError: true,
   });
+  const { errors, handleSubmit, register, reset, setValue } = methods;
   const { mutate, isLoading } = useUpdate<
     ReadingType,
     CustomerType,
@@ -27,22 +36,38 @@ const CreateReading = ({ id }: Props) => {
   });
 
   const create: SubmitHandler<ReadingType> = async (reading) =>
-    mutate({ reading, id });
+    mutate({
+      reading: {
+        ...reading,
+        book: {
+          author: googleBook?.volumeInfo?.authors?.join(', '),
+          title: googleBook?.volumeInfo?.title,
+          googleId: googleBook?.id,
+        },
+      },
+      id,
+    });
+
+  const select = (book: GoogleBookType) => setGoogleBook(book);
 
   return (
-    <form onSubmit={handleSubmit(create)}>
-      {fields.map((field) => (
-        <Input
-          {...field}
-          error={errors[field.name]}
-          register={register}
-          key={field.name}
-        />
-      ))}
-      <Button colorScheme='teal' disabled={isLoading} type='submit'>
-        Ajouter ce commentaire
-      </Button>
-    </form>
+    <FormProvider {...methods}>
+      <div>Ajouter une note de lecture :</div>
+      <form onSubmit={handleSubmit(create)}>
+        <SearchReading onSelect={select} />
+        {fields.map((field) => (
+          <Input
+            {...field}
+            error={errors[field.name] as FieldError}
+            register={register}
+            key={field.name}
+          />
+        ))}
+        <Button colorScheme='teal' disabled={isLoading} type='submit'>
+          Ajouter ce commentaire
+        </Button>
+      </form>
+    </FormProvider>
   );
 };
 

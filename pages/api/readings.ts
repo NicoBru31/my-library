@@ -9,12 +9,16 @@ const handler = nextConnect();
 handler.use(middleware);
 
 handler.post<Incoming, Response>(async (req, res) => {
+  const { book, customerId, ...body }: ReadingType = JSON.parse(req.body);
   const {
-    customerId,
-    ...body
-  }: ReadingType & { customerId: string } = JSON.parse(req.body);
-  const reading = await req.db.collection('readings').insertOne(body);
-  await req.db
+    upsertedId: { _id: bookId },
+  } = await req.db
+    .collection('books')
+    .updateOne(book, { $set: book }, { upsert: true });
+  const reading = await req.db
+    .collection('readings')
+    .insertOne({ ...body, bookId });
+  req.db
     .collection('customers')
     .updateOne(
       { _id: new ObjectId(customerId) },

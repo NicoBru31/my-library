@@ -4,7 +4,7 @@ import { useContext, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Input from '../../components/form/Input';
 import loginFields from '../../components/login/loginFields';
-import SessionContext from '../../contexts/SessionContext';
+import SessionContext, { Session } from '../../contexts/SessionContext';
 import { login } from '../../fetch';
 
 export interface LoginInterface {
@@ -14,22 +14,19 @@ export interface LoginInterface {
 
 const Login = () => {
   const { errors, handleSubmit, register } = useForm<LoginInterface>();
-  const { session, setSession } = useContext(SessionContext);
+  const { setSession } = useContext(SessionContext);
   const router = useRouter();
 
   const send: SubmitHandler<LoginInterface> = async (data) => {
-    let log = await login(data, !!router.query?.isSeller);
+    let log: Session = await login(data, !!router.query?.isSeller);
     setSession(log);
+    if (log.isCustomer) router.push({ pathname: `/customers/${log.id}` });
+    else router.push({ pathname: `/sellers/${log.id}` });
   };
 
   useEffect(() => {
-    if (session?.id)
-      router.push({
-        pathname: `/${router.query?.isSeller ? 'sellers' : 'customers'}/${
-          session.id
-        }`,
-      });
-  }, [session]);
+    setSession({ id: '' });
+  }, [setSession]);
 
   return (
     <form onSubmit={handleSubmit(send)}>

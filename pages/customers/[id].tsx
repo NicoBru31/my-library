@@ -28,7 +28,7 @@ const Customer = ({ customer, id }: CustomerPageType) => {
   return (
     <>
       <h1 className='H1'>{`Bonjour ${data.firstName} !`}</h1>
-      <div>Mes lectures :</div>
+      {data?.readings.length > 0 && <div>Mes lectures :</div>}
       <div className='flex justify-between items-center flex-wrap'>
         {data.readings.map((reading) => (
           <Reading {...reading} key={reading._id} />

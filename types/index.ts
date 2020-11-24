@@ -2,6 +2,9 @@ import { IncomingMessage, ServerResponse } from 'http';
 import { Db } from 'mongodb';
 import { InputProps, TextareaProps } from '@chakra-ui/react';
 import { FieldError, UseFormMethods, ValidationRules } from 'react-hook-form';
+import { BookType, RecoBooksType } from './books';
+
+export * from './books';
 
 export interface AddressType {
   _id: string;
@@ -49,14 +52,16 @@ export interface Incoming extends IncomingMessage {
 
 export interface ReadingType {
   _id: string;
-  author: string;
+  book: BookType;
+  bookId: string;
   comments: string;
-  name: string;
+  customerId: string;
   rating: number;
 }
 
 export interface RecoType {
   _id: string;
+  answers: RecoBooksType[];
   createdAt: Date;
   customerId: string;
   from: {
@@ -81,6 +86,7 @@ export interface SellerType {
 }
 
 export interface SellerPageType {
+  recos: RecoType[];
   seller: SellerType;
   id: string;
 }
