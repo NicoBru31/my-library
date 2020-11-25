@@ -20,15 +20,15 @@ handler.post<Incoming, Response>(async (req, res) => {
   reco.createdAt = new Date();
   reco.isClosed = false;
   const { insertedId } = await req.db.collection('recos').insertOne(reco);
-  const inserted = await req.db.collection('recos').findOne({
-    _id: new ObjectId(insertedId),
-  });
   req.db
     .collection('customers')
     .updateOne(
       { _id: new ObjectId(reco.customerId) },
       { $addToSet: { recos: new ObjectId(insertedId) } },
     );
+  const inserted = await req.db.collection('recos').findOne({
+    _id: new ObjectId(insertedId),
+  });
   res.json(inserted);
 });
 

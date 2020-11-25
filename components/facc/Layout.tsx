@@ -8,8 +8,8 @@ const Layout = ({ children }: PropsWithChildren<unknown>) => (
       <title>Liber</title>
       <meta charSet='utf-8' />
       <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-      <link rel='shortcut icon' href='/favicon.jpeg' type='image/x-icon' />
-      <link rel='icon' href='/favicon.jpeg' type='image/x-icon' />
+      <link rel='shortcut icon' href='/favicon.png' type='image/x-icon' />
+      <link rel='icon' href='/favicon.png' type='image/x-icon' />
     </Head>
     <Menu />
     <div className='p-6 pt-20 min-h-screen'>{children}</div>

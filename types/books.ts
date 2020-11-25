@@ -21,5 +21,6 @@ export interface GoogleBookType {
 
 export interface RecoBooksType {
   books: string[];
+  message: string;
   sellerId: string;
 }
