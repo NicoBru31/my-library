@@ -1,4 +1,5 @@
 import { Accordion } from '@chakra-ui/react';
+import dayjs from 'dayjs';
 import { useQuery } from 'react-query';
 import { CustomerType } from '../../types';
 import RecoItem from './RecoItem';
@@ -9,12 +10,18 @@ const RecoCustomer = () => {
   if (!data?.recos.length) return null;
 
   return (
-    <Accordion>
+    <>
       <div>Mes recos :</div>
-      {data?.recos.map((reco) => (
-        <RecoItem {...reco} key={reco._id} />
-      ))}
-    </Accordion>
+      <Accordion>
+        {data?.recos
+          .sort((a, b) =>
+            dayjs(b.createdAt).isAfter(dayjs(a.createdAt)) ? -1 : 1,
+          )
+          .map((reco) => (
+            <RecoItem {...reco} key={reco._id} />
+          ))}
+      </Accordion>
+    </>
   );
 };
 

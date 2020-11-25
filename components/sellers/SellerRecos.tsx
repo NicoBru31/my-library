@@ -1,3 +1,4 @@
+import { Accordion } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import { RecoType } from '../../types';
 import RecoSeller from '../recos/RecoSeller';
@@ -11,10 +12,12 @@ const SellerRecos = ({ id }: Props) => {
 
   return (
     <div>
-      Les recos en cours :
-      {recos?.map((reco) => (
-        <RecoSeller {...reco} key={reco._id} sellerId={id} />
-      ))}
+      Les recos en attente :
+      <Accordion>
+        {recos?.map((reco) => (
+          <RecoSeller {...reco} key={reco._id} sellerId={id} />
+        ))}
+      </Accordion>
     </div>
   );
 };

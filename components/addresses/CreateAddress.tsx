@@ -1,8 +1,8 @@
 import { Button } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { createAddress, CreateAddressType } from '../../fetch';
+import { createAddress } from '../../fetch';
 import useUpdate from '../../hooks/useUpdate';
-import { AddressType, CustomerType } from '../../types';
+import { AddressType, CustomerType, CreateAddressType } from '../../types';
 import Input from '../form/Input';
 import fields from './addressFields';
 

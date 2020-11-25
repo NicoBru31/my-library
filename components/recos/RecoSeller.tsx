@@ -1,49 +1,30 @@
-import { useEffect } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { updateReco } from '../../fetch';
-import { GoogleBookType, RecoBooksType, RecoType } from '../../types';
-import SearchReading from '../readings/SearchReading';
+import {
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box,
+} from '@chakra-ui/react';
+import dayjs from 'dayjs';
+import { RecoType } from '../../types';
+import CreateAnswer from './answers/CreateAnswer';
 
-interface Props extends RecoType {
+export interface RecoSellerProps extends RecoType {
   sellerId: string;
 }
 
-const RecoSeller = ({ _id, sellerId }: Props) => {
-  const {
-    control,
-    handleSubmit,
-    register,
-    setValue,
-    watch,
-  } = useForm<RecoBooksType>({
-    defaultValues: { books: [], sellerId },
-  });
-  const books = watch('books');
-
-  const send: SubmitHandler<RecoBooksType> = (data) => updateReco(data, _id);
-
-  const select = (book: GoogleBookType) =>
-    setValue('books', [book.id, ...books]);
-
-  return (
-    <form onSubmit={handleSubmit(send)}>
-      <input className='hidden' name='sellerId' ref={register()} />
-      <div>Mes recos pour ce client :</div>
-      <Controller
-        control={control}
-        name='books'
-        render={({ value }) => (
-          <>
-            <SearchReading clearOnSelect onSelect={select} />
-            {value.map((book) => (
-              <div key={book}>{book}</div>
-            ))}
-          </>
-        )}
-      />
-      <button type='submit'>Envoyer</button>
-    </form>
-  );
-};
+const RecoSeller = (props: RecoSellerProps) => (
+  <AccordionItem>
+    <AccordionButton>
+      <Box flex='1' textAlign='left'>
+        {`Demande du ${dayjs(props.createdAt).format('DD-MM-YYYY')}`}
+      </Box>
+      <AccordionIcon />
+    </AccordionButton>
+    <AccordionPanel>
+      <CreateAnswer {...props} />
+    </AccordionPanel>
+  </AccordionItem>
+);
 
 export default RecoSeller;

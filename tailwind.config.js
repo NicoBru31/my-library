@@ -8,8 +8,8 @@ module.exports = {
         whitebg: '#F2F3F4',
       },
       fontFamily: {
-        typewriter: 'FreeMono'
-      }
+        typewriter: 'FreeMono',
+      },
     },
   },
   variants: {},
