@@ -28,9 +28,7 @@ interface Props {
 const DEFAULT: RecoType['from'] = { addresses: [], readings: [] };
 
 const RecoCreate = ({ open, setOpen }: Props) => {
-  const {
-    data: { _id: customerId },
-  } = useQuery<CustomerType>('customer');
+  const { data } = useQuery<CustomerType>('customer');
   const methods = useForm<RecoType>({
     defaultValues: { from: DEFAULT },
   });
@@ -45,7 +43,7 @@ const RecoCreate = ({ open, setOpen }: Props) => {
   });
 
   const save: SubmitHandler<RecoType> = (data) =>
-    mutate({ ...data, customerId });
+    mutate({ ...data, customerId: data._id });
 
   return (
     <Modal isOpen={open} onClose={() => setOpen(false)}>

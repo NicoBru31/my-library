@@ -1,11 +1,20 @@
 import { Checkbox } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useQuery } from 'react-query';
+import useBooks from '../../../hooks/useBooks';
 import { CustomerType, RecoType } from '../../../types';
 
 const RecoCreateReadings = () => {
   const { control } = useFormContext<RecoType>();
   const { data: customer } = useQuery<CustomerType>('customer');
+  const { data, fetchBooks } = useBooks();
+
+  useEffect(() => {
+    if (customer.readings.length) {
+      fetchBooks(...customer.readings.map(({ bookId }) => bookId));
+    }
+  }, [customer]);
 
   return (
     <>
@@ -35,7 +44,9 @@ const RecoCreateReadings = () => {
                   }
                 }}
               >
-                {`${reading.bookId} - ${reading.rating}/20`}
+                {`${data.find(({ _id }) => _id === reading.bookId)?.title} - ${
+                  reading.rating
+                }/20`}
               </Checkbox>
             ))}
           </>

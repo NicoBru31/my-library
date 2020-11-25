@@ -16,7 +16,7 @@ const RecoCreateFooter = ({ setOpen }: Props) => (
     >
       Fermer
     </Button>
-    <Button type='submit' variant='teal'>
+    <Button type='submit' colorScheme='teal'>
       C'est parti !
     </Button>
   </ModalFooter>

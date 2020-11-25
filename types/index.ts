@@ -5,6 +5,7 @@ import { FieldError, UseFormMethods, ValidationRules } from 'react-hook-form';
 import { BookType, RecoBooksType } from './books';
 
 export * from './books';
+export * from './calls';
 
 export interface AddressType {
   _id: string;

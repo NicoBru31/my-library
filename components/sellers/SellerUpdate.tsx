@@ -1,8 +1,8 @@
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { queryCache, useMutation, useQuery } from 'react-query';
 import { Button } from '@chakra-ui/react';
-import { updateSeller, UpdateSellerType } from '../../fetch';
-import { SellerType } from '../../types';
+import { updateSeller } from '../../fetch';
+import { SellerType, UpdateSellerType } from '../../types';
 import Input from '../form/Input';
 import fields from './fields';
 

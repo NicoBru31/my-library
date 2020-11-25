@@ -6,9 +6,14 @@ import {
   SubmitHandler,
   useForm,
 } from 'react-hook-form';
-import { createReading, CreateReadingType } from '../../fetch';
+import { createReading } from '../../fetch';
 import useUpdate from '../../hooks/useUpdate';
-import { CustomerType, GoogleBookType, ReadingType } from '../../types';
+import {
+  CustomerType,
+  GoogleBookType,
+  ReadingType,
+  CreateReadingType,
+} from '../../types';
 import Input from '../form/Input';
 import fields from './readingFields';
 import SearchReading from './SearchReading';

@@ -1,9 +1,9 @@
 import { Button } from '@chakra-ui/react';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
-import { updateCustomer, UpdateCustomerType } from '../../fetch';
+import { updateCustomer } from '../../fetch';
 import useUpdate from '../../hooks/useUpdate';
-import { CustomerType } from '../../types';
+import { CustomerType, UpdateCustomerType } from '../../types';
 import Input from '../form/Input';
 import fields from './fields';
 
