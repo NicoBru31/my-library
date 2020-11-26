@@ -32,7 +32,8 @@ const SearchReading = ({ clearOnSelect = false, onSelect }: Props) => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      getGoogleBooks(`intitle:${search}`).then(setBooks).catch(console.log);
+      if (search.length > 2)
+        getGoogleBooks(`intitle:${search}`).then(setBooks).catch(console.log);
     }, 1000);
 
     return () => clearTimeout(timeout);
@@ -49,7 +50,9 @@ const SearchReading = ({ clearOnSelect = false, onSelect }: Props) => {
         <Input {...props} placeholder='Chercher une oeuvre' />
       )}
       renderItem={(item: GoogleBookType) => (
-        <SearchReadingItem item={item} search={search} />
+        <div key={item.id}>
+          <SearchReadingItem item={item} search={search} />
+        </div>
       )}
       value={search}
     />

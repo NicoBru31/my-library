@@ -4,6 +4,7 @@ import { useContext, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Input from '../../components/form/Input';
 import loginFields from '../../components/login/loginFields';
+import LoaderContext from '../../contexts/LoaderContext';
 import SessionContext, { Session } from '../../contexts/SessionContext';
 import { login } from '../../fetch';
 
@@ -15,9 +16,11 @@ export interface LoginInterface {
 const Login = () => {
   const { errors, handleSubmit, register } = useForm<LoginInterface>();
   const { setSession } = useContext(SessionContext);
+  const { loader, setLoader } = useContext(LoaderContext);
   const router = useRouter();
 
   const send: SubmitHandler<LoginInterface> = async (data) => {
+    setLoader({ isLoading: true });
     let log: Session = await login(data, !!router.query?.isSeller);
     setSession(log);
     if (log.isCustomer) router.push({ pathname: `/customers/${log.id}` });
@@ -38,7 +41,7 @@ const Login = () => {
           register={register}
         />
       ))}
-      <Button colorScheme='teal' type='submit'>
+      <Button colorScheme='teal' disabled={loader.isLoading} type='submit'>
         Je me connecte
       </Button>
     </form>

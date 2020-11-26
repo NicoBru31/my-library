@@ -3,17 +3,24 @@ import Link from 'next/link';
 import { useQuery } from 'react-query';
 import SellerUpdate from '../../../components/sellers/SellerUpdate';
 import { getSeller } from '../../../fetch';
+import { absoluteUrl } from '../../../fetch/utils';
 import { SellerType } from '../../../types';
 import { SellerPageType } from '../../../types/index';
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+  req,
+}) => {
   const id = typeof params.id === 'string' ? params.id : params.id[0];
-  const seller: SellerType = await getSeller(id);
+  const seller: SellerType = await getSeller(
+    absoluteUrl(req, 'localhost:3000').origin,
+    id,
+  );
   return { props: { seller, id } };
 };
 
 const UpdateSeller = ({ id, seller }: SellerPageType) => {
-  const { data } = useQuery<SellerType>('seller', getSeller, {
+  const { data } = useQuery<SellerType>('seller', {
     initialData: seller,
   });
 

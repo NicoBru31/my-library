@@ -5,12 +5,17 @@ import { useQuery } from 'react-query';
 import SellerRecos from '../../components/sellers/SellerRecos';
 import SessionContext from '../../contexts/SessionContext';
 import { getRecos, getSeller } from '../../fetch';
+import { absoluteUrl } from '../../fetch/utils';
 import { RecoType, SellerPageType, SellerType } from '../../types';
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+  req,
+}) => {
   const id = typeof params.id === 'string' ? params.id : params.id[0];
-  const seller: SellerType = await getSeller(id);
-  const recos: RecoType[] = await getRecos();
+  const url = absoluteUrl(req, 'localhost:3000').origin;
+  const seller: SellerType = await getSeller(url, id);
+  const recos: RecoType[] = await getRecos(url);
   return { props: { recos, seller, id } };
 };
 

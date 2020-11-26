@@ -48,7 +48,7 @@ export type InputType<T> = Field<T> & {
 export interface Incoming extends IncomingMessage {
   body?: any;
   db: Db;
-  query: { id?: string; fromSeller?: string };
+  query: { id?: string; fromSeller?: string; googleId?: string };
 }
 
 export interface ReadingType {

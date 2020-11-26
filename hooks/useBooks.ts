@@ -6,7 +6,7 @@ const useBooks = () => {
   const { data } = useQuery<BookType[]>('books', { initialData: [] });
 
   const fetchBooks = (...books: string[]) =>
-    Promise.all(books.map(getBook)).then((fetched) =>
+    Promise.all(books.filter((id) => id !== '').map(getBook)).then((fetched) =>
       queryCache.setQueryData<BookType[]>('books', (oldData) => [
         ...fetched,
         ...oldData,

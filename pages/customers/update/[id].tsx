@@ -2,12 +2,17 @@ import { GetServerSideProps } from 'next';
 import { useQuery } from 'react-query';
 import CustomerUpdate from '../../../components/customer/CustomerUpdate';
 import { getCustomer } from '../../../fetch';
+import { absoluteUrl } from '../../../fetch/utils';
 import { CustomerType } from '../../../types';
 import { CustomerPageType } from '../../../types/index';
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+  req,
+}) => {
   const id = typeof params.id === 'string' ? params.id : params.id[0];
-  const customer: CustomerType = await getCustomer(id);
+  const url = absoluteUrl(req, 'localhost:3000').origin;
+  const customer: CustomerType = await getCustomer(url, id);
   return { props: { customer, id } };
 };
 

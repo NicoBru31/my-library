@@ -6,7 +6,7 @@ const useSellers = () => {
   const { data } = useQuery<SellerType[]>('sellers', { initialData: [] });
 
   const fetchSeller = (sellerId: string) =>
-    getSeller(sellerId).then((newSeller) =>
+    getSeller(window.location.origin, sellerId).then((newSeller) =>
       queryCache.setQueryData<SellerType[]>('sellers', (sellers) => [
         newSeller,
         ...sellers,

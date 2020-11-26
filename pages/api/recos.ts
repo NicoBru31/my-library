@@ -35,10 +35,19 @@ handler.post<Incoming, Response>(async (req, res) => {
 handler.put<Incoming, Response>(async (req, res) => {
   const { id } = req.query;
   const reco = JSON.parse(req.body);
-  const { upsertedCount } = await req.db
-    .collection('recos')
-    .updateOne({ _id: new ObjectId(id) }, { $addToSet: { answers: reco } });
-  res.json({ success: upsertedCount > 0 });
+  try {
+    const { upsertedCount } = await req.db.collection('recos').updateOne(
+      {
+        _id: new ObjectId(id),
+        'answers.sellerId': new ObjectId(reco.sellerId),
+      },
+      { $set: { 'answers.$.books': reco.books } },
+    );
+    res.json({ success: upsertedCount > 0 });
+  } catch (e) {
+    console.log(e);
+    res.json({ success: false });
+  }
 });
 
 export default handler;
