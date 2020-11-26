@@ -1,4 +1,5 @@
 import { Accordion } from '@chakra-ui/react';
+import dayjs from 'dayjs';
 import { useQuery } from 'react-query';
 import { RecoType } from '../../types';
 import RecoSeller from '../recos/RecoSeller';
@@ -14,9 +15,13 @@ const SellerRecos = ({ id }: Props) => {
     <div>
       Les recos en attente :
       <Accordion>
-        {recos?.map((reco) => (
-          <RecoSeller {...reco} key={reco._id} sellerId={id} />
-        ))}
+        {recos
+          ?.sort((a, b) =>
+            dayjs(b.createdAt).isAfter(dayjs(a.createdAt)) ? -1 : 1,
+          )
+          ?.map((reco) => (
+            <RecoSeller {...reco} key={reco._id} sellerId={id} />
+          ))}
       </Accordion>
     </div>
   );

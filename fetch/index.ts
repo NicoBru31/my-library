@@ -51,6 +51,11 @@ export const createSeller = (seller: SellerType) =>
     method: 'POST',
   }).then((res) => res.json());
 
+export const deleteAddress = (id: string): Promise<{ id: string }> =>
+  fetch(`${window.location.origin}/api/addresses?id=${id}`, {
+    method: 'DELETE',
+  }).then((res) => res.json());
+
 export const getBook = (id: string): Promise<BookType> =>
   fetch(`${window.location.origin}/api/books?id=${id}`).then((res) =>
     res.json(),

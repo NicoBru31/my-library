@@ -1,32 +1,45 @@
 import { ObjectId } from 'mongodb';
 import nextConnect from 'next-connect';
 import middleware from '../../middleware/database';
-import {
-  Incoming,
-  CustomerType,
-  AddressType,
-  Response,
-  SellerType,
-} from './../../types/index';
+import { AddressType, Incoming, Response } from './../../types/index';
 
 const handler = nextConnect();
 
 handler.use(middleware);
 
 handler.get<Incoming, Response>(async (req, res) => {
-  const fromSeller = req.query.fromSeller === 'true';
-  const data: CustomerType | SellerType = await req.db
-    .collection(fromSeller ? 'sellers' : 'customers')
-    .findOne(
-      { _id: new ObjectId(req.query.id) },
-      { projection: { addresses: 1 } },
-    );
-  if (!data.addresses) return res.json([]);
-  const addresses: AddressType[] = await req.db
+  const { type, id } = req.query;
+  const field = type === 'city' ? 'city' : 'zip';
+  const address = await req.db
     .collection('addresses')
-    .find({ _id: { $in: data.addresses } })
-    .toArray();
-  res.json(addresses);
+    .findOne<AddressType>(
+      { _id: new ObjectId(id) },
+      { projection: { [field]: 1 } },
+    );
+  let where = {};
+  if (type === 'city') where = { [field]: address[field] };
+  else if (type === 'department') where = { [field]: address[field] };
+  else where = { [field]: { $regex: `^${address[field]}` } };
+  try {
+    const addresses = await req.db
+      .collection('addresses')
+      .aggregate([
+        {
+          $lookup: {
+            from: 'sellers',
+            localField: '_id',
+            foreignField: 'addresses',
+            as: 'seller',
+          },
+        },
+        { $match: { ...where, seller: { $size: 1 } } },
+      ])
+      .next();
+    res.json(addresses || []);
+  } catch (e) {
+    console.log(e);
+    res.json([]);
+  }
 });
 
 handler.post<Incoming, Response>(async (req, res) => {
@@ -47,7 +60,7 @@ handler.post<Incoming, Response>(async (req, res) => {
 });
 
 handler.put<Incoming, Response>(async (req, res) => {
-  const id = req.query.id;
+  const { id } = req.query;
   const { _id, ...body } = JSON.parse(req.body) as AddressType;
   await req.db
     .collection('addresses')
@@ -56,6 +69,14 @@ handler.put<Incoming, Response>(async (req, res) => {
     .collection('addresses')
     .findOne({ _id: new ObjectId(id) });
   res.json(address);
+});
+
+handler.delete<Incoming, Response>(async (req, res) => {
+  const { id } = req.query;
+  const { deletedCount } = await req.db
+    .collection('addresses')
+    .deleteOne({ _id: new ObjectId(id) });
+  res.json({ id, success: deletedCount === 1 });
 });
 
 export default handler;

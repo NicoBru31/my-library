@@ -11,27 +11,24 @@ import {
   TabPanels,
   Tabs,
 } from '@chakra-ui/react';
+import { useContext } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
+import AlertContext from '../../../contexts/AlertContext';
 import { createReco } from '../../../fetch';
 import useUpdate from '../../../hooks/useUpdate';
-import { CustomerType, RecoType } from '../../../types';
+import { CustomerType, ModalProps, RecoType } from '../../../types';
 import RecoCreateAddresses from './RecoCreateAddresses';
 import RecoCreateFooter from './RecoCreateFooter';
 import RecoCreateReadings from './RecoCreateReadings';
-
-interface Props {
-  open: boolean;
-  setOpen: (open: boolean) => void;
-}
+import RecoCreateType from './RecoCreateType';
 
 const DEFAULT: RecoType['from'] = { addresses: [], readings: [] };
 
-const RecoCreate = ({ open, setOpen }: Props) => {
-  const { data } = useQuery<CustomerType>('customer');
-  const methods = useForm<RecoType>({
-    defaultValues: { from: DEFAULT },
-  });
+const RecoCreate = ({ open, setOpen }: ModalProps) => {
+  const methods = useForm<RecoType>({ defaultValues: { from: DEFAULT } });
+  const { setAlert } = useContext(AlertContext);
+  const { data: customer } = useQuery<CustomerType>('customer');
   const { mutate } = useUpdate<RecoType, CustomerType, RecoType>({
     action: createReco,
     key: 'customer',
@@ -42,8 +39,14 @@ const RecoCreate = ({ open, setOpen }: Props) => {
     subKey: 'recos',
   });
 
-  const save: SubmitHandler<RecoType> = (data) =>
-    mutate({ ...data, customerId: data._id });
+  const save: SubmitHandler<RecoType> = (data) => {
+    if (data.from.addresses.length === 0)
+      return setAlert({
+        message: 'Veuillez choisir au moins une adresse',
+        status: 'error',
+      });
+    mutate({ ...data, customerId: customer._id });
+  };
 
   return (
     <Modal isOpen={open} onClose={() => setOpen(false)}>
@@ -62,6 +65,7 @@ const RecoCreate = ({ open, setOpen }: Props) => {
                 <TabPanels>
                   <TabPanel>
                     <RecoCreateAddresses />
+                    <RecoCreateType />
                   </TabPanel>
                   <TabPanel>
                     <RecoCreateReadings />

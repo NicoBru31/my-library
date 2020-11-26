@@ -12,7 +12,7 @@ const Layout = ({ children }: PropsWithChildren<unknown>) => (
       <link rel='icon' href='/favicon.png' type='image/x-icon' />
     </Head>
     <Menu />
-    <div className='p-6 pt-20 min-h-screen'>{children}</div>
+    <div className='pt-20 min-h-screen'>{children}</div>
   </div>
 );
 

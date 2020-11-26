@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { useQuery } from 'react-query';
+import AddAddress from '../../../components/addresses/AddAddress';
 import Address from '../../../components/addresses/Address';
 import CreateAddress from '../../../components/addresses/CreateAddress';
 import { getCustomer } from '../../../fetch';
@@ -24,13 +25,12 @@ const Addresses = ({ customer, id }: CustomerPageType) => {
   return (
     <>
       <h1 className='H1'>Mes adresses</h1>
-      <ul>
+      <div className='flex justify-start flex-wrap'>
+        <AddAddress />
         {data?.addresses.map((address) => (
-          <Address {...address} isCustomerAddress key={address._id} />
+          <Address {...address} key={address._id} />
         ))}
-      </ul>
-      <h2>Créer une adresse</h2>
-      <CreateAddress id={id} />
+      </div>
     </>
   );
 };

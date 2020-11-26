@@ -1,11 +1,10 @@
-import { IncomingMessage, ServerResponse } from 'http';
-import { Db } from 'mongodb';
 import { InputProps, TextareaProps } from '@chakra-ui/react';
 import { FieldError, UseFormMethods, ValidationRules } from 'react-hook-form';
 import { BookType, RecoBooksType } from './books';
 
 export * from './books';
 export * from './calls';
+export * from './modals';
 
 export interface AddressType {
   _id: string;
@@ -13,6 +12,7 @@ export interface AddressType {
   askForReco: boolean;
   city: string;
   name: string;
+  seller?: SellerType;
   zip: string;
 }
 
@@ -45,12 +45,6 @@ export type InputType<T> = Field<T> & {
   register: UseFormMethods<T>['register'];
 };
 
-export interface Incoming extends IncomingMessage {
-  body?: any;
-  db: Db;
-  query: { id?: string; fromSeller?: string; googleId?: string };
-}
-
 export interface ReadingType {
   _id: string;
   book: BookType;
@@ -68,12 +62,9 @@ export interface RecoType {
   from: {
     addresses: string[];
     readings: string[];
+    type?: 'city' | 'department' | 'zip';
   };
   isClosed: boolean;
-}
-
-export interface Response extends ServerResponse {
-  json: (data: Record<string, any>) => void;
 }
 
 export interface SellerType {

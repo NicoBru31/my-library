@@ -16,8 +16,8 @@ export interface RecoSellerProps extends RecoType {
 const RecoSeller = (props: RecoSellerProps) => (
   <AccordionItem>
     <AccordionButton>
-      <Box flex='1' textAlign='left'>
-        {`Demande du ${dayjs(props.createdAt).format('DD-MM-YYYY')}`}
+      <Box className='flex' flex='1' textAlign='left'>
+        <div>{`Demande du ${dayjs(props.createdAt).format('DD-MM-YYYY')}`}</div>
       </Box>
       <AccordionIcon />
     </AccordionButton>

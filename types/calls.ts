@@ -1,3 +1,5 @@
+import { IncomingMessage, ServerResponse } from 'http';
+import { Db } from 'mongodb';
 import { AddressType, CustomerType, ReadingType, SellerType } from '.';
 
 export interface CreateReadingType {
@@ -9,6 +11,22 @@ export interface CreateAddressType {
   address: AddressType;
   fromSeller?: boolean;
   id: string;
+}
+
+export interface Incoming extends IncomingMessage {
+  body?: any;
+  db: Db;
+  query: {
+    id?: string;
+    fromSeller?: string;
+    googleId?: string;
+    type?: 'city' | 'department' | 'zip';
+    value?: string;
+  };
+}
+
+export interface Response extends ServerResponse {
+  json: (data: Record<string, any>) => void;
 }
 
 export interface UpdateCustomerType {

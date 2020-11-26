@@ -7,7 +7,7 @@ const AlertProvider = ({ children }: PropsWithChildren<unknown>) => {
 
   return (
     <AlertContext.Provider value={{ alert, setAlert }}>
-      {alert && (
+      {alert?.message && (
         <Alert variant='solid' status={alert.status} zIndex={10}>
           <AlertIcon />
           {alert.message}

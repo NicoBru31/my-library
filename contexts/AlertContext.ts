@@ -8,7 +8,7 @@ export interface AlertInterface {
 
 export default createContext<{
   alert?: AlertInterface;
-  setAlert: Dispatch<SetStateAction<AlertInterface>>;
+  setAlert: Dispatch<SetStateAction<AlertInterface | undefined>>;
 }>({
   setAlert: () => {},
 });

@@ -30,6 +30,7 @@ const useUpdate = <R, S, T>({ action, key, reset, subKey }: Props<R, T>) => {
             }
           : { ...oldData, ...data },
       );
+      setAlert({ message: '' });
       reset();
     },
   });

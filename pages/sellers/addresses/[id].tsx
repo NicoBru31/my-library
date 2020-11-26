@@ -33,7 +33,7 @@ const Addresses = ({ seller, id }: SellerPageType) => {
       ) : (
         <>
           <h2>Créer une adresse</h2>
-          <CreateAddress fromSeller id={id} />
+          {/* <CreateAddress fromSeller id={id} /> */}
         </>
       )}
     </>
