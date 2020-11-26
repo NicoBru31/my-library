@@ -21,7 +21,6 @@ handler.use<Incoming, Response>(async (req, res, next) => {
       ),
     ),
   );
-  //@ts-expect-error
   reco.answers = [...new Set(addresses)].flat(1).map((address) => ({
     books: [],
     message: '',
