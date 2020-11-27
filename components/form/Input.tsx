@@ -8,6 +8,7 @@ import { InputType } from '../../types';
 
 const Input = <T extends {}>({
   error,
+  label,
   name,
   register,
   rules,
@@ -15,7 +16,8 @@ const Input = <T extends {}>({
   ...props
 }: InputType<T>) => (
   <>
-    <div>
+    <div className='mb-2'>
+      {label && <div>{label}</div>}
       {textarea ? (
         <Textarea
           {...(props as TextareaProps)}

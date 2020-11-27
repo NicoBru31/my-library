@@ -48,9 +48,19 @@ const CreateAddress = ({ open, setOpen }: ModalProps) => {
             register={register}
           />
         ))}
-        <Button disabled={isLoading} colorScheme='teal' type='submit'>
-          Ajouter
-        </Button>
+        <div className='flex justify-end'>
+          <Button
+            className='mr-2'
+            colorScheme='teal'
+            onClick={() => setOpen(false)}
+            variant='outline'
+          >
+            Fermer
+          </Button>
+          <Button disabled={isLoading} colorScheme='teal' type='submit'>
+            Ajouter
+          </Button>
+        </div>
       </form>
     </ModalFacc>
   );

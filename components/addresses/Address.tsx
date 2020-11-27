@@ -4,7 +4,7 @@ import UpdateAddress from './UpdateAddress';
 
 const Address = (props: AddressType) => (
   <div className='border border-solid border-black h-1/4 m-8 rounded shadow-lg p-4 w-1/4'>
-    <div className='font-bold'>{name}</div>
+    <div className='font-bold'>{props.name}</div>
     <div>{props.address}</div>
     <div>{`${props.city}, ${props.zip}`}</div>
     <div className='flex justify-end mt-2'>

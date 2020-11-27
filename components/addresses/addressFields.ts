@@ -2,6 +2,7 @@ import { AddressType, Field } from './../../types/index';
 
 const fields: Field<AddressType>[] = [
   {
+    label: "Nom de l'adresse*",
     name: 'name',
     placeholder: 'Maison',
     rules: {
@@ -9,6 +10,7 @@ const fields: Field<AddressType>[] = [
     },
   },
   {
+    label: 'Adresse*',
     name: 'address',
     placeholder: '5 rue du Chapeau Rouge',
     rules: {
@@ -16,6 +18,7 @@ const fields: Field<AddressType>[] = [
     },
   },
   {
+    label: 'Ville*',
     name: 'city',
     placeholder: 'Lyon',
     rules: {
@@ -23,6 +26,7 @@ const fields: Field<AddressType>[] = [
     },
   },
   {
+    label: 'Code postal*',
     maxLength: 5,
     name: 'zip',
     placeholder: '69009',

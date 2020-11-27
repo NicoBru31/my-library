@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .background {
-  background-color: theme('colors.whitebg');
+  background-image: theme('colors.whitebg');
   overflow-x: unset;
 }
 

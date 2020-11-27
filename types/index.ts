@@ -35,6 +35,7 @@ export interface CustomerPageType {
 }
 
 export type Field<T> = (InputProps | TextareaProps) & {
+  label?: string;
   name: keyof T;
   rules?: ValidationRules;
   textarea?: boolean;
@@ -42,6 +43,7 @@ export type Field<T> = (InputProps | TextareaProps) & {
 
 export type InputType<T> = Field<T> & {
   error?: FieldError;
+  label?: string;
   register: UseFormMethods<T>['register'];
 };
 
