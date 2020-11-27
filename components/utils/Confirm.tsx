@@ -22,7 +22,7 @@ const Confirm = ({ onConfirm, open, setOpen, title }: Props) => {
         >
           Non
         </Button>
-        <Button colorScheme='teal' onClick={confirm}>
+        <Button className='ml-4' colorScheme='teal' onClick={confirm}>
           Oui
         </Button>
       </div>

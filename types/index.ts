@@ -34,7 +34,10 @@ export interface CustomerPageType {
   id: string;
 }
 
-export type Field<T> = (InputProps | TextareaProps) & {
+export type Field<T> = (
+  | Omit<InputProps, 'name'>
+  | Omit<TextareaProps, 'name'>
+) & {
   label?: string;
   name: keyof T;
   rules?: ValidationRules;

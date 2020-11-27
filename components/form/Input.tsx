@@ -17,7 +17,7 @@ const Input = <T extends {}>({
 }: InputType<T>) => (
   <>
     <div className='mb-2'>
-      {label && <div>{label}</div>}
+      {label && <div className='text-white'>{label}</div>}
       {textarea ? (
         <Textarea
           {...(props as TextareaProps)}

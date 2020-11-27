@@ -83,6 +83,7 @@
       rgba(242, 243, 244, 0)
     ),
     url(/home.jpg);
+  background-position: top;
   background-repeat: no-repeat, no-repeat;
   background-size: cover;
   height: calc(100vh - 5rem);
@@ -95,10 +96,17 @@
   @apply absolute;
   @apply z-20;
   padding: 20px;
-  right: -40vw;
+  right: -100vw;
   top: 0;
   transition: 0.6s ease-in-out;
-  width: 40vw;
+  width: 100vw;
+}
+
+@media screen and (min-width: 768px) {
+  .menu-pane {
+    right: -40vw;
+    width: 40vw;
+  }
 }
 
 .menu-open {

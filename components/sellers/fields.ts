@@ -2,6 +2,7 @@ import { SellerType, Field } from '../../types';
 
 const fields: Field<SellerType>[] = [
   {
+    label: 'Nom de la librairie*',
     name: 'name',
     placeholder: 'Nom du magasin',
     rules: {
@@ -9,6 +10,7 @@ const fields: Field<SellerType>[] = [
     },
   },
   {
+    label: 'E-mail*',
     name: 'email',
     placeholder: 'e-email',
     type: 'email',
@@ -17,6 +19,7 @@ const fields: Field<SellerType>[] = [
     },
   },
   {
+    label: 'Mot de passe*',
     name: 'password',
     placeholder: 'Mot de passe',
     type: 'password',

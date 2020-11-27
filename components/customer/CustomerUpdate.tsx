@@ -20,6 +20,7 @@ const CustomerUpdate = () => {
     UpdateCustomerType
   >({
     action: updateCustomer,
+    isUpdate: true,
     key: 'customer',
     reset,
   });

@@ -18,9 +18,11 @@ const RecoItem = ({ answers, createdAt }: RecoType) => (
       <AccordionIcon />
     </AccordionButton>
     <AccordionPanel pb={4}>
-      {answers?.map((answer) => (
-        <Answer {...answer} key={answer.sellerId} />
-      ))}
+      {answers
+        ?.filter((answer) => answer.books.length > 0)
+        ?.map((answer) => (
+          <Answer {...answer} key={answer.sellerId} />
+        ))}
       {!answers?.length && <div>Pas de réponse pour le moment</div>}
     </AccordionPanel>
   </AccordionItem>

@@ -13,7 +13,9 @@ const HeaderMain = () => {
     >
       <GiBookshelf color='white' size='40px' />
       <div className='font-bold text-white pl-4 pr-4 text-3xl'>LIBER</div>
-      <div className='text-white'>La plateforme de vos librairies</div>
+      <div className='text-white hidden md:block'>
+        La plateforme de vos librairies
+      </div>
     </div>
   );
 };

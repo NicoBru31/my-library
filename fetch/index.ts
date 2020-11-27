@@ -7,6 +7,7 @@ import {
   CreateReadingType,
   CustomerType,
   GoogleBookType,
+  ReadingType,
   RecoBooksType,
   RecoType,
   SellerType,
@@ -53,6 +54,11 @@ export const createSeller = (seller: SellerType) =>
 
 export const deleteAddress = (id: string): Promise<{ id: string }> =>
   fetch(`${window.location.origin}/api/addresses?id=${id}`, {
+    method: 'DELETE',
+  }).then((res) => res.json());
+
+export const deleteReading = (id: string): Promise<{ id: string }> =>
+  fetch(`${window.location.origin}/api/readings?id=${id}`, {
     method: 'DELETE',
   }).then((res) => res.json());
 
@@ -106,6 +112,12 @@ export const updateAddress = (address: Partial<AddressType>) =>
 export const updateCustomer = ({ customer, id }: UpdateCustomerType) =>
   fetch(`${window.location.origin}/api/customers?id=${id}`, {
     body: JSON.stringify(customer),
+    method: 'PUT',
+  }).then((res) => res.json());
+
+export const updateReading = (reading: ReadingType): Promise<ReadingType> =>
+  fetch(`${window.location.origin}/api/readings?id=${reading._id}`, {
+    body: JSON.stringify(reading),
     method: 'PUT',
   }).then((res) => res.json());
 

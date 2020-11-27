@@ -9,7 +9,7 @@ const Card = ({ alt, img, link, text, title }: CardInterface) => {
 
   return (
     <div
-      className='w-1/3 bg-cardbg text-center p-4 cursor-pointer hover:bg-cardbghover'
+      className='md:w-1/3 bg-cardbg text-center m-4 p-4 cursor-pointer hover:bg-cardbghover'
       onClick={goTo}
     >
       <Image alt={alt} src={img} height={200} width={200} />

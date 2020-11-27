@@ -1,4 +1,3 @@
-import { Button } from '@chakra-ui/react';
 import { useState } from 'react';
 import {
   FieldError,
@@ -7,28 +6,29 @@ import {
   useForm,
 } from 'react-hook-form';
 import { createReading } from '../../fetch';
+import useSession from '../../hooks/useSession';
 import useUpdate from '../../hooks/useUpdate';
 import {
+  CreateReadingType,
   CustomerType,
   GoogleBookType,
+  ModalProps,
   ReadingType,
-  CreateReadingType,
 } from '../../types';
+import ModalFacc from '../facc/ModalFacc';
 import Input from '../form/Input';
+import ModalFooter from '../utils/ModalFooter';
 import fields from './readingFields';
 import SearchReading from './SearchReading';
 
-interface Props {
-  id: string;
-}
-
-const CreateReading = ({ id }: Props) => {
+const CreateReading = ({ open, setOpen }: ModalProps) => {
+  const session = useSession();
   const [googleBook, setGoogleBook] = useState<GoogleBookType>();
   const methods = useForm<ReadingType>({
     mode: 'onBlur',
     shouldFocusError: true,
   });
-  const { errors, handleSubmit, register, reset, setValue } = methods;
+  const { errors, handleSubmit, register, reset } = methods;
   const { mutate, isLoading } = useUpdate<
     ReadingType,
     CustomerType,
@@ -50,29 +50,36 @@ const CreateReading = ({ id }: Props) => {
           googleId: googleBook?.id,
         },
       },
-      id,
-    });
+      id: session.id,
+    }).then(() => setOpen(false));
 
   const select = (book: GoogleBookType) => setGoogleBook(book);
 
   return (
-    <FormProvider {...methods}>
-      <div>Ajouter une note de lecture :</div>
-      <form onSubmit={handleSubmit(create)}>
-        <SearchReading onSelect={select} />
-        {fields.map((field) => (
-          <Input
-            {...field}
-            error={errors[field.name] as FieldError}
-            register={register}
-            key={field.name}
+    <ModalFacc
+      open={open}
+      setOpen={setOpen}
+      title='Ajouter une note de lecture'
+    >
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(create)}>
+          <SearchReading onSelect={select} />
+          {fields.map((field) => (
+            <Input
+              {...field}
+              error={errors[field.name] as FieldError}
+              register={register}
+              key={field.name}
+            />
+          ))}
+          <ModalFooter
+            addText='Ajouter ce commentaire'
+            isLoading={isLoading}
+            setOpen={setOpen}
           />
-        ))}
-        <Button colorScheme='teal' disabled={isLoading} type='submit'>
-          Ajouter ce commentaire
-        </Button>
-      </form>
-    </FormProvider>
+        </form>
+      </FormProvider>
+    </ModalFacc>
   );
 };
 

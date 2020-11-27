@@ -2,6 +2,7 @@ import { CustomerType, Field } from './../../types/index';
 
 const fields: Field<CustomerType>[] = [
   {
+    label: 'Prénom*',
     name: 'firstName',
     placeholder: 'Frédéric',
     rules: {
@@ -9,6 +10,7 @@ const fields: Field<CustomerType>[] = [
     },
   },
   {
+    label: 'Nom*',
     name: 'lastName',
     placeholder: 'Bastiat',
     rules: {
@@ -16,6 +18,7 @@ const fields: Field<CustomerType>[] = [
     },
   },
   {
+    label: 'E-mail*',
     name: 'email',
     placeholder: 'toto@to.to',
     rules: {
@@ -28,6 +31,7 @@ const fields: Field<CustomerType>[] = [
     type: 'email',
   },
   {
+    label: 'Mot de passe',
     name: 'password',
     placeholder: 'Mot de passe',
     type: 'password',

@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { useQuery } from 'react-query';
-import CreateReading from '../../components/readings/CreateReading';
+import AddReading from '../../components/readings/AddReading';
 import Reading from '../../components/readings/Reading';
 import SessionContext from '../../contexts/SessionContext';
 import { getCustomer } from '../../fetch';
@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   return { props: { customer, id } };
 };
 
-const Customer = ({ customer, id }: CustomerPageType) => {
+const Customer = ({ customer }: CustomerPageType) => {
   const { data } = useQuery('customer', { initialData: customer });
   const { setSession } = useContext(SessionContext);
   const { push } = useRouter();
@@ -32,17 +32,18 @@ const Customer = ({ customer, id }: CustomerPageType) => {
 
   return (
     <>
-      <h1 className='H1'>{`Bonjour ${data.firstName} !`}</h1>
-      {data?.readings.length > 0 && <div>Mes lectures :</div>}
-      <div className='flex justify-between items-center flex-wrap'>
+      <h1 className='H1'>{`Bonjour ${data.firstName}, voici vos lectures :`}</h1>
+      <div className='flex justify-start items-center flex-wrap'>
+        <AddReading />
         {data.readings.map((reading) => (
           <Reading {...reading} key={reading._id} />
         ))}
       </div>
-      <CreateReading id={id} />
-      <Button colorScheme='teal' onClick={logout}>
-        Me déconnecter
-      </Button>
+      <div className='flex justify-center'>
+        <Button colorScheme='teal' onClick={logout}>
+          Me déconnecter
+        </Button>
+      </div>
     </>
   );
 };

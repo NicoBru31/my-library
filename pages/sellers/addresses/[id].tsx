@@ -1,8 +1,8 @@
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { useQuery } from 'react-query';
+import AddAddress from '../../../components/addresses/AddAddress';
 import Address from '../../../components/addresses/Address';
-import CreateAddress from '../../../components/addresses/CreateAddress';
 import { getSeller } from '../../../fetch';
 import { absoluteUrl } from '../../../fetch/utils';
 import { SellerPageType, SellerType } from '../../../types';
@@ -33,7 +33,7 @@ const Addresses = ({ seller, id }: SellerPageType) => {
       ) : (
         <>
           <h2>Créer une adresse</h2>
-          {/* <CreateAddress fromSeller id={id} /> */}
+          <AddAddress />
         </>
       )}
     </>

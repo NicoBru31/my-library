@@ -29,7 +29,9 @@ const HeaderProfile = () => {
       onClick={goProfile}
     >
       <Image alt='avatar' src={src} height={40} width={40} />
-      <div className='text-white pl-4'>{`${session?.fullName || ''}`}</div>
+      <div className='text-white pl-4 hidden md:block'>{`${
+        session?.fullName || ''
+      }`}</div>
     </div>
   );
 };

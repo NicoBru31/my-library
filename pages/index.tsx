@@ -5,7 +5,7 @@ import Intro from '../components/home/Intro';
 const Home = () => (
   <div className='home-picture'>
     <Intro />
-    <div className='flex justify-around items-center'>
+    <div className='md:flex justify-around items-center'>
       {cards.map((card) => (
         <Card {...card} key={card.alt} />
       ))}

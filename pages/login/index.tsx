@@ -32,19 +32,33 @@ const Login = () => {
   }, [setSession]);
 
   return (
-    <form onSubmit={handleSubmit(send)}>
-      {loginFields.map((field) => (
-        <Input
-          {...field}
-          error={errors[field.name]}
-          key={field.name}
-          register={register}
-        />
-      ))}
-      <Button colorScheme='teal' disabled={loader.isLoading} type='submit'>
-        Je me connecte
-      </Button>
-    </form>
+    <div className='home-picture flex justify-center'>
+      <form
+        className='bg-cardbg mt-6 h-auto p-4 rounded'
+        onSubmit={handleSubmit(send)}
+        style={{ height: 'fit-content' }}
+      >
+        {loginFields.map((field) => (
+          <Input
+            {...field}
+            css={{ color: 'white' }}
+            error={errors[field.name]}
+            focusBorderColor='green.500'
+            key={field.name}
+            register={register}
+            variant='flushed'
+          />
+        ))}
+        <Button
+          className='text-center'
+          colorScheme='teal'
+          disabled={loader.isLoading}
+          type='submit'
+        >
+          Je me connecte
+        </Button>
+      </form>
+    </div>
   );
 };
 
