@@ -23,7 +23,7 @@ const Input = <T extends {}>({
           {...(props as TextareaProps)}
           className='Input'
           style={{ width: '300px' }}
-          name={name}
+          name={name.toString()}
           ref={register(rules)}
         />
       ) : (
@@ -31,7 +31,7 @@ const Input = <T extends {}>({
           {...(props as InputProps)}
           className='Input'
           style={{ width: '300px' }}
-          name={name}
+          name={name.toString()}
           ref={register(rules)}
         />
       )}
