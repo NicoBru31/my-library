@@ -23,11 +23,19 @@ const Menu = () => {
       <MenuBurger burgerOpen={burgerOpen} setBurgerOpen={setBurgerOpen} />
       <div className={`menu-pane ${burgerOpen && 'menu-open'}`}>
         <div className='Link'>
-          <Link href='/customers'>Je suis client</Link>
+          <Link href={session?.id ? `/customers/${session.id}` : '/login'}>
+            Je suis client
+          </Link>
         </div>
         {session?.isCustomer && <MenuItems type='customers' />}
         <div className='Link'>
-          <Link href='/sellers'>Je suis libraire</Link>
+          <Link
+            href={
+              session?.id ? `/sellers/${session.id}` : '/login?isSeller=true'
+            }
+          >
+            Je suis libraire
+          </Link>
         </div>
         {session?.isCustomer === false && <MenuItems type='sellers' />}
       </div>

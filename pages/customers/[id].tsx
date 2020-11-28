@@ -35,7 +35,7 @@ const Customer = ({ customer }: CustomerPageType) => {
       <h1 className='H1'>{`Bonjour ${data.firstName}, voici vos lectures :`}</h1>
       <div className='flex justify-start items-center flex-wrap'>
         <AddReading />
-        {data.readings.map((reading) => (
+        {data?.readings?.map((reading) => (
           <Reading {...reading} key={reading._id} />
         ))}
       </div>

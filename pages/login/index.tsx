@@ -1,12 +1,15 @@
 import { Button } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useContext, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import fields from '../../components/customer/fields';
 import Input from '../../components/form/Input';
 import loginFields from '../../components/login/loginFields';
+import sellerFields from '../../components/sellers/fields';
+import CreateAccount from '../../components/utils/CreateAccount';
 import LoaderContext from '../../contexts/LoaderContext';
-import SessionContext, { Session } from '../../contexts/SessionContext';
-import { login } from '../../fetch';
+import { createCustomer, createSeller } from '../../fetch';
+import useLogin from '../../hooks/useLogin';
 
 export interface LoginInterface {
   email: string;
@@ -14,50 +17,67 @@ export interface LoginInterface {
 }
 
 const Login = () => {
+  const [create, setCreate] = useState<'customer' | 'seller'>();
   const { errors, handleSubmit, register } = useForm<LoginInterface>();
-  const { setSession } = useContext(SessionContext);
-  const { loader, setLoader } = useContext(LoaderContext);
+  const { loader } = useContext(LoaderContext);
   const router = useRouter();
+  const login = useLogin();
 
-  const send: SubmitHandler<LoginInterface> = async (data) => {
-    setLoader({ isLoading: true });
-    let log: Session = await login(data, !!router.query?.isSeller);
-    setSession(log);
-    if (log.isCustomer) router.push({ pathname: `/customers/${log.id}` });
-    else router.push({ pathname: `/sellers/${log.id}` });
-  };
+  const goCreate = () =>
+    setCreate(router.query?.isSeller ? 'seller' : 'customer');
 
-  useEffect(() => {
-    setSession({ id: '' });
-  }, [setSession]);
+  const send: SubmitHandler<LoginInterface> = (data) => login(data);
 
   return (
     <div className='home-picture flex justify-center'>
-      <form
-        className='bg-cardbg mt-6 h-auto p-4 rounded'
-        onSubmit={handleSubmit(send)}
-        style={{ height: 'fit-content' }}
-      >
-        {loginFields.map((field) => (
-          <Input
-            {...field}
-            css={{ color: 'white' }}
-            error={errors[field.name]}
-            focusBorderColor='green.500'
-            key={field.name}
-            register={register}
-            variant='flushed'
-          />
-        ))}
-        <Button
-          className='text-center'
-          colorScheme='teal'
-          disabled={loader.isLoading}
-          type='submit'
+      {create === 'customer' && (
+        <CreateAccount
+          back={() => setCreate(undefined)}
+          create={createCustomer}
+          field={create}
+          fields={fields}
+        />
+      )}
+      {create === 'seller' && (
+        <CreateAccount
+          back={() => setCreate(undefined)}
+          create={createSeller}
+          field={create}
+          fields={sellerFields}
+        />
+      )}
+      {!create && (
+        <form
+          className='bg-cardbg mt-6 h-auto p-4 rounded'
+          onSubmit={handleSubmit(send)}
+          style={{ height: 'fit-content' }}
         >
-          Je me connecte
-        </Button>
-      </form>
+          {loginFields.map((field) => (
+            <Input
+              {...field}
+              css={{ color: 'white' }}
+              error={errors[field.name]}
+              focusBorderColor='green.500'
+              key={field.name}
+              register={register}
+              variant='flushed'
+            />
+          ))}
+          <div className='flex justify-end mt-4'>
+            <Button
+              className='mr-4'
+              colorScheme='teal'
+              disabled={loader.isLoading}
+              type='submit'
+            >
+              Je me connecte
+            </Button>
+            <Button colorScheme='teal' onClick={goCreate}>
+              Je crée mon compte
+            </Button>
+          </div>
+        </form>
+      )}
     </div>
   );
 };
