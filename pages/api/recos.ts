@@ -33,7 +33,7 @@ handler.use<Incoming, Response>(async (req, res, next) => {
 handler.get<Incoming, Response>(async (req, res) => {
   const recos = await req.db
     .collection('recos')
-    .find({ isClosed: false })
+    .find({ isClosed: false, 'answers.sellerId': req.query.fromSeller })
     .toArray();
   res.json(recos);
 });

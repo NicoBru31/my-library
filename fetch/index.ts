@@ -85,8 +85,8 @@ export const getGoogleBooks = (query: string): Promise<GoogleBookType[]> =>
 export const getCustomer = (url: string, id: string): Promise<CustomerType> =>
   fetch(`${url}/api/customers?id=${id}`).then((res) => res.json());
 
-export const getRecos = (url: string): Promise<RecoType[]> =>
-  fetch(`${url}/api/recos`).then((res) => res.json());
+export const getRecos = (url: string, sellerId: string): Promise<RecoType[]> =>
+  fetch(`${url}/api/recos?fromSeller=${sellerId}`).then((res) => res.json());
 
 export const getSeller = (url: string, id: string): Promise<SellerType> =>
   fetch(`${url}/api/sellers?id=${id}`).then((res) => res.json());

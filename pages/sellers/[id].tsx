@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const id = typeof params.id === 'string' ? params.id : params.id[0];
   const url = absoluteUrl(req, 'localhost:3000').origin;
   const seller: SellerType = await getSeller(url, id);
-  const recos: RecoType[] = await getRecos(url);
+  const recos: RecoType[] = await getRecos(url, id);
   return { props: { recos, seller, id } };
 };
 
