@@ -13,9 +13,11 @@ const useLogin = () => {
   const doLogin = async (data: LoginInterface) => {
     setLoader({ isLoading: true });
     let log: Session = await login(data, !!query?.isSeller);
-    setSession(log);
-    if (log.isCustomer) push({ pathname: `/customers/${log.id}` });
-    else push({ pathname: `/sellers/${log.id}` });
+    if (log.id) {
+      setSession(log);
+      if (log.isCustomer) push({ pathname: `/customers/${log.id}` });
+      else push({ pathname: `/sellers/${log.id}` });
+    }
   };
 
   useEffect(() => {

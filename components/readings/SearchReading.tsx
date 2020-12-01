@@ -42,7 +42,7 @@ const SearchReading = ({ clearOnSelect = false, onSelect }: Props) => {
   return (
     <Autocomplete
       getItemValue={(item: GoogleBookType) => item.volumeInfo.title}
-      items={books}
+      items={books.slice(0, 3)}
       menuStyle={{ position: 'fixed', zIndex: 10 }}
       onChange={change}
       onSelect={select}

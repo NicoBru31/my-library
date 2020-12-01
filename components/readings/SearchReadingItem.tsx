@@ -8,7 +8,7 @@ interface Props {
 const SearchReadingItem = ({ item, search }: Props) => (
   <div
     key={item.id}
-    className='bg-green-700 p-4 cursor-pointer z-10 w-full flex items-start'
+    className='bg-green-700 p-4 rounded cursor-pointer z-10 w-64 flex items-start overflow-y-auto hover:bg-green-900'
   >
     <img
       src={item?.volumeInfo?.imageLinks?.smallThumbnail}

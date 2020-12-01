@@ -1,19 +1,12 @@
 import { Button, ModalFooter } from '@chakra-ui/react';
-import { useFormContext } from 'react-hook-form';
-import { RecoType } from '../../../types';
 
 interface Props {
-  setOpen: (open: boolean) => void;
+  onClose: () => void;
 }
 
-const RecoCreateFooter = ({ setOpen }: Props) => (
+const RecoCreateFooter = ({ onClose }: Props) => (
   <ModalFooter>
-    <Button
-      colorScheme='teal'
-      mr={3}
-      onClick={() => setOpen(false)}
-      variant='outline'
-    >
+    <Button colorScheme='teal' mr={3} onClick={onClose} variant='outline'>
       Fermer
     </Button>
     <Button type='submit' colorScheme='teal'>

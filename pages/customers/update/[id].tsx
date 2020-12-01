@@ -17,15 +17,17 @@ export const getServerSideProps: GetServerSideProps = async ({
 };
 
 const UpdateCustomer = ({ customer }: CustomerPageType) => {
-  const { data } = useQuery<CustomerType>('customer', getCustomer, {
+  useQuery<CustomerType>('customer', getCustomer, {
     initialData: customer,
   });
 
   return (
-    <>
-      <h1 className='H1'>{`Hello ${data.firstName} !`}</h1>
-      <CustomerUpdate />
-    </>
+    <div className='home-picture'>
+      <h1 className='H1'>Modifier mes paramètres de compte</h1>
+      <div className='flex justify-center'>
+        <CustomerUpdate />
+      </div>
+    </div>
   );
 };
 

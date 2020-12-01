@@ -31,9 +31,9 @@ const Customer = ({ customer }: CustomerPageType) => {
   };
 
   return (
-    <>
+    <div className='bg-books'>
       <h1 className='H1'>{`Bonjour ${data.firstName}, voici vos lectures :`}</h1>
-      <div className='flex justify-start items-center flex-wrap'>
+      <div className='grid grid-cols-3 items-center flex-wrap'>
         <AddReading />
         {data?.readings?.map((reading) => (
           <Reading {...reading} key={reading._id} />
@@ -44,7 +44,7 @@ const Customer = ({ customer }: CustomerPageType) => {
           Me déconnecter
         </Button>
       </div>
-    </>
+    </div>
   );
 };
 

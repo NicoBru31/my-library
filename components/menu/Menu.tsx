@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -22,20 +23,18 @@ const Menu = () => {
       <HeaderProfile />
       <MenuBurger burgerOpen={burgerOpen} setBurgerOpen={setBurgerOpen} />
       <div className={`menu-pane ${burgerOpen && 'menu-open'}`}>
-        <div className='Link'>
-          <Link href={session?.id ? `/customers/${session.id}` : '/login'}>
-            Je suis client
-          </Link>
+        <div className='flex text-white text-2xl'>
+          <div className='mr-2'>
+            <Image alt='avatar' src='/reader.svg' height={20} width={20} />
+          </div>
+          <div>Je suis client</div>
         </div>
         {session?.isCustomer && <MenuItems type='customers' />}
-        <div className='Link'>
-          <Link
-            href={
-              session?.id ? `/sellers/${session.id}` : '/login?isSeller=true'
-            }
-          >
-            Je suis libraire
-          </Link>
+        <div className='flex text-white text-2xl'>
+          <div className='mr-2'>
+            <Image alt='avatar' src='/seller.svg' height={20} width={20} />
+          </div>
+          <div>Je suis libraire</div>
         </div>
         {session?.isCustomer === false && <MenuItems type='sellers' />}
       </div>

@@ -29,18 +29,23 @@ const CustomerUpdate = () => {
     mutate({ customer: variables, id: customer._id });
 
   return (
-    <form onSubmit={handleSubmit(save)}>
+    <form className='card w-auto' onSubmit={handleSubmit(save)}>
       {fields.map((field) => (
         <Input
           {...field}
+          css={{ color: 'white' }}
           error={errors[field.name] as FieldError}
+          focusBorderColor='green.500'
           key={field.name}
           register={register}
+          variant='flushed'
         />
       ))}
-      <Button disabled={isLoading} colorScheme='teal' type='submit'>
-        Enregistrer
-      </Button>
+      <div className='flex justify-center'>
+        <Button disabled={isLoading} colorScheme='teal' type='submit'>
+          Enregistrer
+        </Button>
+      </div>
     </form>
   );
 };

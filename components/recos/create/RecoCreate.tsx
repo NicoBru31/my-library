@@ -25,7 +25,7 @@ import RecoCreateType from './RecoCreateType';
 
 const DEFAULT: RecoType['from'] = { addresses: [], readings: [] };
 
-const RecoCreate = ({ open, setOpen }: ModalProps) => {
+const RecoCreate = (props: ModalProps) => {
   const methods = useForm<RecoType>({ defaultValues: { from: DEFAULT } });
   const { setAlert } = useContext(AlertContext);
   const { data: customer } = useQuery<CustomerType>('customer');
@@ -34,7 +34,7 @@ const RecoCreate = ({ open, setOpen }: ModalProps) => {
     key: 'customer',
     reset: () => {
       methods.reset({ from: DEFAULT });
-      setOpen(false);
+      props.onClose();
     },
     subKey: 'recos',
   });
@@ -49,7 +49,7 @@ const RecoCreate = ({ open, setOpen }: ModalProps) => {
   };
 
   return (
-    <Modal isOpen={open} onClose={() => setOpen(false)}>
+    <Modal {...props}>
       <ModalOverlay />
       <ModalContent>
         <FormProvider {...methods}>
@@ -57,7 +57,7 @@ const RecoCreate = ({ open, setOpen }: ModalProps) => {
             <ModalHeader>Je crée ma reco</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <Tabs>
+              <Tabs colorScheme='teal'>
                 <TabList>
                   <Tab>Adresses</Tab>
                   <Tab>Lectures</Tab>
@@ -73,7 +73,7 @@ const RecoCreate = ({ open, setOpen }: ModalProps) => {
                 </TabPanels>
               </Tabs>
             </ModalBody>
-            <RecoCreateFooter setOpen={setOpen} />
+            <RecoCreateFooter onClose={props.onClose} />
           </form>
         </FormProvider>
       </ModalContent>

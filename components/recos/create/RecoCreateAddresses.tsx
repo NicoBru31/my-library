@@ -17,6 +17,7 @@ const RecoCreateAddresses = () => {
           <>
             {data?.addresses?.map((address) => (
               <Checkbox
+                colorScheme='teal'
                 defaultIsChecked={value?.includes(address._id)}
                 key={address._id}
                 onChange={(e) => {

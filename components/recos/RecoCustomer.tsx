@@ -12,10 +12,10 @@ const RecoCustomer = () => {
   return (
     <>
       <div>Mes recos :</div>
-      <Accordion>
+      <Accordion allowToggle>
         {data?.recos
           .sort((a, b) =>
-            dayjs(b.createdAt).isAfter(dayjs(a.createdAt)) ? -1 : 1,
+            dayjs(b.createdAt).isAfter(dayjs(a.createdAt)) ? 1 : -1,
           )
           .map((reco) => (
             <RecoItem {...reco} key={reco._id} />

@@ -14,10 +14,10 @@ const SellerRecos = ({ id }: Props) => {
   return (
     <div>
       Les recos en attente :
-      <Accordion>
+      <Accordion allowToggle colorScheme='teal'>
         {recos
           ?.sort((a, b) =>
-            dayjs(b.createdAt).isAfter(dayjs(a.createdAt)) ? -1 : 1,
+            dayjs(b.createdAt).isAfter(dayjs(a.createdAt)) ? 1 : -1,
           )
           ?.map((reco) => (
             <RecoSeller {...reco} key={reco._id} sellerId={id} />

@@ -7,6 +7,17 @@
   overflow-x: unset;
 }
 
+.bg-books {
+  background-image: linear-gradient(
+      to top,
+      rgba(242, 243, 244, 1),
+      rgba(242, 243, 244, 0)
+    ),
+    url(/books.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .burger {
   @apply cursor-pointer;
   height: 40px;
@@ -60,6 +71,14 @@
   top: 55px;
 }
 
+.card {
+  @apply bg-cardbg;
+  @apply mt-6;
+  @apply h-auto;
+  @apply p-4;
+  @apply rounded;
+}
+
 .H1 {
   @apply text-center;
   @apply font-bold;
@@ -70,6 +89,8 @@
   @apply text-2xl;
   @apply text-white;
   @apply cursor-pointer;
+  @apply flex;
+  @apply items-center;
 }
 
 .Link:hover {

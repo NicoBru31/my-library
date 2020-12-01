@@ -1,5 +1,4 @@
-import { Button } from '@chakra-ui/react';
-import { useState } from 'react';
+import { Button, useDisclosure } from '@chakra-ui/react';
 import useDelete from '../../hooks/useDelete';
 import { CustomerType } from '../../types';
 import Confirm from './Confirm';
@@ -11,7 +10,7 @@ interface Props {
 }
 
 const RemoveModal = ({ field, id, remove }: Props) => {
-  const [removeModal, setRemoveModal] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { mutate, isLoading } = useDelete({
     action: remove,
     key: 'customer',
@@ -21,16 +20,16 @@ const RemoveModal = ({ field, id, remove }: Props) => {
   return (
     <>
       <Confirm
-        open={removeModal}
+        isOpen={isOpen}
         onConfirm={() => mutate(id)}
-        setOpen={setRemoveModal}
+        onClose={onClose}
         title='Voulez-vous supprimer cette lecture ?'
       />
       <Button
         className='ml-4'
         disabled={isLoading}
         colorScheme='red'
-        onClick={() => setRemoveModal(true)}
+        onClick={onOpen}
       >
         Supprimer
       </Button>

@@ -6,20 +6,16 @@ interface Props extends ModalProps {
   onConfirm: () => void;
 }
 
-const Confirm = ({ onConfirm, open, setOpen, title }: Props) => {
+const Confirm = ({ onConfirm, title, ...props }: Props) => {
   const confirm = () => {
     onConfirm();
-    setOpen(false);
+    props.onClose();
   };
 
   return (
-    <ModalFacc open={open} setOpen={setOpen} title={title}>
+    <ModalFacc {...props} title={title}>
       <div className='flex justify-end'>
-        <Button
-          colorScheme='teal'
-          onClick={() => setOpen(false)}
-          variant='outline'
-        >
+        <Button colorScheme='teal' onClick={props.onClose} variant='outline'>
           Non
         </Button>
         <Button className='ml-4' colorScheme='teal' onClick={confirm}>

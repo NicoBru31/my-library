@@ -1,5 +1,5 @@
 import { Button } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   Controller,
   FormProvider,
@@ -16,7 +16,6 @@ import CreateAnswerItem from './CreateAnswerItem';
 const NB_RECOS = [Math.random().toString(), Math.random().toString()];
 
 const CreateAnswer = ({ _id, sellerId, answers }: RecoSellerProps) => {
-  const [open, setOpen] = useState(false);
   const answer = answers?.find((answer) => answer.sellerId === sellerId);
   const methods = useForm<RecoBooksType>({
     defaultValues: answer || { books: [], message: '', sellerId },

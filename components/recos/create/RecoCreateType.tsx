@@ -12,8 +12,8 @@ const RecoCreateType = () => {
         defaultValue='city'
         name='from.type'
         render={({ onChange, value }) => (
-          <RadioGroup onChange={onChange} value={value}>
-            <Stack direction='row'>
+          <RadioGroup colorScheme='teal' onChange={onChange} value={value}>
+            <Stack direction='column'>
               <Radio value='city'>de ma ville</Radio>
               <Radio value='department'>de mon départment</Radio>
               <Radio value='zip'>de mon quartier (même code postal)</Radio>

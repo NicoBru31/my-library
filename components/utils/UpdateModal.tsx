@@ -1,5 +1,4 @@
-import { Button } from '@chakra-ui/react';
-import { useState } from 'react';
+import { Button, useDisclosure } from '@chakra-ui/react';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import useSession from '../../hooks/useSession';
 import useUpdate from '../../hooks/useUpdate';
@@ -22,7 +21,7 @@ const UpdateModal = <T extends { _id: string }>({
   title,
   update,
 }: Props<T>) => {
-  const [open, setOpen] = useState(false);
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const session = useSession();
   const { errors, handleSubmit, register, reset } = useForm<T>({
     mode: 'onBlur',
@@ -36,19 +35,14 @@ const UpdateModal = <T extends { _id: string }>({
     subKey,
   });
 
-  const save: SubmitHandler<T> = (variables) =>
-    mutate(variables).then(() => setOpen(false));
+  const save: SubmitHandler<T> = (variables) => mutate(variables).then(onClose);
 
   return (
     <>
-      <Button
-        colorScheme='teal'
-        onClick={() => setOpen(true)}
-        variant='outline'
-      >
+      <Button colorScheme='teal' onClick={onOpen}>
         Modifier
       </Button>
-      <ModalFacc open={open} setOpen={setOpen} title={title}>
+      <ModalFacc isOpen={isOpen} onClose={onClose} title={title}>
         <form onSubmit={handleSubmit(save)}>
           {fields.map((field) => (
             <Input
@@ -69,7 +63,7 @@ const UpdateModal = <T extends { _id: string }>({
             <Button
               className='mr-2'
               colorScheme='teal'
-              onClick={() => setOpen(false)}
+              onClick={onClose}
               variant='outline'
             >
               Fermer

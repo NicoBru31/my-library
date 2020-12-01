@@ -16,14 +16,14 @@ export const getServerSideProps: GetServerSideProps = async ({
   return { props: { customer, id } };
 };
 
-const Reco = ({ customer, id }: CustomerPageType) => {
+const Reco = ({ customer }: CustomerPageType) => {
   useQuery<CustomerType>('customer', { initialData: customer });
 
   return (
-    <>
+    <div className='bg-books px-4'>
       <RecoIntro />
       <RecoCustomer />
-    </>
+    </div>
   );
 };
 

@@ -21,7 +21,7 @@ import ModalFooter from '../utils/ModalFooter';
 import fields from './readingFields';
 import SearchReading from './SearchReading';
 
-const CreateReading = ({ open, setOpen }: ModalProps) => {
+const CreateReading = (props: ModalProps) => {
   const session = useSession();
   const [googleBook, setGoogleBook] = useState<GoogleBookType>();
   const methods = useForm<ReadingType>({
@@ -51,16 +51,12 @@ const CreateReading = ({ open, setOpen }: ModalProps) => {
         },
       },
       id: session.id,
-    }).then(() => setOpen(false));
+    }).then(props.onClose);
 
   const select = (book: GoogleBookType) => setGoogleBook(book);
 
   return (
-    <ModalFacc
-      open={open}
-      setOpen={setOpen}
-      title='Ajouter une note de lecture'
-    >
+    <ModalFacc {...props} title='Ajouter une note de lecture'>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(create)}>
           <SearchReading onSelect={select} />
@@ -75,7 +71,7 @@ const CreateReading = ({ open, setOpen }: ModalProps) => {
           <ModalFooter
             addText='Ajouter ce commentaire'
             isLoading={isLoading}
-            setOpen={setOpen}
+            onClose={props.onClose}
           />
         </form>
       </FormProvider>

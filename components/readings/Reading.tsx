@@ -1,44 +1,36 @@
 import { useEffect, useState } from 'react';
-import {
-  deleteReading,
-  getBook,
-  getGoogleBook,
-  updateReading,
-} from '../../fetch';
-import { BookType, GoogleBookType, ReadingType } from '../../types';
+import { deleteReading, getBook, updateReading } from '../../fetch';
+import { BookType, ReadingType } from '../../types';
 import CardButtons from '../utils/CardButtons';
+import Loading from '../utils/Loading';
 import fields from './readingFields';
+import ReadingPopover from './ReadingPopover';
 
 const Reading = (props: ReadingType) => {
   const { bookId, rating, comments } = props;
-  const [gBook, setGBook] = useState<GoogleBookType>();
   const [book, setBook] = useState<BookType>();
 
   useEffect(() => {
     getBook(bookId).then(setBook);
   }, [bookId]);
 
-  useEffect(() => {
-    book?.googleId && getGoogleBook(book.googleId).then(setGBook);
-  }, [book, setGBook]);
-
   return (
-    <div
-      className='flex h-56 w-full md:w-1/4 m-8 shadow-lg'
-      style={{
-        backgroundImage: `url(${gBook?.volumeInfo?.imageLinks?.thumbnail})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-      }}
-    >
-      <div className='bg-cardbg flex h-full w-full'>
+    <div className='flex h-56 w-full md:w-4/5 m-8 shadow-lg'>
+      <div className='bg-cardbg flex h-full w-full rounded'>
         <div className='text-center text-white m-auto p-4'>
           <div className='text-xl'>
-            <div className='italic'>{book?.title}</div>
-            {` par ${book?.author}`}
+            <Loading className='italic' text={book?.title} />
+            <Loading className='font-bold' text={book?.author} />
           </div>
           <div>{`Note : ${rating} / 20`}</div>
-          <div className='flex-wrap'>{`Commentaires : ${comments || ''}`}</div>
+          {comments.length < 20 ? (
+            <div className='flex-wrap'>{`Commentaire : ${comments}`}</div>
+          ) : (
+            <div className='flex-wrap'>
+              {`Commentaire : ${comments.split(' ').slice(0, 4).join(' ')}...`}
+              <ReadingPopover comment={comments} />
+            </div>
+          )}
           <CardButtons
             data={props}
             field='readings'

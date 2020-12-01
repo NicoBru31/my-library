@@ -13,7 +13,7 @@ import ModalFacc from '../facc/ModalFacc';
 import Input from '../form/Input';
 import fields from './addressFields';
 
-const CreateAddress = ({ open, setOpen }: ModalProps) => {
+const CreateAddress = (props: ModalProps) => {
   const session = useSession();
   const { errors, handleSubmit, register, reset } = useForm<AddressType>({
     mode: 'onBlur',
@@ -35,10 +35,10 @@ const CreateAddress = ({ open, setOpen }: ModalProps) => {
       address: variables,
       fromSeller: !session?.isCustomer,
       id: session?.id,
-    }).then(() => setOpen(false));
+    }).then(props.onClose);
 
   return (
-    <ModalFacc open={open} setOpen={setOpen} title='Créer une adresse'>
+    <ModalFacc {...props} title='Créer une adresse'>
       <form onSubmit={handleSubmit(save)}>
         {fields.map((field) => (
           <Input
@@ -52,7 +52,7 @@ const CreateAddress = ({ open, setOpen }: ModalProps) => {
           <Button
             className='mr-2'
             colorScheme='teal'
-            onClick={() => setOpen(false)}
+            onClick={props.onClose}
             variant='outline'
           >
             Fermer

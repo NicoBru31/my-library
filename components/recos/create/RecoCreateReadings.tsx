@@ -26,6 +26,7 @@ const RecoCreateReadings = () => {
           <>
             {customer?.readings?.map((reading) => (
               <Checkbox
+                colorScheme='teal'
                 defaultIsChecked={value?.includes(reading._id)}
                 key={reading._id}
                 onChange={(e) => {
