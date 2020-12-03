@@ -103,6 +103,15 @@ export const login = (
     },
   ).then((res) => res.json());
 
+export const patchReco = (
+  id: string,
+  recoId: string,
+): Promise<{ notified: string[] }> =>
+  fetch(`${window.location.origin}/api/recos`, {
+    body: JSON.stringify({ id, recoId }),
+    method: 'PATCH',
+  }).then((res) => res.json());
+
 export const updateAddress = (address: Partial<AddressType>) =>
   fetch(`${window.location.origin}/api/addresses?id=${address._id}`, {
     body: JSON.stringify(address),

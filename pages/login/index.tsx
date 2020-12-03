@@ -18,7 +18,10 @@ export interface LoginInterface {
 
 const Login = () => {
   const [create, setCreate] = useState<'customer' | 'seller'>();
-  const { errors, handleSubmit, register } = useForm<LoginInterface>();
+  const { errors, handleSubmit, register } = useForm<LoginInterface>({
+    mode: 'onBlur',
+    shouldFocusError: true,
+  });
   const { loader } = useContext(LoaderContext);
   const router = useRouter();
   const login = useLogin();

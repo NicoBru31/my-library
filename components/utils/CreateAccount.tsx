@@ -25,6 +25,7 @@ const CreateAccount = <
   const { errors, handleSubmit, register, reset, setError } = useForm<
     T & { confirm: string }
   >({
+    mode: 'onBlur',
     shouldFocusError: true,
   });
   const { mutate, isLoading } = useUpdate({

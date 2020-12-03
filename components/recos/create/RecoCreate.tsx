@@ -26,7 +26,11 @@ import RecoCreateType from './RecoCreateType';
 const DEFAULT: RecoType['from'] = { addresses: [], readings: [] };
 
 const RecoCreate = (props: ModalProps) => {
-  const methods = useForm<RecoType>({ defaultValues: { from: DEFAULT } });
+  const methods = useForm<RecoType>({
+    defaultValues: { from: DEFAULT },
+    mode: 'onBlur',
+    shouldFocusError: true,
+  });
   const { setAlert } = useContext(AlertContext);
   const { data: customer } = useQuery<CustomerType>('customer');
   const { mutate } = useUpdate<RecoType, CustomerType, RecoType>({

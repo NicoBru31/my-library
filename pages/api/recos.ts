@@ -2,9 +2,16 @@ import { ObjectId } from 'mongodb';
 import nextConnect from 'next-connect';
 import fetch from 'isomorphic-fetch';
 import middleware from '../../middleware/database';
-import { AddressType, Incoming, RecoType, Response } from '../../types';
+import {
+  AddressType,
+  Incoming,
+  RecoBooksType,
+  RecoType,
+  Response,
+} from '../../types';
 import { absoluteUrl } from '../../fetch/utils';
 
+const COL = 'recos';
 const handler = nextConnect();
 
 handler.use(middleware);
@@ -32,24 +39,40 @@ handler.use<Incoming, Response>(async (req, res, next) => {
 
 handler.get<Incoming, Response>(async (req, res) => {
   const recos = await req.db
-    .collection('recos')
+    .collection(COL)
     .find({ isClosed: false, 'answers.sellerId': req.query.fromSeller })
     .toArray();
   res.json(recos);
+});
+
+handler.patch<Incoming, Response>(async (req, res) => {
+  const { recoId, id } = JSON.parse(req.body);
+  console.log(req.body);
+  const { upsertedCount } = await req.db
+    .collection(COL)
+    .updateOne({ _id: new ObjectId(recoId) }, { $addToSet: { notified: id } });
+  const { notified } = await req.db
+    .collection(COL)
+    .findOne<RecoType>(
+      { _id: new ObjectId(recoId) },
+      { projection: { notified: 1 } },
+    );
+  res.json({ success: upsertedCount === 1, notified });
 });
 
 handler.post<Incoming, Response>(async (req, res) => {
   const reco = JSON.parse(req.body) as RecoType;
   reco.createdAt = new Date();
   reco.isClosed = false;
-  const { insertedId } = await req.db.collection('recos').insertOne(reco);
+  reco.notified = [reco.customerId];
+  const { insertedId } = await req.db.collection(COL).insertOne(reco);
   req.db
     .collection('customers')
     .updateOne(
       { _id: new ObjectId(reco.customerId) },
       { $addToSet: { recos: new ObjectId(insertedId) } },
     );
-  const inserted = await req.db.collection('recos').findOne({
+  const inserted = await req.db.collection(COL).findOne({
     _id: new ObjectId(insertedId),
   });
   res.json(inserted);
@@ -57,9 +80,9 @@ handler.post<Incoming, Response>(async (req, res) => {
 
 handler.put<Incoming, Response>(async (req, res) => {
   const { id } = req.query;
-  const reco = JSON.parse(req.body);
+  const reco = JSON.parse(req.body) as RecoBooksType;
   try {
-    const { upsertedCount } = await req.db.collection('recos').updateOne(
+    const { upsertedCount } = await req.db.collection(COL).updateOne(
       {
         _id: new ObjectId(id),
         'answers.sellerId': new ObjectId(reco.sellerId),
@@ -68,6 +91,9 @@ handler.put<Incoming, Response>(async (req, res) => {
         $set: {
           'answers.$.books': reco.books,
           'answers.$.message': reco.message,
+        },
+        $pull: {
+          notified: '$customerId',
         },
       },
     );

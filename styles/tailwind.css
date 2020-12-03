@@ -20,6 +20,8 @@
 
 .burger {
   @apply cursor-pointer;
+  @apply absolute;
+  right: 2rem;
   height: 40px;
   width: 40px;
   z-index: 2;
@@ -114,7 +116,7 @@
 .menu-pane {
   @apply bg-green-800;
   @apply h-screen;
-  @apply absolute;
+  @apply fixed;
   @apply z-20;
   padding: 20px;
   right: -100vw;

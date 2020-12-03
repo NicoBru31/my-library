@@ -70,6 +70,7 @@ export interface RecoType {
     type?: 'city' | 'department' | 'zip';
   };
   isClosed: boolean;
+  notified?: string[];
 }
 
 export interface SellerType {

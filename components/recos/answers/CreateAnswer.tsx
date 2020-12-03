@@ -19,6 +19,8 @@ const CreateAnswer = ({ _id, sellerId, answers }: RecoSellerProps) => {
   const answer = answers?.find((answer) => answer.sellerId === sellerId);
   const methods = useForm<RecoBooksType>({
     defaultValues: answer || { books: [], message: '', sellerId },
+    mode: 'onBlur',
+    shouldFocusError: true,
   });
   const { control, handleSubmit, register, watch } = methods;
   const books = watch('books');

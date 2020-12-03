@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import useSession from '../../hooks/useSession';
 import HeaderMain from './HeaderMain';
 import HeaderProfile from './HeaderProfile';
