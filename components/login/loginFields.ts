@@ -5,7 +5,7 @@ const loginFields: Field<LoginInterface>[] = [
   {
     label: 'E-mail',
     name: 'email',
-    placeholder: 'toto@to.to',
+    placeholder: 'victo@hugo.fr',
     rules: { required: 'Champ obligatoire' },
     type: 'email',
   },

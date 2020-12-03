@@ -4,7 +4,7 @@ const fields: Field<SellerType>[] = [
   {
     label: 'Nom de la librairie*',
     name: 'name',
-    placeholder: 'Nom du magasin',
+    placeholder: 'Mon magasin',
     rules: {
       required: 'Champ obligatoire',
     },
@@ -12,7 +12,7 @@ const fields: Field<SellerType>[] = [
   {
     label: 'E-mail*',
     name: 'email',
-    placeholder: 'e-email',
+    placeholder: 'librairie@lbr.fr',
     type: 'email',
     rules: {
       required: 'Champ obligatoire',

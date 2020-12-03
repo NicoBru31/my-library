@@ -47,7 +47,6 @@ handler.get<Incoming, Response>(async (req, res) => {
 
 handler.patch<Incoming, Response>(async (req, res) => {
   const { recoId, id } = JSON.parse(req.body);
-  console.log(req.body);
   const { upsertedCount } = await req.db
     .collection(COL)
     .updateOne({ _id: new ObjectId(recoId) }, { $addToSet: { notified: id } });
@@ -82,10 +81,10 @@ handler.put<Incoming, Response>(async (req, res) => {
   const { id } = req.query;
   const reco = JSON.parse(req.body) as RecoBooksType;
   try {
-    const { upsertedCount } = await req.db.collection(COL).updateOne(
+    const result = await req.db.collection(COL).findOneAndUpdate(
       {
         _id: new ObjectId(id),
-        'answers.sellerId': new ObjectId(reco.sellerId),
+        'answers.sellerId': reco.sellerId,
       },
       {
         $set: {
@@ -96,8 +95,11 @@ handler.put<Incoming, Response>(async (req, res) => {
           notified: '$customerId',
         },
       },
+      {
+        returnOriginal: false,
+      },
     );
-    res.json({ success: upsertedCount > 0 });
+    res.json(result.value);
   } catch (e) {
     console.log(e);
     res.json({ success: false });

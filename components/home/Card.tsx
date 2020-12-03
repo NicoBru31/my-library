@@ -1,16 +1,11 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import useSession from '../../hooks/useSession';
 import { CardInterface } from './cards';
 
-const Card = ({ alt, img, link, search, text, title }: CardInterface) => {
+const Card = ({ alt, img, search, text, title }: CardInterface) => {
   const { push } = useRouter();
-  const session = useSession();
 
-  const goTo = () =>
-    !session?.id
-      ? push({ pathname: '/login', search })
-      : push({ pathname: `${link}/${session.id}` });
+  const goTo = () => push({ pathname: '/login', search });
 
   return (
     <div

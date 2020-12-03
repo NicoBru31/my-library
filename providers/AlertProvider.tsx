@@ -1,9 +1,15 @@
-import { useState, PropsWithChildren } from 'react';
+import { useState, PropsWithChildren, useEffect } from 'react';
 import { Alert, AlertIcon, CloseButton } from '@chakra-ui/react';
 import AlertContext, { AlertInterface } from '../contexts/AlertContext';
 
 const AlertProvider = ({ children }: PropsWithChildren<unknown>) => {
   const [alert, setAlert] = useState<AlertInterface>();
+
+  useEffect(() => {
+    if (alert?.message) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [alert]);
 
   return (
     <AlertContext.Provider value={{ alert, setAlert }}>

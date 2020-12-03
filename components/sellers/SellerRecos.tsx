@@ -28,7 +28,7 @@ const SellerRecos = ({ id }: Props) => {
   return (
     <div>
       Les recos en attente :
-      <Accordion allowToggle colorScheme='teal'>
+      <Accordion allowToggle colorScheme='teal' onChange={sendIsNotified}>
         {recos
           ?.sort((a, b) =>
             dayjs(b.createdAt).isAfter(dayjs(a.createdAt)) ? 1 : -1,

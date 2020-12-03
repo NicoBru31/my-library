@@ -130,7 +130,10 @@ export const updateReading = (reading: ReadingType): Promise<ReadingType> =>
     method: 'PUT',
   }).then((res) => res.json());
 
-export const updateReco = (data: RecoBooksType, id: string) =>
+export const updateReco = (
+  data: RecoBooksType,
+  id: string,
+): Promise<RecoType> =>
   fetch(`${window.location.origin}/api/recos?id=${id}`, {
     body: JSON.stringify(data),
     method: 'PUT',

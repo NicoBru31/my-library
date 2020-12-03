@@ -1,14 +1,16 @@
 import { Button } from '@chakra-ui/react';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import {
   Controller,
   FormProvider,
   SubmitHandler,
   useForm,
 } from 'react-hook-form';
+import { queryCache } from 'react-query';
+import AlertContext from '../../../contexts/AlertContext';
 import { updateReco } from '../../../fetch';
 import useBooks from '../../../hooks/useBooks';
-import { RecoBooksType } from '../../../types';
+import { RecoBooksType, RecoType } from '../../../types';
 import Input from '../../form/Input';
 import { RecoSellerProps } from '../RecoSeller';
 import CreateAnswerItem from './CreateAnswerItem';
@@ -22,11 +24,22 @@ const CreateAnswer = ({ _id, sellerId, answers }: RecoSellerProps) => {
     mode: 'onBlur',
     shouldFocusError: true,
   });
+  const { setAlert } = useContext(AlertContext);
   const { control, handleSubmit, register, watch } = methods;
   const books = watch('books');
   const { fetchBooks } = useBooks();
 
-  const send: SubmitHandler<RecoBooksType> = (data) => updateReco(data, _id);
+  const send: SubmitHandler<RecoBooksType> = (data) =>
+    updateReco(data, _id).then((reco) => {
+      setAlert({
+        message: 'Votre reco a été envoyée au client',
+        status: 'success',
+      });
+      console.log(reco);
+      queryCache.setQueryData<RecoType[]>('recos', (recos) =>
+        [...recos].map((r) => (r._id === reco._id ? reco : r)),
+      );
+    });
 
   useEffect(() => {
     if (books?.length) fetchBooks(...books);

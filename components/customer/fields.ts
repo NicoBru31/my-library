@@ -4,7 +4,7 @@ const fields: Field<CustomerType>[] = [
   {
     label: 'Prénom*',
     name: 'firstName',
-    placeholder: 'Frédéric',
+    placeholder: 'Alexandre',
     rules: {
       required: 'Champ obligatoire',
     },
@@ -12,7 +12,7 @@ const fields: Field<CustomerType>[] = [
   {
     label: 'Nom*',
     name: 'lastName',
-    placeholder: 'Bastiat',
+    placeholder: 'Dumas',
     rules: {
       required: 'Champ obligatoire',
     },
@@ -20,7 +20,7 @@ const fields: Field<CustomerType>[] = [
   {
     label: 'E-mail*',
     name: 'email',
-    placeholder: 'toto@to.to',
+    placeholder: 'alexandre@dumas.fr',
     rules: {
       required: 'Champ obligatoire',
       pattern: {
