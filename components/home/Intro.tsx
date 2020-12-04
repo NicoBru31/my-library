@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 const Intro = () => (
   <div className='bg-cardbg text-center p-4 mb-10'>
     <div className='text-xl text-white'>

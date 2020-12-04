@@ -35,7 +35,6 @@ const CreateAnswer = ({ _id, sellerId, answers }: RecoSellerProps) => {
         message: 'Votre reco a été envoyée au client',
         status: 'success',
       });
-      console.log(reco);
       queryCache.setQueryData<RecoType[]>('recos', (recos) =>
         [...recos].map((r) => (r._id === reco._id ? reco : r)),
       );

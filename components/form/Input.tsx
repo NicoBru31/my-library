@@ -4,6 +4,7 @@ import {
   Textarea,
   TextareaProps,
 } from '@chakra-ui/react';
+import * as React from 'react';
 import { InputType } from '../../types';
 
 const Input = <T extends {}>({
@@ -17,26 +18,38 @@ const Input = <T extends {}>({
 }: InputType<T>) => (
   <>
     <div className='mb-2'>
-      {label && <div className='text-white'>{label}</div>}
+      {label && (
+        <label className='text-white' htmlFor={name.toString()}>
+          {label}
+        </label>
+      )}
       {textarea ? (
         <Textarea
           {...(props as TextareaProps)}
           className='Input'
-          style={{ width: '300px' }}
+          id={name.toString()}
           name={name.toString()}
           ref={register(rules)}
+          role='textbox'
+          style={{ width: '300px' }}
         />
       ) : (
         <ChakraInput
           {...(props as InputProps)}
           className='Input'
-          style={{ width: '300px' }}
+          id={name.toString()}
           name={name.toString()}
           ref={register(rules)}
+          role='textbox'
+          style={{ width: '300px' }}
         />
       )}
     </div>
-    <div style={{ color: 'red' }}>{error?.message}</div>
+    {error?.message && (
+      <div role='alert' style={{ color: 'red' }}>
+        {error.message}
+      </div>
+    )}
   </>
 );
 

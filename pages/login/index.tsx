@@ -1,6 +1,6 @@
+import * as React from 'react';
 import { Button } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useContext, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import fields from '../../components/customer/fields';
 import Input from '../../components/form/Input';
@@ -17,17 +17,16 @@ export interface LoginInterface {
 }
 
 const Login = () => {
-  const [create, setCreate] = useState<'customer' | 'seller'>();
+  const [create, setCreate] = React.useState<'customer' | 'seller'>();
   const { errors, handleSubmit, register } = useForm<LoginInterface>({
     mode: 'onBlur',
     shouldFocusError: true,
   });
-  const { loader } = useContext(LoaderContext);
-  const router = useRouter();
+  const { loader } = React.useContext(LoaderContext);
+  const { query } = useRouter();
   const login = useLogin();
 
-  const goCreate = () =>
-    setCreate(router.query?.isSeller ? 'seller' : 'customer');
+  const goCreate = () => setCreate(query?.isSeller ? 'seller' : 'customer');
 
   const send: SubmitHandler<LoginInterface> = (data) => login(data);
 
