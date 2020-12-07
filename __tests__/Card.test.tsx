@@ -1,13 +1,7 @@
 import React from 'react';
-import '@testing-library/jest-dom/extend-expect';
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '../test-utils';
 import Card from '../components/home/Card';
 import cards from '../components/home/cards';
-
-jest.mock('next/image', () => ({
-  __esModule: true,
-  default: (props: any) => <img {...props} />,
-}));
 
 test('Test Home card', () => {
   render(<Card {...cards[0]} />);

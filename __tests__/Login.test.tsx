@@ -1,17 +1,11 @@
-import '@testing-library/jest-dom/extend-expect';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
+import { fireEvent, render, screen, waitFor } from '../test-utils';
 import Login, { LoginInterface } from '../pages/login';
 
 const mockUseLogin = jest.fn((data: LoginInterface) => {});
 jest.mock('../hooks/useLogin', () => ({
   __esModule: true,
   default: () => mockUseLogin,
-}));
-
-jest.mock('next/router', () => ({
-  __esModule: true,
-  useRouter: () => ({ query: {}, push: () => {} }),
 }));
 
 describe('Test Login Page', () => {

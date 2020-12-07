@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import * as React from 'react';
 import { useEffect } from 'react';
 import { PropsWithChildren } from 'react';
 import SessionContext, { Session } from '../contexts/SessionContext';
 
 const SessionProvider = ({ children }: PropsWithChildren<unknown>) => {
-  const [session, setSession] = useState<Session>();
+  const [session, setSession] = React.useState<Session>();
 
   useEffect(() => {
     const localSession = window.localStorage.getItem('liber:session');

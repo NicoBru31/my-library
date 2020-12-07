@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { useRouter } from 'next/router';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import LoaderContext, { LoaderInterface } from '../contexts/LoaderContext';
