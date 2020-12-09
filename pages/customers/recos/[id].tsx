@@ -20,7 +20,7 @@ const Reco = ({ customer }: CustomerPageType) => {
   useQuery<CustomerType>('customer', { initialData: customer });
 
   return (
-    <div className='bg-books px-4'>
+    <div className='bg-books'>
       <RecoIntro />
       <RecoCustomer />
     </div>

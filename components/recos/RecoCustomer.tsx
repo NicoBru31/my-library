@@ -25,7 +25,7 @@ const RecoCustomer = () => {
   };
 
   return (
-    <>
+    <div className='px-4'>
       <div>Mes recos :</div>
       <Accordion allowToggle onChange={sendIsNotified}>
         {data?.recos
@@ -36,7 +36,7 @@ const RecoCustomer = () => {
             <RecoItem {...reco} key={reco._id} />
           ))}
       </Accordion>
-    </>
+    </div>
   );
 };
 

@@ -21,6 +21,7 @@ const Input = <T extends {}>({
       {label && (
         <label className='text-white' htmlFor={name.toString()}>
           {label}
+          <br />
         </label>
       )}
       {textarea ? (

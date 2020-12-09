@@ -1,5 +1,7 @@
 import { Button, useDisclosure } from '@chakra-ui/react';
 import Image from 'next/image';
+import { introReco } from '../customer/intro';
+import Intro from '../utils/Intro';
 import RecoCreate from './create/RecoCreate';
 import intro from './intro';
 
@@ -8,8 +10,8 @@ const RecoIntro = () => {
 
   return (
     <>
-      <h1>Comment ça marche ?</h1>
-      <div className='sm:block md:flex items-baseline justify-between my-4'>
+      <Intro {...introReco} />
+      <div className='sm:block md:flex items-baseline justify-around my-4'>
         {intro.map(({ text, image }) => (
           <div
             key={text}

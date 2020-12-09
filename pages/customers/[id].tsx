@@ -3,8 +3,11 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { useQuery } from 'react-query';
+import { introReadings } from '../../components/customer/intro';
 import AddReading from '../../components/readings/AddReading';
+import GoReco from '../../components/readings/GoReco';
 import Reading from '../../components/readings/Reading';
+import Intro from '../../components/utils/Intro';
 import SessionContext from '../../contexts/SessionContext';
 import { getCustomer } from '../../fetch';
 import { absoluteUrl } from '../../fetch/utils';
@@ -32,12 +35,13 @@ const Customer = ({ customer }: CustomerPageType) => {
 
   return (
     <div className='bg-books'>
-      <h1 className='H1'>{`Bonjour ${data.firstName}, voici vos lectures :`}</h1>
+      <Intro {...introReadings} />
       <div className='grid grid-cols-3 items-center flex-wrap'>
         <AddReading />
         {data?.readings?.map((reading) => (
           <Reading {...reading} key={reading._id} />
         ))}
+        <GoReco />
       </div>
       <div className='flex justify-center'>
         <Button colorScheme='teal' onClick={logout}>

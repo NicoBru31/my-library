@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen } from '../test-utils';
-import Intro from '../components/home/Intro';
+import Home from '../pages';
 
 test('Home Intro test', () => {
-  render(<Intro />);
+  render(<Home />);
 
   expect(
     screen.getByText(
