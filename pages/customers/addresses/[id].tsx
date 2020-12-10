@@ -25,7 +25,7 @@ const Addresses = ({ customer, id }: CustomerPageType) => {
   return (
     <>
       <h1 className='H1'>Mes adresses</h1>
-      <div className='flex justify-start flex-wrap'>
+      <div className='md:grid grid-cols-3 items-center flex-wrap'>
         <AddAddress />
         {data?.addresses.map((address) => (
           <Address {...address} key={address._id} />

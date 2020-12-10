@@ -15,7 +15,7 @@ const Reading = (props: ReadingType) => {
   }, [bookId]);
 
   return (
-    <div className='flex h-56 w-full md:w-4/5 m-8 shadow-lg'>
+    <div className='reading'>
       <div className='bg-cardbg flex h-full w-full rounded'>
         <div className='text-center text-white m-auto p-4'>
           <div className='text-xl'>

@@ -36,7 +36,7 @@ const Customer = ({ customer }: CustomerPageType) => {
   return (
     <div className='bg-books'>
       <Intro {...introReadings} />
-      <div className='grid grid-cols-3 items-center flex-wrap'>
+      <div className='md:grid grid-cols-3 items-center flex-wrap'>
         <AddReading />
         {data?.readings?.map((reading) => (
           <Reading {...reading} key={reading._id} />

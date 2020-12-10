@@ -11,11 +11,11 @@ const RecoIntro = () => {
   return (
     <>
       <Intro {...introReco} />
-      <div className='sm:block md:flex items-baseline justify-around my-4'>
+      <div className='md:grid grid-cols-3 items-center flex-wrap my-4'>
         {intro.map(({ text, image }) => (
           <div
             key={text}
-            className='card text-white text-center h-32 sm:w-4/5 md:w-1/4 p-4'
+            className='card text-white text-center h-32 w-4/5 p-4'
           >
             <div>{text}</div>
             <Image src={image} height={60} width={60} />

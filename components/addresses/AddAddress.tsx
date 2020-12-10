@@ -5,7 +5,7 @@ const AddAddress = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
-    <div className='items-center border border-dashed border-gray-600 flex justify-center h-1/4 m-8 rounded p-4 w-1/4'>
+    <div className='reading border border-dashed border-gray-600 flex justify-center items-center p-4'>
       <Button colorScheme='teal' onClick={onOpen}>
         Ajouter
       </Button>

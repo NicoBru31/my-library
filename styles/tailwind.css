@@ -79,6 +79,15 @@
   @apply h-auto;
   @apply p-4;
   @apply rounded;
+  margin-left: 10%;
+}
+
+.reading {
+  @apply h-56;
+  @apply shadow-lg;
+  margin-bottom: 10%;
+  margin-left: 10%;
+  width: 80%;
 }
 
 .H1 {
@@ -109,7 +118,7 @@
   background-position: top;
   background-repeat: no-repeat, no-repeat;
   background-size: cover;
-  /* height: calc(100vh - 5rem); */
+  min-height: calc(100vh - 5rem);
   width: 100vw;
 }
 
