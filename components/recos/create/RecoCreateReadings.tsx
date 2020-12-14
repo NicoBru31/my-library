@@ -4,6 +4,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import useBooks from '../../../hooks/useBooks';
 import { CustomerType, RecoType } from '../../../types';
+import AddReading from '../../readings/AddReading';
 
 const RecoCreateReadings = () => {
   const { control } = useFormContext<RecoType>();
@@ -18,7 +19,8 @@ const RecoCreateReadings = () => {
 
   return (
     <>
-      <div className='my-4'>Je choisis des lectures</div>
+      <div>Je choisis des lectures.</div>
+      Cliquez <AddReading>ici</AddReading> pour en ajouter une.
       <Controller
         control={control}
         name='from.readings'

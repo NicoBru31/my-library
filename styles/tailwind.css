@@ -82,6 +82,15 @@
   margin-left: 10%;
 }
 
+.card-no-ml {
+  @apply bg-cardbg;
+  @apply mt-6;
+  @apply h-auto;
+  @apply p-4;
+  @apply rounded;
+  margin-left: 0;
+}
+
 .reading {
   @apply h-56;
   @apply shadow-lg;
@@ -128,9 +137,7 @@
   @apply fixed;
   @apply z-20;
   padding: 20px;
-  right: -100vw;
   top: 0;
-  transition: 0.6s ease-in-out;
   width: 100vw;
 }
 

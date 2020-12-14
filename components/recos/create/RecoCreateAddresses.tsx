@@ -2,6 +2,7 @@ import { Checkbox } from '@chakra-ui/react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import { CustomerType } from '../../../types';
+import AddAddress from '../../addresses/AddAddress';
 
 const RecoCreateAddresses = () => {
   const { data } = useQuery<CustomerType>('customer');
@@ -10,6 +11,7 @@ const RecoCreateAddresses = () => {
   return (
     <>
       <div>Sélectionnez une ou plusieurs adresses</div>
+      Cliquez <AddAddress>ici</AddAddress> pour en ajouter une.
       <Controller
         control={control}
         name='from.addresses'

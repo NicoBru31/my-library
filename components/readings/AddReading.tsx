@@ -1,8 +1,18 @@
+import * as React from 'react';
 import { Button, useDisclosure } from '@chakra-ui/react';
 import CreateReading from './CreateReading';
 
-const AddReading = () => {
+const AddReading = ({ children }: React.PropsWithChildren<unknown>) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  if (children) {
+    return (
+      <span className='text-blue-700 cursor-pointer' onClick={onOpen}>
+        {children}
+        <CreateReading isOpen={isOpen} onClose={onClose} />
+      </span>
+    );
+  }
 
   return (
     <div className='reading'>

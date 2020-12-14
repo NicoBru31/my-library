@@ -6,7 +6,7 @@ const RecoCreateType = () => {
 
   return (
     <>
-      <div>Je veux contacter les libraires</div>
+      <div className='pt-6'>Je veux contacter les libraires</div>
       <Controller
         control={control}
         defaultValue='city'

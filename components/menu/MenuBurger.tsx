@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { useContext } from 'react';
 import AlertContext from '../../contexts/AlertContext';
 
@@ -11,16 +12,17 @@ const MenuBurger = ({ burgerOpen, setBurgerOpen }: Props) => {
 
   return (
     <div className='z-30' style={{ height: 'calc(100% - 20px)' }}>
-      <button
+      <motion.button
         className={`burger${burgerOpen ? ' burger-open' : ''}${
           alert ? ' alert' : ''
         } hover:opacity-50`}
         onClick={() => setBurgerOpen(!burgerOpen)}
+        whileHover={{ scale: 1.2 }}
       >
         <div />
         <div />
         <div />
-      </button>
+      </motion.button>
     </div>
   );
 };
