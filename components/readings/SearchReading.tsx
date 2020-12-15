@@ -1,6 +1,5 @@
-import * as React from 'react';
 import { Input } from '@chakra-ui/react';
-import { AiOutlineCheckCircle, AiOutlineCloseCircle } from 'react-icons/ai';
+import * as React from 'react';
 import Autocomplete from 'react-autocomplete';
 import LoaderContext from '../../contexts/LoaderContext';
 import { getGoogleBooks } from '../../fetch';
@@ -8,26 +7,22 @@ import { GoogleBookType } from '../../types';
 import SearchReadingItem from './SearchReadingItem';
 
 interface Props {
-  clearOnSelect?: boolean;
   onSelect: (item: GoogleBookType) => void;
 }
 
-const SearchReading = ({ clearOnSelect = false, onSelect }: Props) => {
+const SearchReading = ({ onSelect }: Props) => {
   const [books, setBooks] = React.useState<GoogleBookType[]>([]);
   const [search, setSearch] = React.useState('');
-  const [book, setBook] = React.useState<GoogleBookType>();
   const { loader } = React.useContext(LoaderContext);
 
   const change = (e: any) => {
     e?.preventDefault();
-    setBook(undefined);
     setSearch(e.target.value);
   };
 
   const select = (val: string, item: GoogleBookType) => {
     onSelect(item);
-    setBook(item);
-    setSearch(clearOnSelect ? '' : val);
+    setSearch('');
   };
 
   React.useEffect(() => {
@@ -46,19 +41,12 @@ const SearchReading = ({ clearOnSelect = false, onSelect }: Props) => {
   return (
     <Autocomplete
       getItemValue={(item: GoogleBookType) => item.volumeInfo.title}
-      items={books.slice(0, 3)}
+      items={(books || []).slice(0, 3)}
       menuStyle={{ position: 'fixed', zIndex: 10 }}
       onChange={change}
       onSelect={select}
       renderInput={(props) => (
-        <div className='flex items-center'>
-          <Input {...props} placeholder='Chercher une oeuvre' />
-          {book ? (
-            <AiOutlineCheckCircle size={30} color='green' />
-          ) : (
-            <AiOutlineCloseCircle size={30} color='red' />
-          )}
-        </div>
+        <Input {...props} placeholder='Chercher une oeuvre' />
       )}
       renderItem={(item: GoogleBookType) => (
         <div key={item.id}>

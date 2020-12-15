@@ -29,3 +29,5 @@ export const menuItemVariants: Variants = {
 };
 
 export const scale: string | TargetAndTransition = { scale: 1.2 };
+
+export const hoverOpacity: string | TargetAndTransition = { opacity: 0.5 };

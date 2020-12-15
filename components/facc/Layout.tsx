@@ -1,6 +1,7 @@
 import { PropsWithChildren } from 'react';
 import Head from 'next/head';
 import Menu from '../menu/Menu';
+import Footer from '../footer/Footer';
 
 const Layout = ({ children }: PropsWithChildren<unknown>) => (
   <div className='background'>
@@ -13,6 +14,7 @@ const Layout = ({ children }: PropsWithChildren<unknown>) => (
     </Head>
     <Menu />
     <div className='pt-20 min-h-screen'>{children}</div>
+    <Footer />
   </div>
 );
 

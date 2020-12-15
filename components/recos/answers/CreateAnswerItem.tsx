@@ -50,7 +50,7 @@ const CreateAnswerItem = ({ index, value }: Props) => {
           />
         </div>
       ) : (
-        <SearchReading clearOnSelect onSelect={select} />
+        <SearchReading onSelect={select} />
       )}
     </div>
   );

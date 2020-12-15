@@ -4,7 +4,7 @@
 
 .background {
   background-image: theme('colors.whitebg');
-  overflow-x: unset;
+  overflow-x: hidden;
 }
 
 .bg-books {
@@ -125,6 +125,14 @@
   @apply flex;
   @apply items-center;
   border-bottom: 1px solid white;
+}
+
+.fooerLink {
+  @apply text-lg;
+  @apply text-white;
+  @apply cursor-pointer;
+  @apply flex;
+  @apply items-center;
 }
 
 .home-picture {

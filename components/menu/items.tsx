@@ -13,13 +13,13 @@ export interface MenuItemProps {
 const items: MenuItemProps[] = [
   {
     href: '/type/update/id',
-    Icon: <RiAccountCircleLine className='mr-2' height={20} width={20} />,
+    Icon: <RiAccountCircleLine className='mr-2' size={20} />,
     match: /update/,
     title: 'Mon compte',
   },
   {
     href: '/type/addresses/id',
-    Icon: <FaRegAddressCard className='mr-2' height={20} width={20} />,
+    Icon: <FaRegAddressCard className='mr-2' size={20} />,
     match: /addresses/,
     title: 'Mes adresses',
   },
@@ -28,13 +28,13 @@ const items: MenuItemProps[] = [
 export const customerItems: MenuItemProps[] = [
   {
     href: '/type/id',
-    Icon: <BiBookHeart className='mr-2' height={20} width={20} />,
+    Icon: <BiBookHeart className='mr-2' size={20} />,
     match: /\/customers\/\[id\]$/,
     title: 'Mes lectures',
   },
   {
     href: '/type/recos/id',
-    Icon: <CgUserList className='mr-2' height={20} width={20} />,
+    Icon: <CgUserList className='mr-2' size={20} />,
     match: /recos/,
     title: 'Mes recos',
   },

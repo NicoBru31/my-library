@@ -18,6 +18,7 @@ import {
 import ModalFacc from '../facc/ModalFacc';
 import Input from '../form/Input';
 import ModalFooter from '../utils/ModalFooter';
+import CreateReadingSelectedBook from './CreateReadingSelectedBook';
 import fields from './readingFields';
 import SearchReading from './SearchReading';
 
@@ -60,6 +61,10 @@ const CreateReading = (props: ModalProps) => {
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(create)}>
           <SearchReading onSelect={select} />
+          <CreateReadingSelectedBook
+            googleBook={googleBook}
+            setGoogleBook={setGoogleBook}
+          />
           {fields.map((field) => (
             <Input
               {...field}

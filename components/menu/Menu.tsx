@@ -14,7 +14,7 @@ const Menu = () => {
   }, [route, setBurgerOpen]);
 
   return (
-    <div className='bg-green-700 absolute h-20 w-full flex justify-between items-center pl-8 pr-8'>
+    <div className='bg-green-700 absolute h-20 w-full flex justify-between items-center pl-12 pr-8'>
       <HeaderMain />
       <HeaderProfile />
       <MenuBurger burgerOpen={burgerOpen} setBurgerOpen={setBurgerOpen} />
