@@ -1,4 +1,4 @@
-export interface IntroInterface {
+interface IntroInterface {
   text: string;
   image: string;
 }

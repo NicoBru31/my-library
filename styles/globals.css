@@ -28,3 +28,7 @@ button:focus {
   opacity: 1;
   transition: opacity 0.5s;
 }
+
+.slide {
+  background: none !important;
+}

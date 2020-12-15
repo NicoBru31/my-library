@@ -1,13 +1,9 @@
 import { Button } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
 import * as React from 'react';
-import useSession from '../../hooks/useSession';
+import useRouting from '../../hooks/useRouting';
 
 const AddressGoReco = () => {
-  const { push } = useRouter();
-  const { id } = useSession();
-
-  const goReco = () => push({ pathname: `/customers/recos/${id}` });
+  const { goReco } = useRouting();
 
   return (
     <div className='bg-cardbg text-center text-white reading flex justify-center items-center p-4'>

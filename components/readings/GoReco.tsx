@@ -1,13 +1,9 @@
 import { Button } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
 import * as React from 'react';
-import SessionContext from '../../contexts/SessionContext';
+import useRouting from '../../hooks/useRouting';
 
 const GoReco = () => {
-  const { push } = useRouter();
-  const { session } = React.useContext(SessionContext);
-
-  const visit = () => push({ pathname: `/customers/recos/${session.id}` });
+  const { goReco } = useRouting();
 
   return (
     <div className='reading'>
@@ -16,7 +12,7 @@ const GoReco = () => {
           <div className='text-xl'>Quelle sera votre prochaine lecture ?</div>
           <div>{`Note : 20 / 20`}</div>
           <div className='flex-wrap'>{`Commentaire : `}</div>
-          <Button colorScheme='teal' onClick={visit}>
+          <Button colorScheme='teal' onClick={goReco}>
             Recommandations
           </Button>
         </div>

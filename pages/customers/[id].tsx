@@ -3,14 +3,14 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { useQuery } from 'react-query';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { introReadings } from '../../components/customer/intro';
-import AddReading from '../../components/readings/AddReading';
-import GoReco from '../../components/readings/GoReco';
-import Reading from '../../components/readings/Reading';
+import Readings from '../../components/readings/Readings';
 import Intro from '../../components/utils/Intro';
 import SessionContext from '../../contexts/SessionContext';
 import { getCustomer } from '../../fetch';
 import { absoluteUrl } from '../../fetch/utils';
+import useRouting from '../../hooks/useRouting';
 import { CustomerPageType, CustomerType } from '../../types';
 
 export const getServerSideProps: GetServerSideProps = async ({
@@ -24,25 +24,19 @@ export const getServerSideProps: GetServerSideProps = async ({
 };
 
 const Customer = ({ customer }: CustomerPageType) => {
-  const { data } = useQuery('customer', { initialData: customer });
+  useQuery('customer', { initialData: customer });
   const { setSession } = useContext(SessionContext);
-  const { push } = useRouter();
+  const { goLogin } = useRouting();
 
   const logout = () => {
     setSession({ id: '' });
-    push({ pathname: '/login' });
+    goLogin();
   };
 
   return (
     <div className='bg-books'>
       <Intro {...introReadings} />
-      <div className='md:grid grid-cols-3 items-center flex-wrap'>
-        <AddReading />
-        {data?.readings?.map((reading) => (
-          <Reading {...reading} key={reading._id} />
-        ))}
-        <GoReco />
-      </div>
+      <Readings />
       <div className='flex justify-center my-10'>
         <Button colorScheme='teal' onClick={logout}>
           Me déconnecter

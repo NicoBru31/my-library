@@ -28,6 +28,12 @@ export const menuItemVariants: Variants = {
   closed: { opacity: 0, x: 100 },
 };
 
-export const scale: string | TargetAndTransition = { scale: 1.2 };
+export const scale: TargetAndTransition = { scale: 1.2 };
+
+export const scaleShake: TargetAndTransition = {
+  transition: { duration: 0.2 },
+  rotate: [0, -10, 10, 0],
+  scale: [1, 1.2],
+};
 
 export const hoverOpacity: string | TargetAndTransition = { opacity: 0.5 };

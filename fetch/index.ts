@@ -72,11 +72,6 @@ export const getBookByGoogleId = (id: string): Promise<BookType> =>
     res.json(),
   );
 
-export const getGoogleBook = (id: string): Promise<GoogleBookType> =>
-  fetch(`${window.location.origin}/api/google?id=${id}`).then((res) =>
-    res.json(),
-  );
-
 export const getGoogleBooks = (query: string): Promise<GoogleBookType[]> =>
   fetch(`${window.location.origin}/api/google?q=${query}`).then((res) =>
     res.json(),

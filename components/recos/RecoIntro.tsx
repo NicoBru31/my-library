@@ -7,6 +7,7 @@ import RecoCreate from './create/RecoCreate';
 import intro from './intro';
 import { motion } from 'framer-motion';
 import { menuItemVariants } from '../../variants';
+import { Carousel } from 'react-responsive-carousel';
 
 const RecoIntro = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -31,20 +32,25 @@ const RecoIntro = () => {
           </div>
         ))}
       </div>
-      <div className='md:hidden h-32 my-4'>
-        {intro.map(({ text, image }, index) => (
-          <motion.div
-            className='absolute card text-white text-center w-4/5 p-4'
+      <Carousel
+        autoPlay
+        className='md:hidden h-32 my-4'
+        infiniteLoop
+        showArrows={false}
+        showIndicators={false}
+        showStatus={false}
+        showThumbs={false}
+      >
+        {intro.map(({ text, image }) => (
+          <div
+            className='card text-white text-center h-32 w-4/5 p-4'
             key={text}
-            animate={index === currIndex ? 'open' : 'closed'}
-            initial={index === currIndex ? 'open' : 'closed'}
-            variants={menuItemVariants}
           >
             <div>{text}</div>
             <Image src={image} height={60} width={60} />
-          </motion.div>
+          </div>
         ))}
-      </div>
+      </Carousel>
       <div className='flex justify-center my-10'>
         <Button colorScheme='teal' onClick={onOpen}>
           Demander une reco
