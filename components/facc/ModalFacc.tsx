@@ -15,10 +15,16 @@ const ModalFacc = ({
   ...props
 }: PropsWithChildren<ModalProps>) => (
   <Modal {...props}>
-    <ModalOverlay />
+    <ModalOverlay className='rounded' />
     <ModalContent>
-      <ModalHeader>{title}</ModalHeader>
-      <ModalCloseButton />
+      <ModalHeader className='bg-green-600 rounded-t-md text-white'>
+        {title}
+      </ModalHeader>
+      <ModalCloseButton
+        className='focus:shadow-none'
+        color='white'
+        borderColor='transparent'
+      />
       <ModalBody>{children}</ModalBody>
     </ModalContent>
   </Modal>

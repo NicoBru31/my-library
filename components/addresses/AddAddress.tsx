@@ -8,7 +8,7 @@ const AddAddress = ({ children }: React.PropsWithChildren<unknown>) => {
   return (
     <>
       {!children ? (
-        <div className='reading border border-dashed border-gray-600 flex justify-center items-center p-4'>
+        <div className='bg-cardbg reading flex justify-center items-center p-4'>
           <Button colorScheme='teal' onClick={onOpen}>
             Ajouter
           </Button>

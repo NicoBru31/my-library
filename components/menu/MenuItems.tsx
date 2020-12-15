@@ -1,10 +1,9 @@
-import Link from 'next/link';
-import { RiAccountCircleLine } from 'react-icons/ri';
-import { FaRegAddressCard } from 'react-icons/fa';
-import { BiBookHeart } from 'react-icons/bi';
-import { CgUserList } from 'react-icons/cg';
-import useSession from '../../hooks/useSession';
+import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
+import useSession from '../../hooks/useSession';
+import { menuItemVariants } from '../../variants';
+import items, { customerItems } from './items';
+import MenuItem from './MenuItem';
 
 interface Props {
   type: 'customers' | 'sellers';
@@ -17,32 +16,28 @@ const MenuItems = ({ type }: Props) => {
   if (!session.id) return null;
 
   return (
-    <div className='pl-6 mb-6'>
-      <div className={`Link ${route.includes('update') && 'opacity-50'}`}>
-        <RiAccountCircleLine className='mr-2' height={20} width={20} />
-        <Link href={`/${type}/update/${session.id}`}>Mon compte</Link>
-      </div>
-      <div className={`Link ${route.includes('addresses') && 'opacity-50'}`}>
-        <FaRegAddressCard className='mr-2' height={20} width={20} />
-        <Link href={`/${type}/addresses/${session.id}`}>Mes adresses</Link>
-      </div>
+    <motion.div className='pl-6 mb-6' variants={menuItemVariants}>
+      {items.map(({ href, match, ...item }) => (
+        <MenuItem
+          {...item}
+          href={href.replace(/type/, type).replace(/id/, session.id)}
+          isActive={route.match(match)?.length > 0}
+          key={href}
+        />
+      ))}
       {type === 'customers' && (
         <>
-          <div
-            className={`Link ${
-              route.match(/\/customers\/\[id\]$/) && 'opacity-50'
-            }`}
-          >
-            <BiBookHeart className='mr-2' height={20} width={20} />
-            <Link href={`/${type}/${session.id}`}>Mes lectures</Link>
-          </div>
-          <div className={`Link ${route.includes('recos') && 'opacity-50'}`}>
-            <CgUserList className='mr-2' height={20} width={20} />
-            <Link href={`/${type}/recos/${session.id}`}>Mes recos</Link>
-          </div>
+          {customerItems.map(({ href, match, ...item }) => (
+            <MenuItem
+              {...item}
+              href={href.replace(/type/, type).replace(/id/, session.id)}
+              isActive={route.match(match)?.length > 0}
+              key={href}
+            />
+          ))}
         </>
       )}
-    </div>
+    </motion.div>
   );
 };
 

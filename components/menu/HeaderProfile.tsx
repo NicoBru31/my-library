@@ -1,7 +1,9 @@
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import useSession from '../../hooks/useSession';
+import { scale } from '../../variants';
 
 const HeaderProfile = () => {
   const { push } = useRouter();
@@ -24,15 +26,16 @@ const HeaderProfile = () => {
   if (!session?.id) return null;
 
   return (
-    <div
+    <motion.div
       className='flex items-center cursor-pointer hover:opacity-50'
       onClick={goProfile}
+      whileHover={scale}
     >
       <Image alt='avatar' src={src} height={40} width={40} />
       <div className='text-white pl-4 hidden md:block'>{`${
         session?.fullName || ''
       }`}</div>
-    </div>
+    </motion.div>
   );
 };
 

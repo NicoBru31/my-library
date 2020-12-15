@@ -43,7 +43,7 @@ const Customer = ({ customer }: CustomerPageType) => {
         ))}
         <GoReco />
       </div>
-      <div className='flex justify-center'>
+      <div className='flex justify-center my-10'>
         <Button colorScheme='teal' onClick={logout}>
           Me déconnecter
         </Button>

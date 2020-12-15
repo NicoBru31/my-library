@@ -18,6 +18,17 @@
   background-size: cover;
 }
 
+.bg-book {
+  background-image: linear-gradient(
+      to top,
+      rgba(242, 243, 244, 1),
+      rgba(242, 243, 244, 0)
+    ),
+    url(/book.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .burger {
   @apply cursor-pointer;
   @apply absolute;
@@ -92,6 +103,8 @@
 }
 
 .reading {
+  @apply bg-cardbg;
+  @apply rounded;
   @apply h-56;
   @apply shadow-lg;
   margin-bottom: 10%;
@@ -111,10 +124,7 @@
   @apply cursor-pointer;
   @apply flex;
   @apply items-center;
-}
-
-.Link:hover {
-  @apply text-pink-300;
+  border-bottom: 1px solid white;
 }
 
 .home-picture {
@@ -136,7 +146,8 @@
   @apply h-screen;
   @apply fixed;
   @apply z-20;
-  padding: 20px;
+  padding: 30px;
+  padding-top: 50px;
   top: 0;
   width: 100vw;
 }

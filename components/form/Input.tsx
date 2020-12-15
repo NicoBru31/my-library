@@ -8,6 +8,7 @@ import * as React from 'react';
 import { InputType } from '../../types';
 
 const Input = <T extends {}>({
+  classLabel,
   error,
   label,
   name,
@@ -19,7 +20,7 @@ const Input = <T extends {}>({
   <>
     <div className='mb-2'>
       {label && (
-        <label className='text-white' htmlFor={name.toString()}>
+        <label className={classLabel || 'text-white'} htmlFor={name.toString()}>
           {label}
           <br />
         </label>

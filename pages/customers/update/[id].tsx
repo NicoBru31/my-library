@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { useQuery } from 'react-query';
 import CustomerUpdate from '../../../components/customer/CustomerUpdate';
+import Intro from '../../../components/utils/Intro';
 import { getCustomer } from '../../../fetch';
 import { absoluteUrl } from '../../../fetch/utils';
 import { CustomerType } from '../../../types';
@@ -23,7 +24,10 @@ const UpdateCustomer = ({ customer }: CustomerPageType) => {
 
   return (
     <div className='home-picture'>
-      <h1 className='H1'>Modifier mes paramètres de compte</h1>
+      <Intro
+        text='Ces informations restent strictement confidentielles, elles ne sont transmises à personne.'
+        title='Modifier mon compte'
+      />
       <div className='flex justify-center'>
         <CustomerUpdate />
       </div>

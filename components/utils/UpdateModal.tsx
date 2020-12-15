@@ -47,6 +47,7 @@ const UpdateModal = <T extends { _id: string }>({
           {fields.map((field) => (
             <Input
               {...field}
+              classLabel='text-black'
               defaultValue={initial[field.name.toString()]}
               error={errors[field.name] as FieldError}
               key={field.name.toString()}

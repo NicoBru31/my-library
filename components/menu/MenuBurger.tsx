@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useContext } from 'react';
 import AlertContext from '../../contexts/AlertContext';
+import { scale } from '../../variants';
 
 interface Props {
   burgerOpen: boolean;
@@ -17,7 +18,7 @@ const MenuBurger = ({ burgerOpen, setBurgerOpen }: Props) => {
           alert ? ' alert' : ''
         } hover:opacity-50`}
         onClick={() => setBurgerOpen(!burgerOpen)}
-        whileHover={{ scale: 1.2 }}
+        whileHover={scale}
       >
         <div />
         <div />

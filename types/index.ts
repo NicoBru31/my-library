@@ -45,6 +45,7 @@ export type Field<T> = (
 };
 
 export type InputType<T> = Field<T> & {
+  classLabel?: string;
   error?: FieldError;
   label?: string;
   register: UseFormMethods<T>['register'];

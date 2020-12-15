@@ -43,6 +43,7 @@ const CreateAddress = (props: ModalProps) => {
         {fields.map((field) => (
           <Input
             {...field}
+            classLabel='text-black'
             error={errors[field.name] as FieldError}
             key={field.name}
             register={register}

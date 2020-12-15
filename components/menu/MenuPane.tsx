@@ -1,16 +1,12 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import useSession from '../../hooks/useSession';
+import { menuVariants } from '../../variants';
 import MenuItems from './MenuItems';
 
 interface Props {
   burgerOpen: boolean;
 }
-
-const variants = {
-  open: { opacity: 1, right: 0 },
-  closed: { opacity: 0, right: '-100vw' },
-};
 
 const MenuPane = ({ burgerOpen }: Props) => {
   const session = useSession();
@@ -19,9 +15,9 @@ const MenuPane = ({ burgerOpen }: Props) => {
     <motion.div
       animate={burgerOpen ? 'open' : 'closed'}
       className='menu-pane'
+      initial='closed'
       transition={{ duration: 0.6 }}
-      initial={'closed'}
-      variants={variants}
+      variants={menuVariants}
     >
       <div className='flex text-white text-2xl'>
         <div className='mr-2'>
