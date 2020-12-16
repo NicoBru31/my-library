@@ -30,7 +30,7 @@ const CreateReading = (props: ModalProps) => {
     shouldFocusError: true,
   });
   const { errors, handleSubmit, register, reset } = methods;
-  const { mutate, isLoading } = useUpdate<
+  const { mutateAsync, isLoading } = useUpdate<
     ReadingType,
     CustomerType,
     CreateReadingType
@@ -42,7 +42,7 @@ const CreateReading = (props: ModalProps) => {
   });
 
   const create: SubmitHandler<ReadingType> = async (reading) =>
-    mutate({
+    mutateAsync({
       reading: {
         ...reading,
         book: {

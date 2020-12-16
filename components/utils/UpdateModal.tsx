@@ -27,7 +27,7 @@ const UpdateModal = <T extends { _id: string }>({
     mode: 'onBlur',
     shouldFocusError: true,
   });
-  const { mutate, isLoading } = useUpdate({
+  const { mutateAsync, isLoading } = useUpdate({
     action: update,
     isUpdate: true,
     key: !session?.isCustomer ? 'seller' : 'customer',
@@ -35,7 +35,8 @@ const UpdateModal = <T extends { _id: string }>({
     subKey,
   });
 
-  const save: SubmitHandler<T> = (variables) => mutate(variables).then(onClose);
+  const save: SubmitHandler<T> = (variables) =>
+    mutateAsync(variables).then(onClose);
 
   return (
     <>

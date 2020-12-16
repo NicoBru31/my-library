@@ -40,7 +40,7 @@ const useUpdate = <R extends { _id: string }, S, T>({
   const queryClient = useQueryClient();
   const { setAlert } = useContext(AlertContext);
   const { setLoader } = useContext(LoaderContext);
-  const { mutate, isLoading } = useMutation<R, S, T>(action, {
+  const mutation = useMutation(action, {
     onError: (e) => {
       console.log(e);
       setAlert({
@@ -58,10 +58,10 @@ const useUpdate = <R extends { _id: string }, S, T>({
   });
 
   useEffect(() => {
-    setLoader({ isLoading });
-  }, [isLoading]);
+    setLoader({ isLoading: mutation.isLoading });
+  }, [mutation.isLoading]);
 
-  return { mutate, isLoading };
+  return mutation;
 };
 
 export default useUpdate;

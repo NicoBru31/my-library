@@ -1,7 +1,6 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import AlertContext from '../contexts/AlertContext';
-import LoaderContext from '../contexts/LoaderContext';
 
 type Props = {
   action: (id: string) => Promise<{ id: string }>;
@@ -11,7 +10,6 @@ type Props = {
 
 const useDelete = <T>({ action, key, subKey }: Props) => {
   const { setAlert } = useContext(AlertContext);
-  const { setLoader } = useContext(LoaderContext);
   const queryClient = useQueryClient();
   const { mutate, isLoading } = useMutation<{ id: string }, T, string>(action, {
     onError: (e) => {
@@ -29,10 +27,6 @@ const useDelete = <T>({ action, key, subKey }: Props) => {
       setAlert({ message: '' });
     },
   });
-
-  useEffect(() => {
-    setLoader({ isLoading });
-  }, [isLoading]);
 
   return { mutate, isLoading };
 };

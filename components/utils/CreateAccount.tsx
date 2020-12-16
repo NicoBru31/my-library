@@ -29,7 +29,7 @@ const CreateAccount = <
     mode: 'onBlur',
     shouldFocusError: true,
   });
-  const { mutate, isLoading } = useUpdate({
+  const { mutateAsync, isLoading } = useUpdate({
     action: create,
     key: field,
     reset,
@@ -42,7 +42,7 @@ const CreateAccount = <
       return setError('confirm', {
         message: 'Les mots de passe doivent être identiques',
       });
-    const { _id } = await mutate(variables as T);
+    const { _id } = await mutateAsync(variables as T);
     await login({ email: variables.email, password: variables.password });
     push({ pathname: `/${field}s/${_id}` });
   };

@@ -19,7 +19,7 @@ const CreateAddress = (props: ModalProps) => {
     mode: 'onBlur',
     shouldFocusError: true,
   });
-  const { mutate, isLoading } = useUpdate<
+  const { mutateAsync, isLoading } = useUpdate<
     AddressType,
     CustomerType,
     CreateAddressType
@@ -31,7 +31,7 @@ const CreateAddress = (props: ModalProps) => {
   });
 
   const save: SubmitHandler<AddressType> = (variables) =>
-    mutate({
+    mutateAsync({
       address: variables,
       fromSeller: !session?.isCustomer,
       id: session?.id,
