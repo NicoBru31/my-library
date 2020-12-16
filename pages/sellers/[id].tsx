@@ -1,27 +1,40 @@
 import { Button } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 import { useContext } from 'react';
-import { useQuery } from 'react-query';
+import { QueryClient, useQuery } from 'react-query';
+import { dehydrate } from 'react-query/hydration';
 import SellerRecos from '../../components/sellers/SellerRecos';
 import SessionContext from '../../contexts/SessionContext';
-import { getRecos, getSeller } from '../../fetch';
+import { getBooks, getReadings, getRecos, getSeller } from '../../fetch';
 import { absoluteUrl } from '../../fetch/utils';
-import { RecoType, SellerPageType, SellerType } from '../../types';
+import { SellerType } from '../../types';
 
 export const getServerSideProps: GetServerSideProps = async ({
   params,
   req,
 }) => {
+  const queryClient = new QueryClient();
   const id = typeof params.id === 'string' ? params.id : params.id[0];
   const url = absoluteUrl(req, 'localhost:3000').origin;
-  const seller: SellerType = await getSeller(url, id);
-  const recos: RecoType[] = await getRecos(url, id);
-  return { props: { recos, seller, id } };
+  const recos = await getRecos(url, id);
+  const readingIds = recos.map((reco) => reco.from?.readings || []).flat(1);
+  const readings = await getReadings(url, readingIds);
+  const bookIds = recos.reduce<string[]>(
+    (ids, reco) => [
+      ...ids,
+      ...(reco.answers?.map(({ books }) => books) || []).flat(1),
+    ],
+    [],
+  );
+  await queryClient.prefetchQuery('seller', () => getSeller(url, id));
+  await queryClient.prefetchQuery('recos', () => recos);
+  await queryClient.prefetchQuery('readings', () => readings);
+  await queryClient.prefetchQuery('books', () => getBooks(url, bookIds));
+  return { props: { dehydratedState: dehydrate(queryClient) } };
 };
 
-const Seller = ({ recos, seller, id }: SellerPageType) => {
-  const { data } = useQuery<SellerType>('seller', { initialData: seller });
-  useQuery<RecoType[]>('recos', { initialData: recos });
+const Seller = () => {
+  const { data } = useQuery<SellerType>('seller');
   const { setSession } = useContext(SessionContext);
 
   const logout = () => setSession({ id: '' });
@@ -29,7 +42,7 @@ const Seller = ({ recos, seller, id }: SellerPageType) => {
   return (
     <>
       <h1 className='H1'>{`Bonjour ${data.name} !`}</h1>
-      <SellerRecos id={id} />
+      <SellerRecos id={data._id} />
       <Button colorScheme='teal' onClick={logout}>
         Me déconnecter
       </Button>

@@ -1,8 +1,8 @@
 import { Button } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
 import { useContext } from 'react';
-import { useQuery } from 'react-query';
+import { QueryClient } from 'react-query';
+import { dehydrate } from 'react-query/hydration';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { introReadings } from '../../components/customer/intro';
 import Readings from '../../components/readings/Readings';
@@ -11,20 +11,19 @@ import SessionContext from '../../contexts/SessionContext';
 import { getCustomer } from '../../fetch';
 import { absoluteUrl } from '../../fetch/utils';
 import useRouting from '../../hooks/useRouting';
-import { CustomerPageType, CustomerType } from '../../types';
 
 export const getServerSideProps: GetServerSideProps = async ({
   params,
   req,
 }) => {
+  const queryClient = new QueryClient();
   const id = typeof params.id === 'string' ? params.id : params.id[0];
   const url = absoluteUrl(req, 'localhost:3000').origin;
-  const customer: CustomerType = await getCustomer(url, id);
-  return { props: { customer, id } };
+  await queryClient.prefetchQuery('customer', () => getCustomer(url, id));
+  return { props: { dehydratedState: dehydrate(queryClient) } };
 };
 
-const Customer = ({ customer }: CustomerPageType) => {
-  useQuery('customer', { initialData: customer });
+const Customer = () => {
   const { setSession } = useContext(SessionContext);
   const { goLogin } = useRouting();
 
@@ -37,7 +36,7 @@ const Customer = ({ customer }: CustomerPageType) => {
     <div className='bg-books'>
       <Intro {...introReadings} />
       <Readings />
-      <div className='flex justify-center my-10'>
+      <div className='flex justify-center py-10'>
         <Button colorScheme='teal' onClick={logout}>
           Me déconnecter
         </Button>

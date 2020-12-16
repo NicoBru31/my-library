@@ -16,6 +16,26 @@ handler.delete<Incoming, Response>(async (req, res) => {
   res.json({ id, success: deletedCount === 1 });
 });
 
+handler.get<Incoming, Response>(async (req, res) => {
+  const ids = req.query.ids.split(',').map((id) => new ObjectId(id));
+  const readings = await req.db
+    .collection('readings')
+    .aggregate([
+      { $match: { _id: { $in: ids } } },
+      {
+        $lookup: {
+          from: 'books',
+          localField: 'bookId',
+          foreignField: '_id',
+          as: 'book',
+        },
+      },
+      { $unwind: '$book' },
+    ])
+    .toArray();
+  res.json(readings);
+});
+
 handler.post<Incoming, Response>(async (req, res) => {
   const { book, customerId, ...body }: ReadingType = JSON.parse(req.body);
   const {

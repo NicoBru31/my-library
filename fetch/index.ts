@@ -12,7 +12,6 @@ import {
   RecoType,
   SellerType,
   UpdateCustomerType,
-  UpdateSellerType,
 } from '../types';
 
 export const createAddress = ({
@@ -67,6 +66,9 @@ export const getBook = (id: string): Promise<BookType> =>
     res.json(),
   );
 
+export const getBooks = (url: string, ids: string[]): Promise<BookType[]> =>
+  fetch(`${url}/api/books?ids=${ids.join(',')}`).then((res) => res.json());
+
 export const getBookByGoogleId = (id: string): Promise<BookType> =>
   fetch(`${window.location.origin}/api/books?googleId=${id}`).then((res) =>
     res.json(),
@@ -80,11 +82,20 @@ export const getGoogleBooks = (query: string): Promise<GoogleBookType[]> =>
 export const getCustomer = (url: string, id: string): Promise<CustomerType> =>
   fetch(`${url}/api/customers?id=${id}`).then((res) => res.json());
 
+export const getReadings = (
+  url: string,
+  ids: string[],
+): Promise<ReadingType[]> =>
+  fetch(`${url}/api/readings?ids=${ids.join(',')}`).then((res) => res.json());
+
 export const getRecos = (url: string, sellerId: string): Promise<RecoType[]> =>
   fetch(`${url}/api/recos?fromSeller=${sellerId}`).then((res) => res.json());
 
 export const getSeller = (url: string, id: string): Promise<SellerType> =>
   fetch(`${url}/api/sellers?id=${id}`).then((res) => res.json());
+
+export const getSellers = (url: string, ids: string[]): Promise<SellerType[]> =>
+  fetch(`${url}/api/sellers?ids=${ids.join(',')}`).then((res) => res.json());
 
 export const login = (
   data: LoginInterface,
@@ -134,8 +145,11 @@ export const updateReco = (
     method: 'PUT',
   }).then((res) => res.json());
 
-export const updateSeller = ({ seller, id }: UpdateSellerType) =>
-  fetch(`${window.location.origin}/api/sellers?id=${id}`, {
+export const updateSeller = ({
+  _id,
+  ...seller
+}: SellerType): Promise<SellerType> =>
+  fetch(`${window.location.origin}/api/sellers?id=${_id}`, {
     body: JSON.stringify(seller),
     method: 'PUT',
   }).then((res) => res.json());

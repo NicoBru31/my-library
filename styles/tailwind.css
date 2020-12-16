@@ -14,8 +14,11 @@
       rgba(242, 243, 244, 0)
     ),
     url(/books.jpg);
-  background-repeat: no-repeat;
+  background-position: top;
+  background-repeat: no-repeat, no-repeat;
   background-size: cover;
+  min-height: calc(100vh - 5rem);
+  width: 100vw;
 }
 
 .bg-book {
@@ -25,8 +28,11 @@
       rgba(242, 243, 244, 0)
     ),
     url(/book.jpg);
-  background-repeat: no-repeat;
+  background-position: top;
+  background-repeat: no-repeat, no-repeat;
   background-size: cover;
+  min-height: calc(100vh - 5rem);
+  width: 100vw;
 }
 
 .burger {

@@ -1,5 +1,5 @@
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
-import { queryCache, useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Button } from '@chakra-ui/react';
 import { updateSeller } from '../../fetch';
 import { SellerType, UpdateSellerType } from '../../types';
@@ -7,17 +7,19 @@ import Input from '../form/Input';
 import fields from './fields';
 
 const SellerUpdate = () => {
+  const queryClient = useQueryClient();
   const { data: seller } = useQuery<SellerType>('seller');
   const { errors, handleSubmit, register } = useForm<SellerType>({
     defaultValues: seller,
     mode: 'onBlur',
     shouldFocusError: true,
   });
-  const [mutate] = useMutation<SellerType, SellerType, UpdateSellerType>(
+  //@ts-expect-error
+  const { mutate } = useMutation<SellerType, SellerType, SellerType>(
     updateSeller,
     {
       onSuccess: (data) =>
-        queryCache.setQueryData('seller', (oldData: SellerType) => ({
+        queryClient.setQueryData('seller', (oldData: SellerType) => ({
           ...oldData,
           ...data,
         })),
@@ -25,7 +27,7 @@ const SellerUpdate = () => {
   );
 
   const save: SubmitHandler<SellerType> = (variables) =>
-    mutate({ seller: variables, id: seller._id });
+    mutate({ ...variables, _id: seller._id });
 
   return (
     <form onSubmit={handleSubmit(save)}>

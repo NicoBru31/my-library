@@ -1,24 +1,32 @@
 import { GetServerSideProps } from 'next';
-import { useQuery } from 'react-query';
+import { QueryClient } from 'react-query';
+import { dehydrate } from 'react-query/hydration';
 import RecoCustomer from '../../../components/recos/RecoCustomer';
 import RecoIntro from '../../../components/recos/RecoIntro';
-import { getCustomer } from '../../../fetch';
+import { getBooks, getCustomer, getSellers } from '../../../fetch';
 import { absoluteUrl } from '../../../fetch/utils';
-import { CustomerPageType, CustomerType } from '../../../types';
 
 export const getServerSideProps: GetServerSideProps = async ({
   params,
   req,
 }) => {
+  const queryClient = new QueryClient();
   const id = typeof params.id === 'string' ? params.id : params.id[0];
   const url = absoluteUrl(req, 'localhost:3000').origin;
-  const customer: CustomerType = await getCustomer(url, id);
-  return { props: { customer, id } };
+  const customer = await getCustomer(url, id);
+  const sellerIds = customer.recos
+    .map((reco) => reco.answers.map((answer) => answer.sellerId))
+    .flat(1);
+  const bookIds = customer.recos
+    .map((reco) => reco.answers.map((answer) => answer.books))
+    .flat(2);
+  await queryClient.prefetchQuery('customer', () => customer);
+  await queryClient.prefetchQuery('books', () => getBooks(url, bookIds));
+  await queryClient.prefetchQuery('sellers', () => getSellers(url, sellerIds));
+  return { props: { dehydratedState: dehydrate(queryClient) } };
 };
 
-const Reco = ({ customer }: CustomerPageType) => {
-  useQuery<CustomerType>('customer', { initialData: customer });
-
+const Reco = () => {
   return (
     <div className='bg-books'>
       <RecoIntro />

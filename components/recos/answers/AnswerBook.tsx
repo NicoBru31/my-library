@@ -1,12 +1,13 @@
 import { ListItem, Skeleton } from '@chakra-ui/react';
-import useBooks from '../../../hooks/useBooks';
+import { useQuery } from 'react-query';
+import { BookType } from '../../../types';
 
 interface Props {
   bookId: string;
 }
 
 const AnswerBook = ({ bookId }: Props) => {
-  const { data } = useBooks();
+  const { data } = useQuery<BookType[]>('books');
   const found = data.find(({ _id }) => _id === bookId);
 
   return (

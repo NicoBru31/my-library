@@ -18,6 +18,7 @@ export interface Incoming extends IncomingMessage {
   db: Db;
   query: {
     id?: string;
+    ids?: string;
     fromSeller?: string;
     googleId?: string;
     type?: 'city' | 'department' | 'zip';

@@ -1,13 +1,17 @@
-import { AppProps } from 'next/dist/next-server/lib/router/router';
 import { ChakraProvider } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
+import { AppProps } from 'next/dist/next-server/lib/router/router';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { Hydrate } from 'react-query/hydration';
 import Layout from '../components/facc/Layout';
-import '../styles/tailwind.css';
-import '../styles/globals.css';
-import SessionProvider from '../providers/SessionProvider';
 import AlertProvider from '../providers/AlertProvider';
 import LoaderProvider from '../providers/LoaderProvider';
-import { motion } from 'framer-motion';
+import SessionProvider from '../providers/SessionProvider';
+import '../styles/globals.css';
+import '../styles/tailwind.css';
 import { pageVariants } from '../variants';
+
+const queryClient = new QueryClient();
 
 const MyApp = ({ Component, pageProps, router }: AppProps) => (
   <motion.div
@@ -16,17 +20,21 @@ const MyApp = ({ Component, pageProps, router }: AppProps) => (
     key={router.route}
     variants={pageVariants}
   >
-    <ChakraProvider>
-      <SessionProvider>
-        <AlertProvider>
-          <LoaderProvider>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </LoaderProvider>
-        </AlertProvider>
-      </SessionProvider>
-    </ChakraProvider>
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState}>
+        <ChakraProvider>
+          <SessionProvider>
+            <AlertProvider>
+              <LoaderProvider>
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              </LoaderProvider>
+            </AlertProvider>
+          </SessionProvider>
+        </ChakraProvider>
+      </Hydrate>
+    </QueryClientProvider>
   </motion.div>
 );
 

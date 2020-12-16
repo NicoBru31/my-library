@@ -1,33 +1,30 @@
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
-import { useQuery } from 'react-query';
+import { QueryClient, useQuery } from 'react-query';
+import { dehydrate } from 'react-query/hydration';
 import SellerUpdate from '../../../components/sellers/SellerUpdate';
 import { getSeller } from '../../../fetch';
 import { absoluteUrl } from '../../../fetch/utils';
 import { SellerType } from '../../../types';
-import { SellerPageType } from '../../../types/index';
 
 export const getServerSideProps: GetServerSideProps = async ({
   params,
   req,
 }) => {
+  const queryClient = new QueryClient();
   const id = typeof params.id === 'string' ? params.id : params.id[0];
-  const seller: SellerType = await getSeller(
-    absoluteUrl(req, 'localhost:3000').origin,
-    id,
-  );
-  return { props: { seller, id } };
+  const url = absoluteUrl(req, 'localhost:3000').origin;
+  await queryClient.prefetchQuery('seller', () => getSeller(url, id));
+  return { props: { dehydratedState: dehydrate(queryClient) } };
 };
 
-const UpdateSeller = ({ id, seller }: SellerPageType) => {
-  const { data } = useQuery<SellerType>('seller', {
-    initialData: seller,
-  });
+const UpdateSeller = () => {
+  const { data } = useQuery<SellerType>('seller');
 
   return (
     <>
       <h1 className='H1'>{`Hello ${data.name} !`}</h1>
-      <Link href={`/sellers/${id}`}>
+      <Link href={`/sellers/${data._id}`}>
         <div className='Link'>Retour</div>
       </Link>
       <SellerUpdate />

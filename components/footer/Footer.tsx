@@ -14,7 +14,7 @@ const Footer = () => {
           <Link href='/faq'>FAQ</Link>
         </motion.div>
       </div>
-      <div>© 2021 Nicolas Bruère</div>
+      <div>{`© ${new Date().getFullYear()} Nicolas Bruère`}</div>
     </div>
   );
 };

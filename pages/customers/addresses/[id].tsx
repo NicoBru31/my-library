@@ -1,27 +1,27 @@
 import { GetServerSideProps } from 'next';
-import { useQuery } from 'react-query';
+import { QueryClient, useQuery } from 'react-query';
+import { dehydrate } from 'react-query/hydration';
 import AddAddress from '../../../components/addresses/AddAddress';
-import AddressGoReco from '../../../components/addresses/AddressGoReco';
 import Address from '../../../components/addresses/Address';
+import AddressGoReco from '../../../components/addresses/AddressGoReco';
 import Intro from '../../../components/utils/Intro';
 import { getCustomer } from '../../../fetch';
 import { absoluteUrl } from '../../../fetch/utils';
-import { CustomerPageType, CustomerType } from '../../../types';
+import { CustomerType } from '../../../types';
 
 export const getServerSideProps: GetServerSideProps = async ({
   params,
   req,
 }) => {
+  const queryClient = new QueryClient();
   const id = typeof params.id === 'string' ? params.id : params.id[0];
   const url = absoluteUrl(req, 'localhost:3000').origin;
-  const customer: CustomerType = await getCustomer(url, id);
-  return { props: { customer, id } };
+  await queryClient.prefetchQuery('customer', () => getCustomer(url, id));
+  return { props: { dehydratedState: dehydrate(queryClient) } };
 };
 
-const Addresses = ({ customer }: CustomerPageType) => {
-  const { data } = useQuery<CustomerType>('customer', {
-    initialData: customer,
-  });
+const Addresses = () => {
+  const { data } = useQuery<CustomerType>('customer');
 
   return (
     <div className='bg-book'>

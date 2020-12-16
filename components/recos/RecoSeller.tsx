@@ -10,6 +10,7 @@ import { GrAlert } from 'react-icons/gr';
 import { useQuery } from 'react-query';
 import { RecoType, SellerType } from '../../types';
 import CreateAnswer from './answers/CreateAnswer';
+import RecoReadings from './RecoReadings';
 
 export interface RecoSellerProps extends RecoType {
   sellerId: string;
@@ -30,6 +31,7 @@ const RecoSeller = (props: RecoSellerProps) => {
         <AccordionIcon />
       </AccordionButton>
       <AccordionPanel>
+        <RecoReadings {...props} />
         <CreateAnswer {...props} />
       </AccordionPanel>
     </AccordionItem>

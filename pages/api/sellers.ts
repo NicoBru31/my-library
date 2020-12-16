@@ -9,18 +9,28 @@ const handler = nextConnect();
 handler.use(middleware);
 
 handler.get<Incoming, Response>(async (req, res) => {
-  const agg = await req.db.collection('sellers').aggregate([
-    { $match: { _id: new ObjectId(req.query.id) } },
-    {
-      $lookup: {
-        from: 'addresses',
-        localField: 'addresses',
-        foreignField: '_id',
-        as: 'addresses',
+  let match = {};
+  if (req.query.id) match = { _id: new ObjectId(req.query.id) };
+  else if (req.query.ids) {
+    const ids = req.query.ids.split(',').map((id) => new ObjectId(id));
+    match = { _id: { $in: ids } };
+  }
+  const agg = await req.db
+    .collection('sellers')
+    .aggregate([
+      { $match: match },
+      {
+        $lookup: {
+          from: 'addresses',
+          localField: 'addresses',
+          foreignField: '_id',
+          as: 'addresses',
+        },
       },
-    },
-  ]);
-  res.json(await agg.next());
+    ])
+    .toArray();
+  if (req.query.id) res.json(agg[0]);
+  else res.json(agg);
 });
 
 handler.post<Incoming, Response>(async (req, res) => {

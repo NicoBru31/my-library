@@ -1,13 +1,18 @@
-import { queryCache, useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { getBook } from '../fetch';
 import { BookType } from '../types';
 
 const useBooks = () => {
-  const { data } = useQuery<BookType[]>('books', { initialData: [] });
+  const queryClient = useQueryClient();
+  const { data } = useQuery<BookType[]>('books');
 
   const fetchBooks = (...books: string[]) =>
-    Promise.all(books.filter((id) => id !== '').map(getBook)).then((fetched) =>
-      queryCache.setQueryData<BookType[]>('books', (oldData) => [
+    Promise.all(
+      books
+        .filter((id) => id !== '' && !data?.find(({ _id }) => _id === id))
+        .map(getBook),
+    ).then((fetched) =>
+      queryClient.setQueryData<BookType[]>('books', (oldData) => [
         ...fetched,
         ...oldData,
       ]),

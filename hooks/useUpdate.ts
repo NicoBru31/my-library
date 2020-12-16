@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { queryCache, useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import AlertContext from '../contexts/AlertContext';
 import LoaderContext from '../contexts/LoaderContext';
 
@@ -37,9 +37,10 @@ const useUpdate = <R extends { _id: string }, S, T>({
   reset,
   subKey,
 }: Props<R, T>) => {
+  const queryClient = useQueryClient();
   const { setAlert } = useContext(AlertContext);
   const { setLoader } = useContext(LoaderContext);
-  const [mutate, { isLoading }] = useMutation<R, S, T>(action, {
+  const { mutate, isLoading } = useMutation<R, S, T>(action, {
     onError: (e) => {
       console.log(e);
       setAlert({
@@ -48,7 +49,7 @@ const useUpdate = <R extends { _id: string }, S, T>({
       });
     },
     onSuccess: (data) => {
-      queryCache.setQueryData(key, (oldData: S) =>
+      queryClient.setQueryData(key, (oldData: S) =>
         update(oldData, data, isUpdate, subKey),
       );
       setAlert({ message: '' });

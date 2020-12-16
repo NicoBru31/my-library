@@ -27,10 +27,21 @@ handler.use(async (req, res, next) => {
 });
 
 handler.get<Incoming, Response>(async (req, res) => {
-  const book = await req.db
-    .collection('books')
-    .findOne({ _id: new ObjectId(req.query.id) });
-  res.json(book);
+  if (req.query.id) {
+    const book = await req.db
+      .collection('books')
+      .findOne({ _id: new ObjectId(req.query.id) });
+    return res.json(book);
+  } else if (req.query.ids) {
+    const books = await req.db
+      .collection('books')
+      .find({
+        _id: { $in: req.query.ids.split(',').map((id) => new ObjectId(id)) },
+      })
+      .toArray();
+    return res.json(books);
+  }
+  return res.json([]);
 });
 
 export default handler;
