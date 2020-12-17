@@ -17,7 +17,7 @@ a {
 }
 
 button:focus {
-  outline: none;
+  outline: none !important;
 }
 
 .fadeOut {
@@ -31,4 +31,12 @@ button:focus {
 
 .slide {
   background: none !important;
+}
+
+.white-stroke path {
+  stroke: white;
+}
+
+.white-fill path {
+  fill: white;
 }

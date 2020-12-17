@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   Popover,
   PopoverArrow,
@@ -10,28 +11,29 @@ import {
 } from '@chakra-ui/react';
 
 interface Props {
-  comment: string;
+  headerText: string;
+  trigger?: string;
+  full: string;
 }
 
-const ReadingPopover = ({ comment }: Props) => (
+const PopoverText = ({ headerText, full, trigger = 'voir tout' }: Props) => (
   <Popover>
     <PopoverTrigger>
       <span className='text-blue-800 hover:opacity-50 cursor-pointer'>
-        {' '}
-        voir tout
+        {trigger}
       </span>
     </PopoverTrigger>
     <Portal>
       <PopoverContent borderWidth={2} borderColor='black' borderStyle='solid'>
         <PopoverArrow />
         <PopoverHeader bg='#38a169' className='text-white'>
-          Commentaire complet :
+          {headerText}
         </PopoverHeader>
         <PopoverCloseButton color='white' />
-        <PopoverBody>{comment}</PopoverBody>
+        <PopoverBody>{full}</PopoverBody>
       </PopoverContent>
     </Portal>
   </Popover>
 );
 
-export default ReadingPopover;
+export default PopoverText;

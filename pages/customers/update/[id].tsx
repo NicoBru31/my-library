@@ -24,7 +24,7 @@ const UpdateCustomer = () => {
         text='Ces informations restent strictement confidentielles, elles ne sont transmises à personne.'
         title='Modifier mon compte'
       />
-      <div className='flex justify-center'>
+      <div className='flex justify-center pb-4'>
         <CustomerUpdate />
       </div>
     </div>

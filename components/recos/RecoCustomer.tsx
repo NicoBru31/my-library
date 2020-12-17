@@ -1,13 +1,21 @@
-import { Accordion, ExpandedIndex } from '@chakra-ui/react';
+import { ExpandedIndex } from '@chakra-ui/react';
 import dayjs from 'dayjs';
+import { motion } from 'framer-motion';
+import { useContext } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
+import RecoContext from '../../contexts/RecoContext';
 import { patchReco } from '../../fetch';
+import useWindowSize from '../../hooks/useWindowSize';
 import { CustomerType } from '../../types';
-import RecoItem from './RecoItem';
+import { slide } from '../../variants';
+import RecoDetails from './details/RecoDetails';
+import RecoListItem from './RecoListItem';
 
 const RecoCustomer = () => {
   const queryClient = useQueryClient();
   const { data } = useQuery<CustomerType>('customer');
+  const { width } = useWindowSize();
+  const { reco } = useContext(RecoContext);
 
   if (!data?.recos.length) return null;
 
@@ -28,15 +36,23 @@ const RecoCustomer = () => {
   return (
     <div className='px-4'>
       <div>Mes recos :</div>
-      <Accordion allowToggle onChange={sendIsNotified}>
-        {data?.recos
-          .sort((a, b) =>
-            dayjs(b.createdAt).isAfter(dayjs(a.createdAt)) ? 1 : -1,
-          )
-          .map((reco) => (
-            <RecoItem {...reco} key={reco._id} />
-          ))}
-      </Accordion>
+      <div className='flex justify-between mx-4'>
+        <motion.div
+          animate={reco ? 'hidden' : 'shown'}
+          initial={width > 768 ? 'hidden' : 'shown'}
+          style={{ pointerEvents: reco && width < 768 ? 'none' : 'auto' }}
+          variants={slide(width > 768 ? '25%' : '100%')}
+        >
+          {data?.recos
+            .sort((a, b) =>
+              dayjs(b.createdAt).isAfter(dayjs(a.createdAt)) ? 1 : -1,
+            )
+            .map((reco) => (
+              <RecoListItem {...reco} key={reco._id} />
+            ))}
+        </motion.div>
+        <RecoDetails />
+      </div>
     </div>
   );
 };

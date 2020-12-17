@@ -10,7 +10,7 @@ interface Props extends Omit<MenuItemProps, 'match'> {
 
 const MenuItem = ({ isActive, href, Icon, title }: Props) => (
   <motion.div
-    className={`Link${isActive ? ' opacity-50' : ''}`}
+    className={`Link${isActive ? ' opacity-50' : ''} hover:opacity-50`}
     whileHover={scale}
   >
     {Icon}

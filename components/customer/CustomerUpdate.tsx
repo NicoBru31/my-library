@@ -29,7 +29,10 @@ const CustomerUpdate = () => {
     mutate({ customer: variables, id: customer._id });
 
   return (
-    <form className='card-no-ml w-auto' onSubmit={handleSubmit(save)}>
+    <form
+      className='card-no-ml w-auto shadow-2xl'
+      onSubmit={handleSubmit(save)}
+    >
       {fields.map((field) => (
         <Input
           {...field}

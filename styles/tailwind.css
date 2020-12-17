@@ -37,7 +37,7 @@
 
 .burger {
   @apply cursor-pointer;
-  @apply absolute;
+  @apply fixed;
   right: 2rem;
   height: 40px;
   width: 40px;
@@ -160,14 +160,19 @@
   @apply h-screen;
   @apply fixed;
   @apply z-20;
+  @apply rounded;
   padding: 30px;
   padding-top: 50px;
   top: 0;
   width: 100vw;
+  -webkit-box-shadow: -5px 5px 5px 0px rgba(0, 0, 0, 0.41);
+  -moz-box-shadow: -5px 5px 5px 0px rgba(0, 0, 0, 0.41);
+  box-shadow: -5px 5px 5px 0px rgba(0, 0, 0, 0.41);
 }
 
 @media screen and (min-width: 768px) {
   .menu-pane {
+    @apply h-auto;
     right: -40vw;
     width: 40vw;
   }

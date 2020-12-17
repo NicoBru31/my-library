@@ -3,7 +3,6 @@ import { GetServerSideProps } from 'next';
 import { useContext } from 'react';
 import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { introReadings } from '../../components/customer/intro';
 import Readings from '../../components/readings/Readings';
 import Intro from '../../components/utils/Intro';

@@ -6,9 +6,11 @@ import { Hydrate } from 'react-query/hydration';
 import Layout from '../components/facc/Layout';
 import AlertProvider from '../providers/AlertProvider';
 import LoaderProvider from '../providers/LoaderProvider';
+import RecoProvider from '../providers/RecoProvider';
 import SessionProvider from '../providers/SessionProvider';
 import '../styles/globals.css';
 import '../styles/tailwind.css';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { pageVariants } from '../variants';
 
 const queryClient = new QueryClient();
@@ -26,9 +28,11 @@ const MyApp = ({ Component, pageProps, router }: AppProps) => (
           <SessionProvider>
             <AlertProvider>
               <LoaderProvider>
-                <Layout>
-                  <Component {...pageProps} />
-                </Layout>
+                <RecoProvider>
+                  <Layout>
+                    <Component {...pageProps} />
+                  </Layout>
+                </RecoProvider>
               </LoaderProvider>
             </AlertProvider>
           </SessionProvider>
