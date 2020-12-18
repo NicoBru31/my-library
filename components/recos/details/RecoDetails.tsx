@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import * as React from 'react';
 import RecoContext from '../../../contexts/RecoContext';
 import useWindowSize from '../../../hooks/useWindowSize';
-import { hidden, slide } from '../../../variants';
+import { hidden, slideRight, slideRightMd } from '../../../variants';
 import RecoAnswers from './RecoAnswers';
 import RecoHeader from './RecoHeader';
 
@@ -19,13 +19,14 @@ const RecoDetails = () => {
   return (
     <motion.div
       animate={animate}
-      initial={width < 768 ? 'hidden' : 'shown'}
+      className='relative md:w-2/3'
+      initial='hidden'
       style={{ height: 'fit-content' }}
-      variants={slide(width > 768 ? '67%' : '100%')}
+      variants={width < 768 ? slideRight : slideRightMd}
     >
       <motion.div
         animate={animate}
-        className='bg-green-800 w-0 rounded h-0 my-4'
+        className='bg-green-800 rounded h-0 my-4 w-full'
         initial='hidden'
         variants={hidden}
       >

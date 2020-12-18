@@ -7,7 +7,7 @@ import RecoContext from '../../contexts/RecoContext';
 import { patchReco } from '../../fetch';
 import useWindowSize from '../../hooks/useWindowSize';
 import { CustomerType } from '../../types';
-import { slide } from '../../variants';
+import { slideLeft } from '../../variants';
 import RecoDetails from './details/RecoDetails';
 import RecoListItem from './RecoListItem';
 
@@ -36,12 +36,24 @@ const RecoCustomer = () => {
   return (
     <div className='px-4'>
       <div>Mes recos :</div>
-      <div className='flex justify-between mx-4'>
+      <div className='hidden md:flex justify-between mx-4'>
+        <div className='w-1/4'>
+          {data?.recos
+            .sort((a, b) =>
+              dayjs(b.createdAt).isAfter(dayjs(a.createdAt)) ? 1 : -1,
+            )
+            .map((reco) => (
+              <RecoListItem {...reco} key={reco._id} />
+            ))}
+        </div>
+        <RecoDetails />
+      </div>
+      <div className='md:hidden flex justify-between mx-4'>
         <motion.div
           animate={reco ? 'hidden' : 'shown'}
-          initial={width > 768 ? 'hidden' : 'shown'}
-          style={{ pointerEvents: reco && width < 768 ? 'none' : 'auto' }}
-          variants={slide(width > 768 ? '25%' : '100%')}
+          className='relative'
+          initial='shown'
+          variants={slideLeft}
         >
           {data?.recos
             .sort((a, b) =>

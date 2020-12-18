@@ -8,7 +8,7 @@ const RecoAnswers = ({ answers = [] }: RecoType) => (
     {answers.map((answer) => (
       <div className='flex justify-between' key={answer.sellerId}>
         <RecoAnswer {...answer} />
-        <RecoAnswerMessage message={answer.message} />
+        {answer.message && <RecoAnswerMessage message={answer.message} />}
       </div>
     ))}
   </div>

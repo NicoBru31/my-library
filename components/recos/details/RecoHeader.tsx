@@ -38,7 +38,7 @@ const RecoHeader = ({
       </div>
       {withClose && (
         <GrFormClose
-          className='white-stroke mr-4 mt-4 cursor-pointer'
+          className='white-stroke mr-4 mt-4 cursor-pointer hover:opacity-50'
           onClick={close}
           size={40}
         />

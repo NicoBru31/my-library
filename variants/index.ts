@@ -41,13 +41,20 @@ export const scaleShake: TargetAndTransition = {
   scale: [1, 1.2],
 };
 
-export const slide = (showWidth: string): Variants => ({
-  hidden: {
-    opacity: showWidth === '100%' ? 0 : 1,
-    width: showWidth === '100%' ? 0 : showWidth,
-  },
-  shown: { opacity: 1, width: showWidth },
-});
+export const slideLeft = {
+  hidden: { left: '-100vw', width: 0 },
+  shown: { left: 0, width: '100%' },
+};
+
+export const slideRight = {
+  hidden: { left: '200vw', width: 0 },
+  shown: { left: 0, width: '100%' },
+};
+
+export const slideRightMd = {
+  hidden: { left: '200vw' },
+  shown: { left: 0 },
+};
 
 export const hoverOpacity: string | TargetAndTransition = { opacity: 0.5 };
 
