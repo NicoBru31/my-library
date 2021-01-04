@@ -29,11 +29,6 @@ export interface CustomerType {
   recos: RecoType[];
 }
 
-export interface CustomerPageType {
-  customer: CustomerType;
-  id: string;
-}
-
 export type Field<T> = (
   | Omit<InputProps, 'name'>
   | Omit<TextareaProps, 'name'>
@@ -71,6 +66,7 @@ export interface RecoType {
     type?: 'city' | 'department' | 'zip';
   };
   isClosed: boolean;
+  name: string;
   notified?: string[];
 }
 
@@ -78,14 +74,10 @@ export interface SellerType {
   _id: string;
   addresses: AddressType[];
   confirm: string;
-  hash: string;
   email: string;
+  hash: string;
   name: string;
   password: string;
-}
-
-export interface SellerPageType {
-  recos: RecoType[];
-  seller: SellerType;
-  id: string;
+  phone: string;
+  site: string;
 }

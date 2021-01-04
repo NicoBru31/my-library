@@ -8,6 +8,7 @@ import RecoSeller from './RecoSeller';
 
 const RecoAnswer = (answer: RecoBooksType) => {
   const { width } = useWindowSize();
+
   return (
     <div className='w-full md:w-3/4'>
       <RecoSeller {...answer} />

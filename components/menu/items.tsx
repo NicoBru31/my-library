@@ -40,4 +40,13 @@ export const customerItems: MenuItemProps[] = [
   },
 ];
 
+export const sellerItems: MenuItemProps[] = [
+  {
+    href: '/type/id',
+    Icon: <CgUserList className='mr-2' size={20} />,
+    match: /\/sellers\/\[id\]$/,
+    title: 'Les recos',
+  },
+];
+
 export default items;

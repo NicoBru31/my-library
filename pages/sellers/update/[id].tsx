@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import Link from 'next/link';
 import { QueryClient, useQuery } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 import SellerUpdate from '../../../components/sellers/SellerUpdate';
@@ -24,9 +23,6 @@ const UpdateSeller = () => {
   return (
     <>
       <h1 className='H1'>{`Hello ${data.name} !`}</h1>
-      <Link href={`/sellers/${data._id}`}>
-        <div className='Link'>Retour</div>
-      </Link>
       <SellerUpdate />
     </>
   );

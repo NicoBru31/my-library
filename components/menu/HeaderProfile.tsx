@@ -1,14 +1,14 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import useSession from '../../hooks/useSession';
 import { scale } from '../../variants';
 
 const HeaderProfile = () => {
   const { push } = useRouter();
   const session = useSession();
-  const [src, setSrc] = useState(
+  const [src, setSrc] = React.useState(
     session?.isCustomer ? '/reader.svg' : '/seller.svg',
   );
 
@@ -18,7 +18,7 @@ const HeaderProfile = () => {
     else if (!session.isCustomer) push({ pathname: `/sellers/${session.id}` });
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (session?.id)
       setSrc(session?.isCustomer ? '/reader.svg' : '/seller.svg');
   }, [session, setSrc]);

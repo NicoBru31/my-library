@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import useSession from '../../hooks/useSession';
 import { menuItemVariants } from '../../variants';
-import items, { customerItems } from './items';
+import items, { customerItems, sellerItems } from './items';
 import MenuItem from './MenuItem';
 
 interface Props {
@@ -25,9 +25,20 @@ const MenuItems = ({ type }: Props) => {
           key={href}
         />
       ))}
-      {type === 'customers' && (
+      {type === 'customers' ? (
         <>
           {customerItems.map(({ href, match, ...item }) => (
+            <MenuItem
+              {...item}
+              href={href.replace(/type/, type).replace(/id/, session.id)}
+              isActive={route.match(match)?.length > 0}
+              key={href}
+            />
+          ))}
+        </>
+      ) : (
+        <>
+          {sellerItems.map(({ href, match, ...item }) => (
             <MenuItem
               {...item}
               href={href.replace(/type/, type).replace(/id/, session.id)}

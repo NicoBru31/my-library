@@ -6,16 +6,16 @@ import { opacityVariants, scaleShake } from '../../variants';
 import RecoHeader from './details/RecoHeader';
 
 const RecoListItem = (props: RecoType) => {
-  const { reco, setReco } = React.useContext(RecoContext);
+  const { reco, changeReco } = React.useContext(RecoContext);
 
-  const changeReco = () => setReco(props);
+  const updateReco = () => changeReco(props);
 
   return (
     <motion.div
       animate={reco?._id === props._id ? 'active' : 'default'}
       className='rounded cursor-pointer bg-green-800 shadow-2xl my-4'
       initial='default'
-      onClick={changeReco}
+      onClick={updateReco}
       variants={opacityVariants}
       whileHover={reco?._id !== props._id && scaleShake}
     >

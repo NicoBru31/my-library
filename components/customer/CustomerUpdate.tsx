@@ -1,6 +1,8 @@
+import * as React from 'react';
 import { Button } from '@chakra-ui/react';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
+import AlertContext from '../../contexts/AlertContext';
 import { updateCustomer } from '../../fetch';
 import useUpdate from '../../hooks/useUpdate';
 import { CustomerType, UpdateCustomerType } from '../../types';
@@ -8,8 +10,9 @@ import Input from '../form/Input';
 import fields from './fields';
 
 const CustomerUpdate = () => {
+  const { setAlert } = React.useContext(AlertContext);
   const { data: customer } = useQuery<CustomerType>('customer');
-  const { errors, handleSubmit, register, reset } = useForm<CustomerType>({
+  const { errors, handleSubmit, register } = useForm<CustomerType>({
     defaultValues: customer,
     mode: 'onBlur',
     shouldFocusError: true,
@@ -22,7 +25,11 @@ const CustomerUpdate = () => {
     action: updateCustomer,
     isUpdate: true,
     key: 'customer',
-    reset,
+    reset: () =>
+      setAlert({
+        message: 'Vos informations ont bien été enregistrées',
+        status: 'success',
+      }),
   });
 
   const save: SubmitHandler<CustomerType> = (variables) =>

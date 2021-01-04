@@ -20,9 +20,11 @@ export const getServerSideProps: GetServerSideProps = async ({
   const bookIds = customer.recos
     .map((reco) => reco.answers.map((answer) => answer.books))
     .flat(2);
-  await queryClient.prefetchQuery('customer', () => customer);
-  await queryClient.prefetchQuery('books', () => getBooks(url, bookIds));
-  await queryClient.prefetchQuery('sellers', () => getSellers(url, sellerIds));
+  await Promise.all([
+    queryClient.prefetchQuery('customer', () => customer),
+    queryClient.prefetchQuery('books', () => getBooks(url, bookIds)),
+    queryClient.prefetchQuery('sellers', () => getSellers(url, sellerIds)),
+  ]);
   return { props: { dehydratedState: dehydrate(queryClient) } };
 };
 

@@ -1,30 +1,33 @@
-import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Button } from '@chakra-ui/react';
+import { useContext } from 'react';
+import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
+import { useQuery } from 'react-query';
+import AlertContext from '../../contexts/AlertContext';
 import { updateSeller } from '../../fetch';
-import { SellerType, UpdateSellerType } from '../../types';
+import useUpdate from '../../hooks/useUpdate';
+import { SellerType } from '../../types';
 import Input from '../form/Input';
 import fields from './fields';
 
 const SellerUpdate = () => {
-  const queryClient = useQueryClient();
+  const { setAlert } = useContext(AlertContext);
   const { data: seller } = useQuery<SellerType>('seller');
   const { errors, handleSubmit, register } = useForm<SellerType>({
     defaultValues: seller,
     mode: 'onBlur',
     shouldFocusError: true,
   });
-  //@ts-expect-error
-  const { mutate } = useMutation<SellerType, SellerType, SellerType>(
-    updateSeller,
-    {
-      onSuccess: (data) =>
-        queryClient.setQueryData('seller', (oldData: SellerType) => ({
-          ...oldData,
-          ...data,
-        })),
-    },
-  );
+
+  const { mutate } = useUpdate<SellerType, SellerType, SellerType>({
+    action: updateSeller,
+    key: 'seller',
+    reset: () =>
+      setAlert({
+        message: 'Vos informations ont bien été enregistrées',
+        status: 'success',
+      }),
+    isUpdate: true,
+  });
 
   const save: SubmitHandler<SellerType> = (variables) =>
     mutate({ ...variables, _id: seller._id });

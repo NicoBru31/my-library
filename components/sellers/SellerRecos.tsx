@@ -1,43 +1,28 @@
-import { Accordion, ExpandedIndex } from '@chakra-ui/react';
+import * as React from 'react';
 import dayjs from 'dayjs';
-import { useQuery, useQueryClient } from 'react-query';
-import { patchReco } from '../../fetch';
+import { useQuery } from 'react-query';
 import { RecoType } from '../../types';
-import RecoSeller from '../recos/RecoSeller';
+import RecoDetails from '../recos/details/RecoDetails';
+import RecoListItem from '../recos/RecoListItem';
 
-interface Props {
-  id: string;
-}
-
-const SellerRecos = ({ id }: Props) => {
+const SellerRecos = () => {
   const { data: recos } = useQuery<RecoType[]>('recos');
-  const queryClient = useQueryClient();
-
-  const sendIsNotified = (index: ExpandedIndex) => {
-    if (typeof index === 'number') {
-      index >= 0 &&
-        patchReco(id, recos[index]._id).then(({ notified }) =>
-          queryClient.setQueryData<RecoType[]>('recos', () =>
-            recos.map((reco, i) =>
-              index === i ? { ...reco, notified } : reco,
-            ),
-          ),
-        );
-    } else index.forEach(sendIsNotified);
-  };
 
   return (
     <div>
-      Les recos en attente :
-      <Accordion allowToggle colorScheme='teal' onChange={sendIsNotified}>
-        {recos
-          ?.sort((a, b) =>
-            dayjs(b.createdAt).isAfter(dayjs(a.createdAt)) ? 1 : -1,
-          )
-          ?.map((reco) => (
-            <RecoSeller {...reco} key={reco._id} sellerId={id} />
-          ))}
-      </Accordion>
+      Les recos :
+      <div className='hidden md:flex justify-between mx-4'>
+        <div className='w-1/4'>
+          {recos
+            .sort((a, b) =>
+              dayjs(b.createdAt).isAfter(dayjs(a.createdAt)) ? 1 : -1,
+            )
+            .map((reco) => (
+              <RecoListItem {...reco} key={reco._id} />
+            ))}
+        </div>
+        <RecoDetails />
+      </div>
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import Link from 'next/link';
 import { QueryClient, useQuery } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 import AddAddress from '../../../components/addresses/AddAddress';
@@ -20,22 +19,18 @@ export const getServerSideProps: GetServerSideProps = async ({
 };
 
 const Addresses = () => {
-  const { data } = useQuery<SellerType>('sellers');
+  const { data } = useQuery<SellerType>('seller');
 
   return (
     <>
       <h1 className='H1'>Mon adresse</h1>
-      <Link href={`/sellers/${data._id}`}>
-        <div className='Link'>Retour</div>
-      </Link>
-      {data?.addresses[0] ? (
-        <Address {...data.addresses[0]} />
-      ) : (
-        <>
-          <h2>Créer une adresse</h2>
+      <div className='md:grid grid-cols-3 items-center flex-wrap'>
+        {data?.addresses.length === 0 ? (
           <AddAddress />
-        </>
-      )}
+        ) : (
+          <Address {...data?.addresses[0]} />
+        )}
+      </div>
     </>
   );
 };

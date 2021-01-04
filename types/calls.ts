@@ -34,8 +34,3 @@ export interface UpdateCustomerType {
   customer: CustomerType;
   id: string;
 }
-
-export interface UpdateSellerType {
-  seller: SellerType;
-  id: string;
-}

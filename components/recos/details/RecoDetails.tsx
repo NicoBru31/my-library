@@ -14,7 +14,7 @@ const RecoDetails = () => {
   React.useEffect(() => {
     if (reco) setAnimate('shown');
     else setAnimate('hidden');
-  }, [reco]);
+  }, [reco, setAnimate]);
 
   return (
     <motion.div

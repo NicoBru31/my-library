@@ -18,7 +18,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   const url = absoluteUrl(req, 'localhost:3000').origin;
   const recos = await getRecos(url, id);
   const readingIds = recos.map((reco) => reco.from?.readings || []).flat(1);
-  const readings = await getReadings(url, readingIds);
   const bookIds = recos.reduce<string[]>(
     (ids, reco) => [
       ...ids,
@@ -26,10 +25,12 @@ export const getServerSideProps: GetServerSideProps = async ({
     ],
     [],
   );
-  await queryClient.prefetchQuery('seller', () => getSeller(url, id));
-  await queryClient.prefetchQuery('recos', () => recos);
-  await queryClient.prefetchQuery('readings', () => readings);
-  await queryClient.prefetchQuery('books', () => getBooks(url, bookIds));
+  await Promise.all([
+    queryClient.prefetchQuery('seller', () => getSeller(url, id)),
+    queryClient.prefetchQuery('recos', () => recos),
+    queryClient.prefetchQuery('readings', () => getReadings(url, readingIds)),
+    queryClient.prefetchQuery('books', () => getBooks(url, bookIds)),
+  ]);
   return { props: { dehydratedState: dehydrate(queryClient) } };
 };
 
@@ -42,7 +43,7 @@ const Seller = () => {
   return (
     <>
       <h1 className='H1'>{`Bonjour ${data.name} !`}</h1>
-      <SellerRecos id={data._id} />
+      <SellerRecos />
       <Button colorScheme='teal' onClick={logout}>
         Me déconnecter
       </Button>
