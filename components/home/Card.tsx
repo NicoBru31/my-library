@@ -1,9 +1,9 @@
-import * as React from 'react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { CardInterface } from './cards';
+import * as React from 'react';
 import { scaleShake } from '../../variants';
+import { CardInterface } from './cards';
 
 const Card = ({ alt, img, search, text, title }: CardInterface) => (
   <Link href={{ pathname: '/login', search }} data-testid='link-element'>

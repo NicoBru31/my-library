@@ -8,9 +8,10 @@ import SearchReadingItem from './SearchReadingItem';
 
 interface Props {
   onSelect: (item: GoogleBookType) => void;
+  theme?: 'white';
 }
 
-const SearchReading = ({ onSelect }: Props) => {
+const SearchReading = ({ onSelect, theme }: Props) => {
   const [books, setBooks] = React.useState<GoogleBookType[]>([]);
   const [search, setSearch] = React.useState('');
   const { loader } = React.useContext(LoaderContext);
@@ -46,7 +47,12 @@ const SearchReading = ({ onSelect }: Props) => {
       onChange={change}
       onSelect={select}
       renderInput={(props) => (
-        <Input {...props} placeholder='Chercher une oeuvre' />
+        <Input
+          {...props}
+          backgroundColor={theme || 'inherit'}
+          color={theme === 'white' ? 'black' : 'inherit'}
+          placeholder='Chercher une oeuvre'
+        />
       )}
       renderItem={(item: GoogleBookType) => (
         <div key={item.id}>

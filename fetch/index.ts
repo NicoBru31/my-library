@@ -27,6 +27,12 @@ export const createAddress = ({
     },
   ).then((res) => res.json());
 
+export const createBook = (book: GoogleBookType): Promise<BookType> =>
+  fetch(`${window.location.origin}/api/books`, {
+    body: JSON.stringify(book),
+    method: 'POST',
+  }).then((res) => res.json());
+
 export const createCustomer = (customer: CustomerType) =>
   fetch(`${window.location.origin}/api/customers`, {
     body: JSON.stringify(customer),

@@ -17,7 +17,9 @@ const RecoAnswers = ({ answers = [] }: RecoType) => {
           ) : (
             <RecoAnswerSeller {...answer} />
           )}
-          {answer.message && <RecoAnswerMessage message={answer.message} />}
+          {answer.message && session.isCustomer && (
+            <RecoAnswerMessage message={answer.message} />
+          )}
         </div>
       ))}
     </div>
