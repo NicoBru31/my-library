@@ -1,15 +1,12 @@
-import { Button } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
-import { useContext } from 'react';
 import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 import { introReadings } from '../../components/customer/intro';
 import Readings from '../../components/readings/Readings';
 import Intro from '../../components/utils/Intro';
-import SessionContext from '../../contexts/SessionContext';
+import Logout from '../../components/utils/Logout';
 import { getCustomer } from '../../fetch';
 import { absoluteUrl } from '../../fetch/utils';
-import useRouting from '../../hooks/useRouting';
 
 export const getServerSideProps: GetServerSideProps = async ({
   params,
@@ -22,26 +19,14 @@ export const getServerSideProps: GetServerSideProps = async ({
   return { props: { dehydratedState: dehydrate(queryClient) } };
 };
 
-const Customer = () => {
-  const { setSession } = useContext(SessionContext);
-  const { goLogin } = useRouting();
-
-  const logout = () => {
-    setSession({ id: '' });
-    goLogin();
-  };
-
-  return (
-    <div className='bg-books'>
-      <Intro {...introReadings} />
-      <Readings />
-      <div className='flex justify-center py-10'>
-        <Button colorScheme='teal' onClick={logout}>
-          Me déconnecter
-        </Button>
-      </div>
+const Customer = () => (
+  <div className='bg-books'>
+    <Intro {...introReadings} />
+    <Readings />
+    <div className='flex justify-center py-10'>
+      <Logout />
     </div>
-  );
-};
+  </div>
+);
 
 export default Customer;

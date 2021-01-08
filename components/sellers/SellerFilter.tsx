@@ -19,7 +19,7 @@ const SellerFilter = ({ setRecos }: Props) => {
   React.useEffect(() => {
     setRecos(() => {
       if (selected === 'DONE') return filterRecoByDone(data, session.id);
-      return filterRecoByWaiting(data, session.id);
+      return filterRecoByWaiting(data, session?.id);
     });
   }, [selected, setRecos, session, data]);
 

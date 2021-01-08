@@ -5,7 +5,7 @@ import { RecoType } from '../../types';
 import RecoDetails from '../recos/details/RecoDetails';
 import RecoListItem from '../recos/RecoListItem';
 import SellerFilter from './SellerFilter';
-// TODO : voir la liste des lectures avec uniquement les notes / 20
+
 const SellerRecos = () => {
   const { data } = useQuery<RecoType[]>('recos');
   const [recos, setRecos] = React.useState<RecoType[]>(data);

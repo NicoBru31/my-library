@@ -2,6 +2,7 @@ import { GetServerSideProps } from 'next';
 import { QueryClient, useQuery } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 import SellerUpdate from '../../../components/sellers/SellerUpdate';
+import Logout from '../../../components/utils/Logout';
 import { getSeller } from '../../../fetch';
 import { absoluteUrl } from '../../../fetch/utils';
 import { SellerType } from '../../../types';
@@ -24,6 +25,7 @@ const UpdateSeller = () => {
     <>
       <h1 className='H1'>{`Hello ${data.name} !`}</h1>
       <SellerUpdate />
+      <Logout />
     </>
   );
 };

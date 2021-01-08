@@ -20,6 +20,7 @@ const RecoAnswerSeller = ({ books }: RecoBooksType) => {
 
   return (
     <div className='w-full md:w-3/4'>
+      <div className='text-white'>Mes propositions :</div>
       {books[0] ? (
         <DeleteAnswer bookId={books[0]} />
       ) : (

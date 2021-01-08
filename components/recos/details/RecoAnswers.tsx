@@ -4,12 +4,14 @@ import { RecoType } from '../../../types';
 import RecoAnswer from './RecoAnswer';
 import RecoAnswerMessage from './RecoAnswerMessage';
 import RecoAnswerSeller from './RecoAnswerSeller';
+import RecoFrom from './RecoFrom';
 
 const RecoAnswers = ({ answers = [] }: RecoType) => {
   const session = useSession();
 
   return (
     <div className='p-4 text-white'>
+      <RecoFrom />
       {answers.map((answer) => (
         <div className='flex justify-between' key={answer.sellerId}>
           {session?.isCustomer ? (
