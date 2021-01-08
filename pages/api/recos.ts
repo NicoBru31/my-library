@@ -11,7 +11,6 @@ import {
 } from '../../types';
 import { absoluteUrl } from '../../fetch/utils';
 
-const COL = 'recos';
 const handler = nextConnect();
 
 handler.use(middleware);
@@ -39,7 +38,7 @@ handler.use<Incoming, Response>(async (req, res, next) => {
 
 handler.get<Incoming, Response>(async (req, res) => {
   const recos = await req.db
-    .collection(COL)
+    .collection('recos')
     .find({ isClosed: false, 'answers.sellerId': req.query.fromSeller })
     .toArray();
   res.json(recos);
@@ -48,10 +47,10 @@ handler.get<Incoming, Response>(async (req, res) => {
 handler.patch<Incoming, Response>(async (req, res) => {
   const { recoId, id } = JSON.parse(req.body);
   const { upsertedCount } = await req.db
-    .collection(COL)
+    .collection('recos')
     .updateOne({ _id: new ObjectId(recoId) }, { $addToSet: { notified: id } });
   const { notified } = await req.db
-    .collection(COL)
+    .collection('recos')
     .findOne<RecoType>(
       { _id: new ObjectId(recoId) },
       { projection: { notified: 1 } },
@@ -64,14 +63,14 @@ handler.post<Incoming, Response>(async (req, res) => {
   reco.createdAt = new Date();
   reco.isClosed = false;
   reco.notified = [reco.customerId];
-  const { insertedId } = await req.db.collection(COL).insertOne(reco);
+  const { insertedId } = await req.db.collection('recos').insertOne(reco);
   req.db
     .collection('customers')
     .updateOne(
       { _id: new ObjectId(reco.customerId) },
       { $addToSet: { recos: new ObjectId(insertedId) } },
     );
-  const inserted = await req.db.collection(COL).findOne({
+  const inserted = await req.db.collection('recos').findOne({
     _id: new ObjectId(insertedId),
   });
   res.json(inserted);
@@ -79,21 +78,25 @@ handler.post<Incoming, Response>(async (req, res) => {
 
 handler.put<Incoming, Response>(async (req, res) => {
   const { id } = req.query;
-  const reco = JSON.parse(req.body) as RecoBooksType;
+  const answer = JSON.parse(req.body) as RecoBooksType;
   try {
-    const result = await req.db.collection(COL).findOneAndUpdate(
+    const found = await req.db
+      .collection('recos')
+      .findOne<RecoType>(
+        { _id: new ObjectId(id) },
+        { projection: { customerId: 1 } },
+      );
+    const result = await req.db.collection('recos').findOneAndUpdate(
       {
         _id: new ObjectId(id),
-        'answers.sellerId': reco.sellerId,
+        'answers.sellerId': answer.sellerId,
       },
       {
         $set: {
-          'answers.$.books': reco.books,
-          'answers.$.message': reco.message,
+          'answers.$.books': answer.books,
+          'answers.$.message': answer.message,
         },
-        $pull: {
-          notified: '$customerId',
-        },
+        $pull: { notified: found.customerId },
       },
       {
         returnOriginal: false,

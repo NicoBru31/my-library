@@ -16,13 +16,15 @@ const RecoHeaderCustomer = ({
 
   return (
     <div className='ml-4'>
-      <div>
-        {name || `Reco créée le ${dayjs(createdAt).format('DD-MM-YYYY')}`}
+      <div className='flex items-center'>
+        <div>
+          {name || `Reco créée le ${dayjs(createdAt).format('DD-MM-YYYY')}`}
+        </div>
+        {!notified?.includes(id) && <GrAlert className='ml-2 white-stroke' />}
       </div>
       <div>{`${responses} réponse${plural ? 's' : ''} reçue${
         plural ? 's' : ''
       }`}</div>
-      {!notified?.includes(id) && <GrAlert className='white-stroke' />}
     </div>
   );
 };

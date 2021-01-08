@@ -13,13 +13,17 @@ const RecoHeaderSeller = ({ answers, createdAt, name, notified }: RecoType) => {
 
   return (
     <div className='ml-4'>
-      <div>
-        {name || `Reco créée le ${dayjs(createdAt).format('DD-MM-YYYY')}`}
+      <div className='flex items-center'>
+        <div>
+          {name || `Reco créée le ${dayjs(createdAt).format('DD-MM-YYYY')}`}
+        </div>
+        {!notified?.includes(session?.id) && (
+          <GrAlert className='ml-2 white-stroke' />
+        )}
       </div>
       <div>{`Il vous reste ${responses} réponse${
         plural ? 's' : ''
       } à envoyer`}</div>
-      {!notified?.includes(session?.id) && <GrAlert className='white-stroke' />}
     </div>
   );
 };
