@@ -1,6 +1,6 @@
 import nextConnect from 'next-connect';
 import { ObjectId } from 'mongodb';
-import { Incoming, Response } from '../../types/index';
+import { BookType, Incoming, Response } from '../../types/index';
 import middleware from '../../middleware/database';
 import { ReadingType } from '../../types';
 
@@ -38,11 +38,14 @@ handler.get<Incoming, Response>(async (req, res) => {
 
 handler.post<Incoming, Response>(async (req, res) => {
   const { book, customerId, ...body }: ReadingType = JSON.parse(req.body);
-  const {
-    upsertedId: { _id: bookId },
-  } = await req.db
+  const found = await req.db
     .collection('books')
-    .updateOne(book, { $set: book }, { upsert: true });
+    .findOne<BookType>({ googleId: book.googleId });
+  let bookId;
+  if (!found) {
+    const { insertedId } = await req.db.collection('books').insertOne(book);
+    bookId = insertedId;
+  } else bookId = found._id;
   const reading = await req.db
     .collection('readings')
     .insertOne({ ...body, bookId });

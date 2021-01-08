@@ -3,7 +3,7 @@ import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 import RecoCustomer from '../../../components/recos/RecoCustomer';
 import RecoIntro from '../../../components/recos/RecoIntro';
-import { getBooks, getCustomer, getSellers } from '../../../fetch';
+import { getBooks, getCustomer, getReadings, getSellers } from '../../../fetch';
 import { absoluteUrl } from '../../../fetch/utils';
 
 export const getServerSideProps: GetServerSideProps = async ({
@@ -17,24 +17,34 @@ export const getServerSideProps: GetServerSideProps = async ({
   const sellerIds = customer.recos
     .map((reco) => reco.answers.map((answer) => answer.sellerId))
     .flat(1);
-  const bookIds = customer.recos
-    .map((reco) => reco.answers.map((answer) => answer.books))
-    .flat(2);
+  const readingIds = [
+    ...customer.recos
+      .map((reco) => reco.from?.readings)
+      .flat(1)
+      .filter((id) => id),
+    ...customer.readings.map(({ _id }) => _id),
+  ];
+  const readings = await getReadings(url, readingIds);
+  const bookIds = [
+    ...customer.recos
+      .map((reco) => reco.answers.map((answer) => answer.books))
+      .flat(2),
+    ...readings.map(({ bookId }) => bookId),
+  ];
   await Promise.all([
     queryClient.prefetchQuery('customer', () => customer),
     queryClient.prefetchQuery('books', () => getBooks(url, bookIds)),
     queryClient.prefetchQuery('sellers', () => getSellers(url, sellerIds)),
+    queryClient.prefetchQuery('readings', () => readings),
   ]);
   return { props: { dehydratedState: dehydrate(queryClient) } };
 };
 
-const Reco = () => {
-  return (
-    <div className='bg-books'>
-      <RecoIntro />
-      <RecoCustomer />
-    </div>
-  );
-};
+const Reco = () => (
+  <div className='bg-books'>
+    <RecoIntro />
+    <RecoCustomer />
+  </div>
+);
 
 export default Reco;

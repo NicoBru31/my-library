@@ -1,6 +1,6 @@
-import * as React from 'react';
 import { Button } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import * as React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import fields from '../../components/customer/fields';
 import Input from '../../components/form/Input';
@@ -10,7 +10,6 @@ import CreateAccount from '../../components/utils/CreateAccount';
 import LoaderContext from '../../contexts/LoaderContext';
 import { createCustomer, createSeller } from '../../fetch';
 import useLogin from '../../hooks/useLogin';
-import useSession from '../../hooks/useSession';
 
 export interface LoginInterface {
   email: string;
@@ -23,23 +22,13 @@ const Login = () => {
     mode: 'onBlur',
     shouldFocusError: true,
   });
-  const { loader, setLoader } = React.useContext(LoaderContext);
-  const { query, push } = useRouter();
+  const { loader } = React.useContext(LoaderContext);
+  const { query } = useRouter();
   const login = useLogin();
-  const session = useSession();
 
   const goCreate = () => setCreate(query?.isSeller ? 'seller' : 'customer');
 
   const send: SubmitHandler<LoginInterface> = (data) => login(data);
-
-  React.useEffect(() => {
-    if (session?.isCustomer === undefined) return;
-    setLoader({ isLoading: true });
-    if (session?.isCustomer === true)
-      push({ pathname: `/customers/${session.id}` });
-    if (session?.isCustomer === false)
-      push({ pathname: `/sellers/${session.id}` });
-  }, [push, session]);
 
   return (
     <div className='home-picture flex justify-center'>

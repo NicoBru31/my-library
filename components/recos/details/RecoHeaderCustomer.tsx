@@ -11,7 +11,7 @@ const RecoHeaderCustomer = ({
   notified,
 }: RecoType) => {
   const { id } = useSession();
-  const responses = answers.reduce((f, e) => f + e.books.length, 0);
+  const responses = answers?.reduce((f, e) => f + e.books.length, 0);
   const plural = responses > 1;
 
   return (

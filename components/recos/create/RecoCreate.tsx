@@ -20,6 +20,7 @@ import useUpdate from '../../../hooks/useUpdate';
 import { CustomerType, ModalProps, RecoType } from '../../../types';
 import RecoCreateAddresses from './RecoCreateAddresses';
 import RecoCreateFooter from './RecoCreateFooter';
+import RecoCreateName from './RecoCreateName';
 import RecoCreateReadings from './RecoCreateReadings';
 import RecoCreateType from './RecoCreateType';
 
@@ -65,6 +66,7 @@ const RecoCreate = (props: ModalProps) => {
                 <TabList>
                   <Tab>Adresses</Tab>
                   <Tab>Lectures</Tab>
+                  <Tab>Nommage</Tab>
                 </TabList>
                 <TabPanels>
                   <TabPanel>
@@ -73,6 +75,9 @@ const RecoCreate = (props: ModalProps) => {
                   </TabPanel>
                   <TabPanel>
                     <RecoCreateReadings />
+                  </TabPanel>
+                  <TabPanel>
+                    <RecoCreateName />
                   </TabPanel>
                 </TabPanels>
               </Tabs>
