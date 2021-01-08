@@ -4,7 +4,7 @@ import { FaDotCircle } from 'react-icons/fa';
 import { useQuery } from 'react-query';
 import RecoContext from '../../../contexts/RecoContext';
 import { ReadingType } from '../../../types';
-import Book from '../../utils/Book';
+import Book from '../../books/Book';
 
 const RecoFrom = () => {
   const { data } = useQuery<ReadingType[]>('readings');
@@ -12,7 +12,7 @@ const RecoFrom = () => {
   const [readings, setReadings] = React.useState<ReadingType[]>([]);
 
   React.useEffect(() => {
-    setReadings(data.filter(({ _id }) => reco?.from?.readings.includes(_id)));
+    setReadings(data?.filter(({ _id }) => reco?.from?.readings.includes(_id)));
   }, [data, reco, setReadings]);
 
   return (

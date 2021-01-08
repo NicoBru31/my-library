@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import * as React from 'react';
 import {
   FieldError,
   FormProvider,
@@ -9,12 +9,14 @@ import { createReading } from '../../fetch';
 import useSession from '../../hooks/useSession';
 import useUpdate from '../../hooks/useUpdate';
 import {
+  BookType,
   CreateReadingType,
   CustomerType,
   GoogleBookType,
   ModalProps,
   ReadingType,
 } from '../../types';
+import Book from '../books/Book';
 import ModalFacc from '../facc/ModalFacc';
 import Input from '../form/Input';
 import ModalFooter from '../utils/ModalFooter';
@@ -24,7 +26,8 @@ import SearchReading from './SearchReading';
 
 const CreateReading = (props: ModalProps) => {
   const session = useSession();
-  const [googleBook, setGoogleBook] = useState<GoogleBookType>();
+  const [googleBook, setGoogleBook] = React.useState<GoogleBookType>();
+  const [bookId, setBookId] = React.useState('');
   const methods = useForm<ReadingType>({
     mode: 'onBlur',
     shouldFocusError: true,
@@ -54,17 +57,23 @@ const CreateReading = (props: ModalProps) => {
       id: session.id,
     }).then(props.onClose);
 
-  const select = (book: GoogleBookType) => setGoogleBook(book);
+  const select = (gBook: GoogleBookType, book: BookType) => {
+    if (gBook) setGoogleBook(gBook);
+    if (book) setBookId(book._id);
+  };
 
   return (
     <ModalFacc {...props} title='Ajouter une note de lecture'>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(create)}>
           <SearchReading onSelect={select} />
-          <CreateReadingSelectedBook
-            googleBook={googleBook}
-            setGoogleBook={setGoogleBook}
-          />
+          {googleBook && (
+            <CreateReadingSelectedBook
+              googleBook={googleBook}
+              setGoogleBook={setGoogleBook}
+            />
+          )}
+          {bookId && <Book bookId={bookId} />}
           {fields.map((field) => (
             <Input
               {...field}

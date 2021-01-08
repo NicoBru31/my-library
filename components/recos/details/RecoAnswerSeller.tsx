@@ -12,10 +12,13 @@ const RecoAnswerSeller = ({ books }: RecoBooksType) => {
   const { update, updateLocalAnswer } = useAnswer();
   const queryCache = useQueryClient();
 
-  const select = async (item: GoogleBookType) => {
-    const book = await createBook(item);
-    queryCache.setQueryData<BookType[]>('books', (data) => [book, ...data]);
-    updateLocalAnswer(book._id);
+  const select = async (item: GoogleBookType, newBook?: BookType) => {
+    if (item) {
+      const book = await createBook(item);
+      queryCache.setQueryData<BookType[]>('books', (data) => [book, ...data]);
+      updateLocalAnswer(book._id);
+    }
+    if (newBook) updateLocalAnswer(newBook._id);
   };
 
   return (

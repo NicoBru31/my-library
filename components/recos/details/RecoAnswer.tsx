@@ -2,7 +2,7 @@ import * as React from 'react';
 import { GoPrimitiveDot } from 'react-icons/go';
 import useWindowSize from '../../../hooks/useWindowSize';
 import { RecoBooksType } from '../../../types';
-import Book from '../../utils/Book';
+import Book from '../../books/Book';
 import PopoverText from '../../utils/PopoverText';
 import RecoSeller from './RecoSeller';
 

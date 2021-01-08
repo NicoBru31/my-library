@@ -28,6 +28,12 @@ export const createAddress = ({
   ).then((res) => res.json());
 
 export const createBook = (book: GoogleBookType): Promise<BookType> =>
+  fetch(`${window.location.origin}/api/books/google`, {
+    body: JSON.stringify(book),
+    method: 'POST',
+  }).then((res) => res.json());
+
+export const createBookWithoutGoogle = (book: BookType): Promise<BookType> =>
   fetch(`${window.location.origin}/api/books`, {
     body: JSON.stringify(book),
     method: 'POST',

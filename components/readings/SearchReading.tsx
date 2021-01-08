@@ -3,11 +3,12 @@ import * as React from 'react';
 import Autocomplete from 'react-autocomplete';
 import LoaderContext from '../../contexts/LoaderContext';
 import { getGoogleBooks } from '../../fetch';
-import { GoogleBookType } from '../../types';
+import { BookType, GoogleBookType } from '../../types';
+import SearchReadingCreate from './SearchReadingCreate';
 import SearchReadingItem from './SearchReadingItem';
 
 interface Props {
-  onSelect: (item: GoogleBookType) => void;
+  onSelect: (item: GoogleBookType, book?: BookType) => void;
   theme?: 'white';
 }
 
@@ -40,27 +41,30 @@ const SearchReading = ({ onSelect, theme }: Props) => {
   }, [search]);
 
   return (
-    <Autocomplete
-      getItemValue={(item: GoogleBookType) => item.volumeInfo.title}
-      items={(books || []).slice(0, 3)}
-      menuStyle={{ position: 'fixed', zIndex: 10 }}
-      onChange={change}
-      onSelect={select}
-      renderInput={(props) => (
-        <Input
-          {...props}
-          backgroundColor={theme || 'inherit'}
-          color={theme === 'white' ? 'black' : 'inherit'}
-          placeholder='Chercher une oeuvre'
-        />
-      )}
-      renderItem={(item: GoogleBookType) => (
-        <div key={item.id}>
-          <SearchReadingItem item={item} search={search} />
-        </div>
-      )}
-      value={search}
-    />
+    <div className='flex items-center'>
+      <Autocomplete
+        getItemValue={(item: GoogleBookType) => item.volumeInfo.title}
+        items={(books || [])?.slice(0, 3)}
+        menuStyle={{ position: 'fixed', zIndex: 10 }}
+        onChange={change}
+        onSelect={select}
+        renderInput={(props) => (
+          <Input
+            {...props}
+            backgroundColor={theme || 'inherit'}
+            color={theme === 'white' ? 'black' : 'inherit'}
+            placeholder='Chercher une oeuvre'
+          />
+        )}
+        renderItem={(item: GoogleBookType) => (
+          <div key={item.id}>
+            <SearchReadingItem item={item} search={search} />
+          </div>
+        )}
+        value={search}
+      />
+      <SearchReadingCreate onSelect={onSelect} search={search} />
+    </div>
   );
 };
 

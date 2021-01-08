@@ -2,7 +2,7 @@ import * as React from 'react';
 import { AiFillDelete } from 'react-icons/ai';
 import RecoContext from '../../../contexts/RecoContext';
 import useSession from '../../../hooks/useSession';
-import Book from '../../utils/Book';
+import Book from '../../books/Book';
 
 interface Props {
   bookId: string;

@@ -45,6 +45,16 @@ handler.get<Incoming, Response>(async (req, res) => {
 });
 
 handler.post<Incoming, Response>(async (req, res) => {
+  const { insertedId } = await req.db
+    .collection('books')
+    .insertOne(JSON.parse(req.body));
+  const inserted = await req.db
+    .collection('books')
+    .findOne({ _id: new ObjectId(insertedId) });
+  res.json(inserted);
+});
+
+handler.post<Incoming, Response>('/google', async (req, res) => {
   const googleBook: GoogleBookType = JSON.parse(req.body);
   const book: BookType = {
     author: googleBook.volumeInfo.authors.join(', '),

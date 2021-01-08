@@ -40,7 +40,7 @@ handler.post<Incoming, Response>(async (req, res) => {
   const { book, customerId, ...body }: ReadingType = JSON.parse(req.body);
   const found = await req.db
     .collection('books')
-    .findOne<BookType>({ googleId: book.googleId });
+    .findOne<BookType>({ _id: new ObjectId(book._id) });
   let bookId;
   if (!found) {
     const { insertedId } = await req.db.collection('books').insertOne(book);
