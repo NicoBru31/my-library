@@ -1,7 +1,7 @@
 import * as React from 'react';
 import dayjs from 'dayjs';
 import { useQuery } from 'react-query';
-import { RecoType } from '../../types';
+import { RecoType } from '@/types/index';
 import RecoDetails from '../recos/details/RecoDetails';
 import RecoListItem from '../recos/RecoListItem';
 import SellerFilter from './SellerFilter';

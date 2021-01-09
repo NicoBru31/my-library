@@ -2,10 +2,10 @@ import { Button } from '@chakra-ui/react';
 import { useContext } from 'react';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
-import AlertContext from '../../contexts/AlertContext';
-import { updateSeller } from '../../fetch';
-import useUpdate from '../../hooks/useUpdate';
-import { SellerType } from '../../types';
+import AlertContext from '@/contexts/AlertContext';
+import { updateSeller } from '@/fetch/index';
+import useUpdate from '@/hooks/useUpdate';
+import { SellerType } from '@/types/index';
 import Input from '../form/Input';
 import fields from './fields';
 

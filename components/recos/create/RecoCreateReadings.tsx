@@ -2,8 +2,8 @@ import { Checkbox } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useQuery } from 'react-query';
-import useBooks from '../../../hooks/useBooks';
-import { CustomerType, RecoType } from '../../../types';
+import useBooks from '@/hooks/useBooks';
+import { CustomerType, RecoType } from '@/types/index';
 import AddReading from '../../readings/AddReading';
 
 const RecoCreateReadings = () => {

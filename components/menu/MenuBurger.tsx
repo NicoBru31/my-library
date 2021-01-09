@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useContext } from 'react';
-import AlertContext from '../../contexts/AlertContext';
+import AlertContext from '@/contexts/AlertContext';
 import { scale } from '../../variants';
 
 interface Props {

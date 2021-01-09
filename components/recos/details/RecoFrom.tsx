@@ -2,8 +2,8 @@ import { List, ListItem } from '@chakra-ui/react';
 import * as React from 'react';
 import { FaDotCircle } from 'react-icons/fa';
 import { useQuery } from 'react-query';
-import RecoContext from '../../../contexts/RecoContext';
-import { ReadingType } from '../../../types';
+import RecoContext from '@/contexts/RecoContext';
+import { ReadingType } from '@/types/index';
 import Book from '../../books/Book';
 
 const RecoFrom = () => {

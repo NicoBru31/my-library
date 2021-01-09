@@ -1,4 +1,4 @@
-import { Field, ReadingType } from './../../types/index';
+import { Field, ReadingType } from '@/types/index';
 
 const fields: Field<ReadingType>[] = [
   {

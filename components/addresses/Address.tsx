@@ -1,5 +1,5 @@
-import { deleteAddress, updateAddress } from '../../fetch';
-import { AddressType } from '../../types';
+import { deleteAddress, updateAddress } from '@/fetch/index';
+import { AddressType } from '@/types/index';
 import CardButtons from '../utils/CardButtons';
 import fields from './addressFields';
 

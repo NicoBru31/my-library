@@ -1,6 +1,6 @@
 import { Button, useDisclosure } from '@chakra-ui/react';
-import useDelete from '../../hooks/useDelete';
-import { CustomerType } from '../../types';
+import useDelete from '@/hooks/useDelete';
+import { CustomerType } from '@/types/index';
 import Confirm from './Confirm';
 
 interface Props {

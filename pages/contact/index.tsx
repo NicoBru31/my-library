@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Intro from '../../components/utils/Intro';
+import Intro from '@/components/utils/Intro';
 
 const Contact = () => (
   <div>

@@ -1,14 +1,14 @@
 import { Button } from '@chakra-ui/react';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
-import { createAddress } from '../../fetch';
-import useSession from '../../hooks/useSession';
-import useUpdate from '../../hooks/useUpdate';
+import { createAddress } from '@/fetch/index';
+import useSession from '@/hooks/useSession';
+import useUpdate from '@/hooks/useUpdate';
 import {
   AddressType,
   CreateAddressType,
   CustomerType,
   ModalProps,
-} from '../../types';
+} from '@/types/index';
 import ModalFacc from '../facc/ModalFacc';
 import Input from '../form/Input';
 import fields from './addressFields';

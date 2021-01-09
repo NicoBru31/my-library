@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import useSession from '../../hooks/useSession';
+import useSession from '@/hooks/useSession';
 import { menuItemVariants } from '../../variants';
 import items, { customerItems, sellerItems } from './items';
 import MenuItem from './MenuItem';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { PropsWithChildren } from 'react';
-import SessionContext, { Session } from '../contexts/SessionContext';
+import SessionContext, { Session } from '@/contexts/SessionContext';
 
 const SessionProvider = ({ children }: PropsWithChildren<unknown>) => {
   const [session, setSession] = React.useState<Session>();

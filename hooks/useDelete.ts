@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import AlertContext from '../contexts/AlertContext';
+import AlertContext from '@/contexts/AlertContext';
 
 type Props = {
   action: (id: string) => Promise<{ id: string }>;

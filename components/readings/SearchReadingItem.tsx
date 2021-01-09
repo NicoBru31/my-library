@@ -1,4 +1,4 @@
-import { GoogleBookType } from '../../types';
+import { GoogleBookType } from '@/types/index';
 
 interface Props {
   item: GoogleBookType;

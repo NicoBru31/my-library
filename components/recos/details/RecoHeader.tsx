@@ -1,18 +1,15 @@
+import RecoContext from '@/contexts/RecoContext';
+import { RecoType } from '@/types/index';
 import * as React from 'react';
 import { AiFillIdcard } from 'react-icons/ai';
 import { GrFormClose } from 'react-icons/gr';
-import RecoContext from '../../../contexts/RecoContext';
-import useSession from '../../../hooks/useSession';
-import { RecoType } from '../../../types';
-import RecoHeaderCustomer from './RecoHeaderCustomer';
-import RecoHeaderSeller from './RecoHeaderSeller';
+import RecoHeaderText from './RecoHeaderText';
 
 interface Props extends RecoType {
   withClose?: boolean;
 }
 
 const RecoHeader = ({ withClose, ...props }: Props) => {
-  const session = useSession();
   const { changeReco } = React.useContext(RecoContext);
 
   const close = () => changeReco(undefined);
@@ -21,11 +18,7 @@ const RecoHeader = ({ withClose, ...props }: Props) => {
     <div className='flex justify-between'>
       <div className='items-center text-white p-2 flex'>
         <AiFillIdcard size={60} color='white' />
-        {session?.isCustomer ? (
-          <RecoHeaderCustomer {...props} />
-        ) : (
-          <RecoHeaderSeller {...props} />
-        )}
+        <RecoHeaderText {...props} />
       </div>
       {withClose && (
         <GrFormClose

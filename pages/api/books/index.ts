@@ -1,9 +1,9 @@
+import fetch from 'isomorphic-fetch';
 import { ObjectId } from 'mongodb';
 import nextConnect from 'next-connect';
-import fetch from 'isomorphic-fetch';
-import middleware from '../../middleware/database';
-import { BookType, GoogleBookType, Incoming, Response } from '../../types';
-import { absoluteUrl } from '../../fetch/utils';
+import { absoluteUrl } from '@/fetch/utils';
+import middleware from '../../../middleware/database';
+import { GoogleBookType, Incoming, Response } from '@/types/index';
 
 const handler = nextConnect();
 
@@ -51,22 +51,6 @@ handler.post<Incoming, Response>(async (req, res) => {
   const inserted = await req.db
     .collection('books')
     .findOne({ _id: new ObjectId(insertedId) });
-  res.json(inserted);
-});
-
-handler.post<Incoming, Response>('/google', async (req, res) => {
-  const googleBook: GoogleBookType = JSON.parse(req.body);
-  const book: BookType = {
-    author: googleBook.volumeInfo.authors.join(', '),
-    googleId: googleBook.id,
-    title: googleBook.volumeInfo.title,
-  };
-  await req.db
-    .collection('books')
-    .updateOne(book, { $set: book }, { upsert: true });
-  const inserted = await req.db
-    .collection('books')
-    .findOne({ googleId: book.googleId });
   res.json(inserted);
 });
 

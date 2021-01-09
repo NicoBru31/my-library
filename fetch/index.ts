@@ -1,4 +1,4 @@
-import { Session } from '../contexts/SessionContext';
+import { Session } from '@/contexts/SessionContext';
 import { LoginInterface } from '../pages/login';
 import {
   AddressType,

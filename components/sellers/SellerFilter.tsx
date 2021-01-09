@@ -1,10 +1,10 @@
 import { Badge, Stack } from '@chakra-ui/react';
 import * as React from 'react';
 import { useQuery } from 'react-query';
-import RecoContext from '../../contexts/RecoContext';
-import useSession from '../../hooks/useSession';
+import RecoContext from '@/contexts/RecoContext';
+import useSession from '@/hooks/useSession';
 import { filterRecoByDone, filterRecoByWaiting } from '../../tools';
-import { RecoType } from '../../types';
+import { RecoType } from '@/types/index';
 
 interface Props {
   setRecos: React.Dispatch<React.SetStateAction<RecoType[]>>;

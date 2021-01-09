@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import * as React from 'react';
 import { useFormContext } from 'react-hook-form';
-import { RecoType } from '../../../types';
+import { RecoType } from '@/types/index';
 import Input from '../../form/Input';
 
 const RecoCreateName = () => {

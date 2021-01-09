@@ -2,7 +2,7 @@ import { compareSync } from 'bcryptjs';
 import nextConnect from 'next-connect';
 import middleware from '../../middleware/database';
 import { LoginInterface } from '../login';
-import { Incoming, Response } from './../../types/index';
+import { Incoming, Response } from '@/types/index';
 
 const handler = nextConnect();
 

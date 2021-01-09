@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { AiFillDelete } from 'react-icons/ai';
-import RecoContext from '../../../contexts/RecoContext';
-import useSession from '../../../hooks/useSession';
+import RecoContext from '@/contexts/RecoContext';
 import Book from '../../books/Book';
 
 interface Props {
@@ -9,21 +8,13 @@ interface Props {
 }
 
 const DeleteAnswer = ({ bookId }: Props) => {
-  const { reco, setReco } = React.useContext(RecoContext);
-  const session = useSession();
+  const { setAnswer } = React.useContext(RecoContext);
 
   const remove = () =>
-    setReco({
-      ...reco,
-      answers: reco.answers.map((answer) =>
-        answer.sellerId !== session?.id
-          ? answer
-          : {
-              ...answer,
-              books: answer.books.filter((book) => book !== bookId),
-            },
-      ),
-    });
+    setAnswer((answer) => ({
+      ...answer,
+      books: answer.books.filter((book) => book !== bookId),
+    }));
 
   return (
     <div className='flex justify-start'>

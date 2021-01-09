@@ -1,6 +1,6 @@
 import { Button } from '@chakra-ui/react';
 import * as React from 'react';
-import useRouting from '../../hooks/useRouting';
+import useRouting from '@/hooks/useRouting';
 
 const GoReco = () => {
   const { goReco } = useRouting();

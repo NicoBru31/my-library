@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import useSession from '../../hooks/useSession';
+import useSession from '@/hooks/useSession';
 import { scale } from '../../variants';
 
 const HeaderProfile = () => {

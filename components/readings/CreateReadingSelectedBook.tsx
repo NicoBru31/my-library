@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
-import { GoogleBookType } from '../../types';
+import { GoogleBookType } from '@/types/index';
 
 interface Props {
   googleBook?: GoogleBookType;

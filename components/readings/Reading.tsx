@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { deleteReading, getBook, updateReading } from '../../fetch';
-import { BookType, ReadingType } from '../../types';
+import { deleteReading, getBook, updateReading } from '@/fetch/index';
+import { BookType, ReadingType } from '@/types/index';
 import CardButtons from '../utils/CardButtons';
 import Loading from '../utils/Loading';
 import fields from './readingFields';

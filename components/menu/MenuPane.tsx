@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import useSession from '../../hooks/useSession';
+import useSession from '@/hooks/useSession';
 import { menuVariants } from '../../variants';
 import MenuItems from './MenuItems';
 

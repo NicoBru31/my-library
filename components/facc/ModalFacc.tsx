@@ -7,7 +7,7 @@ import {
   ModalOverlay,
 } from '@chakra-ui/react';
 import { PropsWithChildren } from 'react';
-import { ModalProps } from '../../types';
+import { ModalProps } from '@/types/index';
 
 const ModalFacc = ({
   children,

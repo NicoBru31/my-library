@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Alert, AlertIcon, CloseButton } from '@chakra-ui/react';
-import AlertContext, { AlertInterface } from '../contexts/AlertContext';
+import AlertContext, { AlertInterface } from '@/contexts/AlertContext';
 
 const AlertProvider = ({ children }: React.PropsWithChildren<unknown>) => {
   const [alert, setAlert] = React.useState<AlertInterface>();

@@ -1,8 +1,8 @@
 import { Button, useDisclosure } from '@chakra-ui/react';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
-import useSession from '../../hooks/useSession';
-import useUpdate from '../../hooks/useUpdate';
-import { Field } from '../../types';
+import useSession from '@/hooks/useSession';
+import useUpdate from '@/hooks/useUpdate';
+import { Field } from '@/types/index';
 import ModalFacc from '../facc/ModalFacc';
 import Input from '../form/Input';
 

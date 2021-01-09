@@ -1,8 +1,8 @@
 import nextConnect from 'next-connect';
 import { ObjectId } from 'mongodb';
-import { BookType, Incoming, Response } from '../../types/index';
+import { BookType, Incoming, Response } from '@/types/index';
 import middleware from '../../middleware/database';
-import { ReadingType } from '../../types';
+import { ReadingType } from '@/types/index';
 
 const handler = nextConnect();
 

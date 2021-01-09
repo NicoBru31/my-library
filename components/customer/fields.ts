@@ -1,4 +1,4 @@
-import { CustomerType, Field } from './../../types/index';
+import { CustomerType, Field } from '@/types/index';
 
 const fields: Field<CustomerType>[] = [
   {

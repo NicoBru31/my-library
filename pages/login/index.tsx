@@ -2,14 +2,14 @@ import { Button } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import fields from '../../components/customer/fields';
-import Input from '../../components/form/Input';
-import loginFields from '../../components/login/loginFields';
-import sellerFields from '../../components/sellers/fields';
-import CreateAccount from '../../components/utils/CreateAccount';
-import LoaderContext from '../../contexts/LoaderContext';
-import { createCustomer, createSeller } from '../../fetch';
-import useLogin from '../../hooks/useLogin';
+import fields from '@/components/customer/fields';
+import Input from '@/components/form/Input';
+import loginFields from '@/components/login/loginFields';
+import sellerFields from '@/components/sellers/fields';
+import CreateAccount from '@/components/utils/CreateAccount';
+import LoaderContext from '@/contexts/LoaderContext';
+import { createCustomer, createSeller } from '@/fetch/index';
+import useLogin from '@/hooks/useLogin';
 
 export interface LoginInterface {
   email: string;

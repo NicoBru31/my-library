@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import * as React from 'react';
-import RecoContext from '../../contexts/RecoContext';
-import { RecoType } from '../../types';
+import RecoContext from '@/contexts/RecoContext';
+import { RecoType } from '@/types/index';
 import { opacityVariants, scaleShake } from '../../variants';
 import RecoHeader from './details/RecoHeader';
 

@@ -1,5 +1,5 @@
 import nextConnect from 'next-connect';
-import { Incoming, Response } from '../../types';
+import { Incoming, Response } from '@/types/index';
 import { queryAdapter } from '../../utils';
 
 const { BOOKS_KEY } = process.env;

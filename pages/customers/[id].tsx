@@ -1,12 +1,12 @@
 import { GetServerSideProps } from 'next';
 import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
-import { introReadings } from '../../components/customer/intro';
-import Readings from '../../components/readings/Readings';
-import Intro from '../../components/utils/Intro';
-import Logout from '../../components/utils/Logout';
-import { getCustomer } from '../../fetch';
-import { absoluteUrl } from '../../fetch/utils';
+import { introReadings } from '@/components/customer/intro';
+import Readings from '@/components/readings/Readings';
+import Intro from '@/components/utils/Intro';
+import Logout from '@/components/utils/Logout';
+import { getCustomer } from '@/fetch/index';
+import { absoluteUrl } from '@/fetch/utils';
 
 export const getServerSideProps: GetServerSideProps = async ({
   params,

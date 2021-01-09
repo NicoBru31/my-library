@@ -1,11 +1,11 @@
 import { GetServerSideProps } from 'next';
 import { QueryClient, useQuery } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
-import SellerUpdate from '../../../components/sellers/SellerUpdate';
-import Logout from '../../../components/utils/Logout';
-import { getSeller } from '../../../fetch';
-import { absoluteUrl } from '../../../fetch/utils';
-import { SellerType } from '../../../types';
+import SellerUpdate from '@/components/sellers/SellerUpdate';
+import Logout from '@/components/utils/Logout';
+import { getSeller } from '@/fetch/index';
+import { absoluteUrl } from '@/fetch/utils';
+import { SellerType } from '@/types/index';
 
 export const getServerSideProps: GetServerSideProps = async ({
   params,

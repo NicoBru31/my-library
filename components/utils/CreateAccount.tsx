@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Button } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
-import useLogin from '../../hooks/useLogin';
-import useUpdate from '../../hooks/useUpdate';
-import { Field } from '../../types';
+import useLogin from '@/hooks/useLogin';
+import useUpdate from '@/hooks/useUpdate';
+import { Field } from '@/types/index';
 import Input from '../form/Input';
 
 interface Props<T> {

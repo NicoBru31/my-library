@@ -1,10 +1,10 @@
 import { GetServerSideProps } from 'next';
 import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
-import CustomerUpdate from '../../../components/customer/CustomerUpdate';
-import Intro from '../../../components/utils/Intro';
-import { getCustomer } from '../../../fetch';
-import { absoluteUrl } from '../../../fetch/utils';
+import CustomerUpdate from '@/components/customer/CustomerUpdate';
+import Intro from '@/components/utils/Intro';
+import { getCustomer } from '@/fetch/index';
+import { absoluteUrl } from '@/fetch/utils';
 
 export const getServerSideProps: GetServerSideProps = async ({
   params,

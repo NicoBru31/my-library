@@ -8,8 +8,8 @@ import {
   RecoBooksType,
   RecoType,
   Response,
-} from '../../types';
-import { absoluteUrl } from '../../fetch/utils';
+} from '@/types/index';
+import { absoluteUrl } from '@/fetch/utils';
 
 const handler = nextConnect();
 

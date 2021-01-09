@@ -2,7 +2,7 @@ import { hashSync } from 'bcryptjs';
 import { ObjectId } from 'mongodb';
 import nextConnect from 'next-connect';
 import middleware from '../../middleware/database';
-import { CustomerType, Incoming, Response } from './../../types/index';
+import { CustomerType, Incoming, Response } from '@/types/index';
 
 const handler = nextConnect();
 

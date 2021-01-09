@@ -1,4 +1,4 @@
-import { AddressType, Field } from './../../types/index';
+import { AddressType, Field } from '@/types/index';
 
 const fields: Field<AddressType>[] = [
   {

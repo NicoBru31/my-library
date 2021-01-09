@@ -5,7 +5,7 @@ import {
   TextareaProps,
 } from '@chakra-ui/react';
 import * as React from 'react';
-import { InputType } from '../../types';
+import { InputType } from '@/types/index';
 
 const Input = <T extends {}>({
   classLabel,

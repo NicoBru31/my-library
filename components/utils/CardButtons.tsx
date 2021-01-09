@@ -1,4 +1,4 @@
-import { CustomerType, Field } from '../../types';
+import { CustomerType, Field } from '@/types/index';
 import RemoveModal from './RemoveModal';
 import UpdateModal from './UpdateModal';
 

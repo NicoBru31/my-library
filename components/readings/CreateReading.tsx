@@ -5,9 +5,9 @@ import {
   SubmitHandler,
   useForm,
 } from 'react-hook-form';
-import { createReading } from '../../fetch';
-import useSession from '../../hooks/useSession';
-import useUpdate from '../../hooks/useUpdate';
+import { createReading } from '@/fetch/index';
+import useSession from '@/hooks/useSession';
+import useUpdate from '@/hooks/useUpdate';
 import {
   BookType,
   CreateReadingType,
@@ -15,7 +15,7 @@ import {
   GoogleBookType,
   ModalProps,
   ReadingType,
-} from '../../types';
+} from '@/types/index';
 import Book from '../books/Book';
 import ModalFacc from '../facc/ModalFacc';
 import Input from '../form/Input';

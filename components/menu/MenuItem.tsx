@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import * as React from 'react';
-import LoaderContext from '../../contexts/LoaderContext';
+import LoaderContext from '@/contexts/LoaderContext';
 import { opacityVariants, scale } from '../../variants';
 import { MenuItemProps } from './items';
 

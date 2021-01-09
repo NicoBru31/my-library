@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
-import AlertContext from '../contexts/AlertContext';
-import LoaderContext from '../contexts/LoaderContext';
-import SessionContext, { Session } from '../contexts/SessionContext';
+import AlertContext from '@/contexts/AlertContext';
+import LoaderContext from '@/contexts/LoaderContext';
+import SessionContext, { Session } from '@/contexts/SessionContext';
 import { login } from '../fetch';
 import { LoginInterface } from './../pages/login/index';
 

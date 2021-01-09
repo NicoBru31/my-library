@@ -1,8 +1,10 @@
+import SessionContext from '@/contexts/SessionContext';
 import { useContext } from 'react';
-import SessionContext from '../contexts/SessionContext';
 
-export default () => {
+const useSession = () => {
   const { session } = useContext(SessionContext);
 
   return session;
 };
+
+export default useSession;

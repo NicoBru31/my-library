@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
 import { PropsWithChildren, useEffect, useState } from 'react';
-import LoaderContext, { LoaderInterface } from '../contexts/LoaderContext';
+import LoaderContext, { LoaderInterface } from '@/contexts/LoaderContext';
 
 const LoaderProvider = ({ children }: PropsWithChildren<unknown>) => {
   const [loader, setLoader] = useState<LoaderInterface>({ isLoading: false });

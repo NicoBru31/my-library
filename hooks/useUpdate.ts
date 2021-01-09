@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import AlertContext from '../contexts/AlertContext';
-import LoaderContext from '../contexts/LoaderContext';
+import AlertContext from '@/contexts/AlertContext';
+import LoaderContext from '@/contexts/LoaderContext';
 
 type Props<R, T> = {
   action: (data: T) => Promise<R>;

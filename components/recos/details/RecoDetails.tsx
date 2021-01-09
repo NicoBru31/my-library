@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 import * as React from 'react';
-import RecoContext from '../../../contexts/RecoContext';
-import useWindowSize from '../../../hooks/useWindowSize';
+import RecoContext from '@/contexts/RecoContext';
+import useWindowSize from '@/hooks/useWindowSize';
 import { hidden, slideRight, slideRightMd } from '../../../variants';
-import RecoAnswers from './RecoAnswers';
+import RecoAnswers from '../answers/RecoAnswers';
 import RecoHeader from './RecoHeader';
 
 const RecoDetails = () => {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FaDotCircle } from 'react-icons/fa';
 import { useQuery } from 'react-query';
-import { RecoBooksType, SellerType } from '../../../types';
+import { RecoBooksType, SellerType } from '@/types/index';
 
 const RecoSeller = ({ books, sellerId }: RecoBooksType) => {
   const { data } = useQuery<SellerType[]>('sellers');

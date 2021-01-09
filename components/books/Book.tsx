@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useQuery } from 'react-query';
-import { BookType } from '../../types';
+import { BookType } from '@/types/index';
 
 interface Props {
   bookId: string;

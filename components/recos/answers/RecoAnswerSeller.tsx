@@ -1,12 +1,12 @@
 import { Button } from '@chakra-ui/react';
 import * as React from 'react';
 import { useQueryClient } from 'react-query';
-import { createBook } from '../../../fetch';
-import useAnswer from '../../../hooks/useAnswer';
-import { BookType, GoogleBookType, RecoBooksType } from '../../../types';
+import { createBook } from '@/fetch/index';
+import useAnswer from '@/hooks/useAnswer';
+import { BookType, GoogleBookType, RecoBooksType } from '@/types/index';
 import SearchReading from '../../readings/SearchReading';
 import DeleteAnswer from '../answers/DeleteAnswer';
-import RecoSellerMessage from './RecoSellerMessage';
+import RecoSellerMessage from '../details/RecoSellerMessage';
 
 const RecoAnswerSeller = ({ books }: RecoBooksType) => {
   const { update, updateLocalAnswer } = useAnswer();

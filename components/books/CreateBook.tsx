@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
-import AlertContext from '../../contexts/AlertContext';
-import LoaderContext from '../../contexts/LoaderContext';
-import { createBookWithoutGoogle } from '../../fetch';
-import { BookType, GoogleBookType, ModalProps } from '../../types';
+import AlertContext from '@/contexts/AlertContext';
+import LoaderContext from '@/contexts/LoaderContext';
+import { createBookWithoutGoogle } from '@/fetch/index';
+import { BookType, GoogleBookType, ModalProps } from '@/types/index';
 import ModalFacc from '../facc/ModalFacc';
 import Input from '../form/Input';
 import ModalFooter from '../utils/ModalFooter';

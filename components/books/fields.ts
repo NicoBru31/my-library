@@ -1,4 +1,4 @@
-import { BookType, Field } from '../../types';
+import { BookType, Field } from '@/types/index';
 
 const fields: Field<BookType>[] = [
   {

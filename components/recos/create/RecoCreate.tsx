@@ -14,10 +14,10 @@ import {
 import { useContext } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
-import AlertContext from '../../../contexts/AlertContext';
-import { createReco } from '../../../fetch';
-import useUpdate from '../../../hooks/useUpdate';
-import { CustomerType, ModalProps, RecoType } from '../../../types';
+import AlertContext from '@/contexts/AlertContext';
+import { createReco } from '@/fetch/index';
+import useUpdate from '@/hooks/useUpdate';
+import { CustomerType, ModalProps, RecoType } from '@/types/index';
 import RecoCreateAddresses from './RecoCreateAddresses';
 import RecoCreateFooter from './RecoCreateFooter';
 import RecoCreateName from './RecoCreateName';

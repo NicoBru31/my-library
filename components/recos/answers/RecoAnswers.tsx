@@ -1,10 +1,10 @@
 import * as React from 'react';
-import useSession from '../../../hooks/useSession';
-import { RecoType } from '../../../types';
-import RecoAnswer from './RecoAnswer';
+import useSession from '@/hooks/useSession';
+import { RecoType } from '@/types/index';
+import RecoAnswer from '../answers/RecoAnswer';
 import RecoAnswerMessage from './RecoAnswerMessage';
 import RecoAnswerSeller from './RecoAnswerSeller';
-import RecoFrom from './RecoFrom';
+import RecoFrom from '../details/RecoFrom';
 
 const RecoAnswers = ({ answers = [] }: RecoType) => {
   const session = useSession();

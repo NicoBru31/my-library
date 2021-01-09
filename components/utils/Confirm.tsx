@@ -1,5 +1,5 @@
 import { Button } from '@chakra-ui/react';
-import { ModalProps } from '../../types';
+import { ModalProps } from '@/types/index';
 import ModalFacc from '../facc/ModalFacc';
 
 interface Props extends ModalProps {

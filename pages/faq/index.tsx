@@ -6,7 +6,7 @@ import {
   AccordionPanel,
   Box,
 } from '@chakra-ui/react';
-import items from '../../components/faq/items';
+import items from '@/components/faq/items';
 
 const index = () => (
   <Accordion allowToggle>

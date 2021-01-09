@@ -1,5 +1,5 @@
 import { LoginInterface } from '../../pages/login';
-import { Field } from '../../types';
+import { Field } from '@/types/index';
 
 const loginFields: Field<LoginInterface>[] = [
   {

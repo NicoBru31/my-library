@@ -1,7 +1,7 @@
 import { Checkbox } from '@chakra-ui/react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useQuery } from 'react-query';
-import { CustomerType } from '../../../types';
+import { CustomerType } from '@/types/index';
 import AddAddress from '../../addresses/AddAddress';
 
 const RecoCreateAddresses = () => {

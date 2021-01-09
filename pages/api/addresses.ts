@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
 import nextConnect from 'next-connect';
 import middleware from '../../middleware/database';
-import { AddressType, Incoming, Response } from './../../types/index';
+import { AddressType, Incoming, Response } from '@/types/index';
 
 const handler = nextConnect();
 

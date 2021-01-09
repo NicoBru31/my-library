@@ -1,10 +1,10 @@
 import { GetServerSideProps } from 'next';
 import { QueryClient, useQuery } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
-import SellerRecos from '../../components/sellers/SellerRecos';
-import { getBooks, getReadings, getRecos, getSeller } from '../../fetch';
-import { absoluteUrl } from '../../fetch/utils';
-import { SellerType } from '../../types';
+import SellerRecos from '@/components/sellers/SellerRecos';
+import { getBooks, getReadings, getRecos, getSeller } from '@/fetch/index';
+import { absoluteUrl } from '@/fetch/utils';
+import { SellerType } from '@/types/index';
 
 export const getServerSideProps: GetServerSideProps = async ({
   params,

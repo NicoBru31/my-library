@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { GoPrimitiveDot } from 'react-icons/go';
-import useWindowSize from '../../../hooks/useWindowSize';
-import { RecoBooksType } from '../../../types';
+import useWindowSize from '@/hooks/useWindowSize';
+import { RecoBooksType } from '@/types/index';
 import Book from '../../books/Book';
 import PopoverText from '../../utils/PopoverText';
-import RecoSeller from './RecoSeller';
+import RecoSeller from '../details/RecoSeller';
 
 const RecoAnswer = (answer: RecoBooksType) => {
   const { width } = useWindowSize();

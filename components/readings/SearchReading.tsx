@@ -1,9 +1,9 @@
 import { Input } from '@chakra-ui/react';
 import * as React from 'react';
 import Autocomplete from 'react-autocomplete';
-import LoaderContext from '../../contexts/LoaderContext';
-import { getGoogleBooks } from '../../fetch';
-import { BookType, GoogleBookType } from '../../types';
+import LoaderContext from '@/contexts/LoaderContext';
+import { getGoogleBooks } from '@/fetch/index';
+import { BookType, GoogleBookType } from '@/types/index';
 import SearchReadingCreate from './SearchReadingCreate';
 import SearchReadingItem from './SearchReadingItem';
 

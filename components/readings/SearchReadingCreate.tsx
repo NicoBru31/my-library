@@ -1,6 +1,6 @@
 import { useDisclosure } from '@chakra-ui/react';
 import * as React from 'react';
-import { BookType, GoogleBookType } from '../../types';
+import { BookType, GoogleBookType } from '@/types/index';
 import CreateBook from '../books/CreateBook';
 
 interface Props {
