@@ -1,5 +1,5 @@
-import { BookType, GoogleBookType } from @/types/books';
-import { Incoming, Response } from @/types/calls';
+import { BookType, GoogleBookType } from '@/types/books';
+import { Incoming, Response } from '@/types/calls';
 import nextConnect from 'next-connect';
 import middleware from '../../../middleware/database';
 
