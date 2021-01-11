@@ -7,7 +7,7 @@ const useNotifResponses = (answers: RecoBooksType[]) => {
   const [notif, setNotif] = useState('');
 
   useEffect(() => {
-    if (!session || answers.length === 0) return;
+    if (!session || !answers) return;
     if (session.isCustomer) {
       const response = answers.reduce((f, e) => f + e.books.length, 0);
       setNotif(

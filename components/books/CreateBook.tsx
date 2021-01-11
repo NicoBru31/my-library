@@ -26,16 +26,15 @@ const CreateBook = ({ onSelect, search, ...props }: Props) => {
   const { mutate, isLoading } = useMutation(createBookWithoutGoogle, {
     mutationKey: 'books',
     onMutate: () => setLoader({ isLoading: true }),
-    onError: () => {
+    onSettled: () => setLoader({ isLoading: false }),
+    onError: () =>
       setAlert({
         message: "Une erreur s'est produite ! Échec de l'action.",
         status: 'error',
-      });
-    },
+      }),
     onSuccess: (data) => {
       queryClient.setQueryData<BookType[]>('books', (old) => [data, ...old]);
       reset();
-      setLoader({ isLoading: false });
       setAlert({ message: '' });
       onSelect(null, data);
       props.onClose();

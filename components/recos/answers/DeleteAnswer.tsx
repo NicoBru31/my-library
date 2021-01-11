@@ -18,7 +18,7 @@ const DeleteAnswer = ({ bookId }: Props) => {
 
   return (
     <div className='flex justify-start'>
-      <Book bookId={bookId} key={bookId} />
+      <Book bookId={bookId} />
       <AiFillDelete
         className='cursor-pointer ml-2 hover:opacity-50'
         color='white'

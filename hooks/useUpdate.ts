@@ -1,7 +1,7 @@
-import { useContext, useEffect } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
 import AlertContext from '@/contexts/AlertContext';
 import LoaderContext from '@/contexts/LoaderContext';
+import { useContext } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 
 type Props<R, T> = {
   action: (data: T) => Promise<R>;
@@ -48,6 +48,8 @@ const useUpdate = <R extends { _id: string }, S, T>({
         status: 'error',
       });
     },
+    onSettled: () => setLoader({ isLoading: false }),
+    onMutate: () => setLoader({ isLoading: true }),
     onSuccess: (data) => {
       queryClient.setQueryData(key, (oldData: S) =>
         update(oldData, data, isUpdate, subKey),
@@ -56,10 +58,6 @@ const useUpdate = <R extends { _id: string }, S, T>({
       reset();
     },
   });
-
-  useEffect(() => {
-    setLoader({ isLoading: mutation.isLoading });
-  }, [mutation.isLoading]);
 
   return mutation;
 };

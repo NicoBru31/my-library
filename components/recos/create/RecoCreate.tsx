@@ -57,10 +57,10 @@ const RecoCreate = (props: ModalProps) => {
     <Modal {...props}>
       <ModalOverlay />
       <ModalContent>
+        <ModalHeader>Je crée ma reco</ModalHeader>
+        <ModalCloseButton />
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(save)}>
-            <ModalHeader>Je crée ma reco</ModalHeader>
-            <ModalCloseButton />
             <ModalBody>
               <Tabs colorScheme='teal'>
                 <TabList>

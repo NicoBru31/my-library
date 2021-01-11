@@ -7,8 +7,10 @@ import { BookType, GoogleBookType, RecoBooksType } from '@/types/index';
 import SearchReading from '../../readings/SearchReading';
 import DeleteAnswer from '../answers/DeleteAnswer';
 import RecoSellerMessage from '../details/RecoSellerMessage';
+import { randomStr } from 'tools';
 
 const RecoAnswerSeller = ({ books }: RecoBooksType) => {
+  const [bookList, setBookList] = React.useState(new Array(2).fill(''));
   const { update, updateLocalAnswer } = useAnswer();
   const queryCache = useQueryClient();
 
@@ -21,23 +23,25 @@ const RecoAnswerSeller = ({ books }: RecoBooksType) => {
     if (newBook) updateLocalAnswer(newBook._id);
   };
 
+  React.useEffect(() => {
+    if (books)
+      setBookList(() => [...books, ...new Array(2).fill('')].slice(0, 2));
+  }, [books, setBookList]);
+
   return (
     <div className='w-full md:w-3/4'>
       <div className='text-white'>Mes propositions :</div>
-      {books[0] ? (
-        <DeleteAnswer bookId={books[0]} />
-      ) : (
-        <div className='my-2'>
-          <SearchReading onSelect={select} theme='white' />
+      {bookList.map((book) => (
+        <div key={book || randomStr()}>
+          {book ? (
+            <DeleteAnswer bookId={book} />
+          ) : (
+            <div className='my-2'>
+              <SearchReading onSelect={select} theme='white' />
+            </div>
+          )}
         </div>
-      )}
-      {books[1] ? (
-        <DeleteAnswer bookId={books[1]} />
-      ) : (
-        <div className='my-2'>
-          <SearchReading onSelect={select} theme='white' />
-        </div>
-      )}
+      ))}
       <RecoSellerMessage />
       <Button
         className='mt-4 hover:opacity-50'

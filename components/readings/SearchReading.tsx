@@ -57,9 +57,7 @@ const SearchReading = ({ onSelect, theme }: Props) => {
           />
         )}
         renderItem={(item: GoogleBookType) => (
-          <div key={item.id}>
-            <SearchReadingItem item={item} search={search} />
-          </div>
+          <SearchReadingItem item={item} key={item.id} search={search} />
         )}
         value={search}
       />

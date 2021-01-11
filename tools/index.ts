@@ -1,5 +1,17 @@
 import { RecoType } from '../types';
 
+export const queryAdapter = (data: Record<string, string>) =>
+  Object.entries(data).reduce(
+    (final, [key, val]) => `${final}${key}=${val}&`,
+    '?',
+  );
+
+export const randomStr = () =>
+  Math.random()
+    .toString(36)
+    .replace(/[^a-z]+/g, '')
+    .substr(0, 5);
+
 export const filterRecoByDone = (data: RecoType[], id?: string) =>
   data.filter(
     ({ answers }) =>
