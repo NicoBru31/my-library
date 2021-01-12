@@ -1,7 +1,7 @@
 import Card from '../components/home/Card';
 import cards from '../components/home/cards';
-import Intro from '../components/utils/Intro';
 import intro from '../components/home/intro';
+import Intro from '../components/utils/Intro';
 
 const Home = () => (
   <div className='home-picture'>

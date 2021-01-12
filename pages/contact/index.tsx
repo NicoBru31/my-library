@@ -4,9 +4,9 @@ import Intro from '@/components/utils/Intro';
 const Contact = () => (
   <div>
     <Intro title='Contactez-nous' text='' />
-    <div>
+    <div className='mx-2'>
       Pour toute question ou suggéstion, n'hésitez pas à nous contacter à
-      l'adresse{' '}
+      l'adresse suivante :{' '}
       <a
         className='cursor-pointer text-blue-700'
         target='_blank'

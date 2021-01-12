@@ -1,18 +1,21 @@
-import React from 'react';
+import * as React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import useSession from '@/hooks/useSession';
 import { scale } from '../../variants';
+import LoaderContext from '@/contexts/LoaderContext';
 
 const HeaderProfile = () => {
   const { push } = useRouter();
+  const { setLoader } = React.useContext(LoaderContext);
   const session = useSession();
   const [src, setSrc] = React.useState(
     session?.isCustomer ? '/reader.svg' : '/seller.svg',
   );
 
   const goProfile = () => {
+    setLoader({ isLoading: true });
     if (!session.id) push({ pathname: '/login' });
     else if (session.isCustomer) push({ pathname: `/customers/${session.id}` });
     else if (!session.isCustomer) push({ pathname: `/sellers/${session.id}` });

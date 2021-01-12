@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import * as React from 'react';
 import HeaderMain from './HeaderMain';
 import HeaderProfile from './HeaderProfile';
 import MenuBurger from './MenuBurger';
@@ -7,9 +7,9 @@ import MenuPane from './MenuPane';
 
 const Menu = () => {
   const { route } = useRouter();
-  const [burgerOpen, setBurgerOpen] = useState(false);
+  const [burgerOpen, setBurgerOpen] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     setBurgerOpen(false);
   }, [route, setBurgerOpen]);
 

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Hydrate } from 'react-query/hydration';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Layout from '../components/facc/Layout';
 import AlertProvider from '../providers/AlertProvider';
 import LoaderProvider from '../providers/LoaderProvider';
@@ -10,7 +11,6 @@ import RecoProvider from '../providers/RecoProvider';
 import SessionProvider from '../providers/SessionProvider';
 import '../styles/globals.css';
 import '../styles/tailwind.css';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { pageVariants } from '../variants';
 
 const queryClient = new QueryClient();

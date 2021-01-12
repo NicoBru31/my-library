@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useContext } from 'react';
+import * as React from 'react';
 import AlertContext from '@/contexts/AlertContext';
 import { scale } from '../../variants';
 
@@ -9,7 +9,7 @@ interface Props {
 }
 
 const MenuBurger = ({ burgerOpen, setBurgerOpen }: Props) => {
-  const { alert } = useContext(AlertContext);
+  const { alert } = React.useContext(AlertContext);
 
   return (
     <div className='z-30' style={{ height: 'calc(100% - 20px)' }}>
