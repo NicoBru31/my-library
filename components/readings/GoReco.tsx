@@ -12,7 +12,11 @@ const GoReco = () => {
           <div className='text-xl'>Quelle sera votre prochaine lecture ?</div>
           <div>{`Note : 20 / 20`}</div>
           <div className='flex-wrap'>{`Commentaire : `}</div>
-          <Button colorScheme='teal' onClick={goReco}>
+          <Button
+            aria-label='Voir les recos'
+            colorScheme='teal'
+            onClick={goReco}
+          >
             Recommandations
           </Button>
         </div>

@@ -25,7 +25,7 @@ const AddReading = ({ children }: React.PropsWithChildren<unknown>) => {
           <div>{`Note : ? / 20`}</div>
           <div className='flex-wrap'>{`Commentaire : `}</div>
           <CreateReading isOpen={isOpen} onClose={onClose} />
-          <Button colorScheme='teal' onClick={onOpen}>
+          <Button aria-label='Ajouter' colorScheme='teal' onClick={onOpen}>
             Ajouter
           </Button>
         </div>

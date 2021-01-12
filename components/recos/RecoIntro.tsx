@@ -44,7 +44,11 @@ const RecoIntro = () => {
         ))}
       </Carousel>
       <div className='flex justify-center my-10'>
-        <Button colorScheme='teal' onClick={onOpen}>
+        <Button
+          aria-label='Demander une reco'
+          colorScheme='teal'
+          onClick={onOpen}
+        >
           Demander une reco
         </Button>
       </div>

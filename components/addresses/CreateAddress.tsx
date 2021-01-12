@@ -51,6 +51,7 @@ const CreateAddress = (props: ModalProps) => {
         ))}
         <div className='flex justify-end'>
           <Button
+            aria-label='Fermer'
             className='mr-2'
             colorScheme='teal'
             onClick={props.onClose}
@@ -58,7 +59,12 @@ const CreateAddress = (props: ModalProps) => {
           >
             Fermer
           </Button>
-          <Button disabled={isLoading} colorScheme='teal' type='submit'>
+          <Button
+            aria-label='Ajouter'
+            disabled={isLoading}
+            colorScheme='teal'
+            type='submit'
+          >
             Ajouter
           </Button>
         </div>

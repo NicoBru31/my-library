@@ -44,6 +44,7 @@ const RecoAnswerSeller = ({ books }: RecoBooksType) => {
       ))}
       <RecoSellerMessage />
       <Button
+        aria-label='Enregistrer'
         className='mt-4 hover:opacity-50'
         colorScheme='tail'
         onClick={update}

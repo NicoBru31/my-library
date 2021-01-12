@@ -9,6 +9,7 @@ interface Props {
 const ModalFooter = ({ addText, isLoading, onClose }: Props) => (
   <div className='flex justify-end mt-2'>
     <Button
+      aria-label='Fermer'
       colorScheme='teal'
       className='mr-4'
       disabled={isLoading}
@@ -17,7 +18,12 @@ const ModalFooter = ({ addText, isLoading, onClose }: Props) => (
     >
       Fermer
     </Button>
-    <Button colorScheme='teal' disabled={isLoading} type='submit'>
+    <Button
+      aria-label={addText}
+      colorScheme='teal'
+      disabled={isLoading}
+      type='submit'
+    >
       {addText}
     </Button>
   </div>

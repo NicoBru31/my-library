@@ -24,7 +24,9 @@ const Readings = () => {
       <div className='md:hidden'>
         <div className='flex justify-center mb-4'>
           <AddReading>
-            <Button colorScheme='teal'>Ajouter une lecture</Button>
+            <Button aria-label='Ajouter une lecture' colorScheme='teal'>
+              Ajouter une lecture
+            </Button>
           </AddReading>
         </div>
         <Carousel
@@ -39,7 +41,11 @@ const Readings = () => {
           ))}
         </Carousel>
         <div className='flex justify-center mt-4'>
-          <Button colorScheme='teal' onClick={goReco}>
+          <Button
+            aria-label='Voir les recos'
+            colorScheme='teal'
+            onClick={goReco}
+          >
             Voir mes recommandations
           </Button>
         </div>

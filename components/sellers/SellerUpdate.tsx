@@ -42,7 +42,7 @@ const SellerUpdate = () => {
           register={register}
         />
       ))}
-      <Button colorScheme='teal' type='submit'>
+      <Button aria-label='Enregistrer' colorScheme='teal' type='submit'>
         Enregistrer
       </Button>
     </form>

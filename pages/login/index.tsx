@@ -67,6 +67,7 @@ const Login = () => {
           ))}
           <div className='flex justify-end mt-4'>
             <Button
+              aria-label='Je me connecte'
               className='mr-4'
               colorScheme='teal'
               disabled={loader.isLoading}
@@ -74,7 +75,11 @@ const Login = () => {
             >
               Je me connecte
             </Button>
-            <Button colorScheme='teal' onClick={goCreate}>
+            <Button
+              aria-label='Créer un compte'
+              colorScheme='teal'
+              onClick={goCreate}
+            >
               Je crée mon compte
             </Button>
           </div>

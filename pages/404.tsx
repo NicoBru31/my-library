@@ -12,7 +12,7 @@ const NotFound = () => {
         Oups.... Nous n'avons pas trouvé cette page !
       </div>
       <Link href='/'>
-        <Button className='mt-10' colorScheme='teal'>
+        <Button aria-label='Accueil' className='mt-10' colorScheme='teal'>
           Je retourne à l'accueil
         </Button>
       </Link>

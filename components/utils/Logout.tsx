@@ -13,7 +13,7 @@ const Logout = () => {
   };
 
   return (
-    <Button colorScheme='teal' onClick={logout}>
+    <Button aria-label='Se déconnecter' colorScheme='teal' onClick={logout}>
       Me déconnecter
     </Button>
   );

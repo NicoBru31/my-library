@@ -6,10 +6,16 @@ interface Props {
 
 const RecoCreateFooter = ({ onClose }: Props) => (
   <ModalFooter>
-    <Button colorScheme='teal' mr={3} onClick={onClose} variant='outline'>
+    <Button
+      aria-label='Fermer'
+      colorScheme='teal'
+      mr={3}
+      onClick={onClose}
+      variant='outline'
+    >
       Fermer
     </Button>
-    <Button type='submit' colorScheme='teal'>
+    <Button aria-label="C'est parti" type='submit' colorScheme='teal'>
       C'est parti !
     </Button>
   </ModalFooter>

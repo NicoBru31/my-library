@@ -72,6 +72,7 @@ const CreateAccount = <
       />
       <div className='flex justify-end mt-4'>
         <Button
+          aria-label='Retour'
           className='mr-4'
           colorScheme='teal'
           onClick={back}
@@ -79,7 +80,12 @@ const CreateAccount = <
         >
           Retour
         </Button>
-        <Button disabled={isLoading} colorScheme='teal' type='submit'>
+        <Button
+          aria-label='Enregistrer'
+          disabled={isLoading}
+          colorScheme='teal'
+          type='submit'
+        >
           Enregistrer
         </Button>
       </div>

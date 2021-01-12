@@ -9,7 +9,7 @@ const AddAddress = ({ children }: React.PropsWithChildren<unknown>) => {
     <>
       {!children ? (
         <div className='bg-cardbg reading flex justify-center items-center p-4'>
-          <Button colorScheme='teal' onClick={onOpen}>
+          <Button aria-label='Ajouter' colorScheme='teal' onClick={onOpen}>
             Ajouter
           </Button>
         </div>

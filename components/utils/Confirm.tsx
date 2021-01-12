@@ -15,10 +15,20 @@ const Confirm = ({ onConfirm, title, ...props }: Props) => {
   return (
     <ModalFacc {...props} title={title}>
       <div className='flex justify-end'>
-        <Button colorScheme='teal' onClick={props.onClose} variant='outline'>
+        <Button
+          aria-label='Non'
+          colorScheme='teal'
+          onClick={props.onClose}
+          variant='outline'
+        >
           Non
         </Button>
-        <Button className='ml-4' colorScheme='teal' onClick={confirm}>
+        <Button
+          aria-label='Oui'
+          className='ml-4'
+          colorScheme='teal'
+          onClick={confirm}
+        >
           Oui
         </Button>
       </div>

@@ -40,7 +40,7 @@ const UpdateModal = <T extends { _id: string }>({
 
   return (
     <>
-      <Button colorScheme='teal' onClick={onOpen}>
+      <Button aria-label='Modifier' colorScheme='teal' onClick={onOpen}>
         Modifier
       </Button>
       <ModalFacc isOpen={isOpen} onClose={onClose} title={title}>
@@ -63,6 +63,7 @@ const UpdateModal = <T extends { _id: string }>({
           />
           <div className='flex justify-end'>
             <Button
+              aria-label='Fermer'
               className='mr-2'
               colorScheme='teal'
               onClick={onClose}
@@ -70,7 +71,12 @@ const UpdateModal = <T extends { _id: string }>({
             >
               Fermer
             </Button>
-            <Button disabled={isLoading} colorScheme='teal' type='submit'>
+            <Button
+              aria-label='Valider'
+              disabled={isLoading}
+              colorScheme='teal'
+              type='submit'
+            >
               Valider
             </Button>
           </div>

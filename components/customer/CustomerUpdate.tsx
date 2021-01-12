@@ -52,7 +52,12 @@ const CustomerUpdate = () => {
         />
       ))}
       <div className='flex justify-center'>
-        <Button disabled={isLoading} colorScheme='teal' type='submit'>
+        <Button
+          aria-label='Enregistrer'
+          disabled={isLoading}
+          colorScheme='teal'
+          type='submit'
+        >
           Enregistrer
         </Button>
       </div>

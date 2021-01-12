@@ -6,7 +6,7 @@ interface IntroInterface {
 const intro: IntroInterface[] = [
   {
     text: 'Je choisis une ou plusieurs adresses',
-    image: '/select.png',
+    image: '/select.webp',
   },
   {
     text: 'Je sélectionne mes lectures',

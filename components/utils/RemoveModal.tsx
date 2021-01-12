@@ -26,6 +26,7 @@ const RemoveModal = ({ field, id, remove }: Props) => {
         title='Voulez-vous supprimer cette lecture ?'
       />
       <Button
+        aria-label='Supprimer'
         className='ml-4'
         disabled={isLoading}
         colorScheme='red'

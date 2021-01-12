@@ -9,8 +9,12 @@ const Layout = ({ children }: PropsWithChildren<unknown>) => (
       <title>Liber</title>
       <meta charSet='utf-8' />
       <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-      <link rel='shortcut icon' href='/favicon.png' type='image/x-icon' />
-      <link rel='icon' href='/favicon.png' type='image/x-icon' />
+      <meta
+        name='description'
+        content='Donner accès aux librairies à toutes les personnes de son quartier.'
+      />
+      <link rel='shortcut icon' href='/favicon.webp' type='image/x-icon' />
+      <link rel='icon' href='/favicon.webp' type='image/x-icon' />
     </Head>
     <Menu />
     <div className='pt-20 min-h-screen'>{children}</div>

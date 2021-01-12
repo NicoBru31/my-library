@@ -9,7 +9,7 @@ const AddressGoReco = () => {
     <div className='bg-cardbg text-center text-white reading flex justify-center items-center p-4'>
       <div>
         <div className='font-bold'>Prêt à demander une reco ?</div>
-        <Button colorScheme='teal' onClick={goReco}>
+        <Button aria-label='Créer reco' colorScheme='teal' onClick={goReco}>
           Je crée une reco
         </Button>
       </div>
