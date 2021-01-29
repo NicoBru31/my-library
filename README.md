@@ -1,4 +1,5 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+The aim of this project is to provide recommandations from real book sellers to customers form their neighbourhood. Customers can create read notes with commentary and grade and select them when asking for a reco.
 
 ## Getting Started
 
